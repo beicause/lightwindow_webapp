@@ -1,0 +1,222 @@
+<template>
+  <view>
+    <!--    如果显示详情，顶部为-->
+    <view class="top-container" v-if="showDetail">
+      <view class="top-item">
+        <picker :disabled="!editable" mode="time" :value="time" @change="timeChange">
+          <text :style="{color:color,fontSize:fontSize+'px'}">{{ time }}</text>
+        </picker>
+      </view>
+      <view class="top-item" :style="{height:fontSize+'px'}" style="position: relative">
+        <input style="position: absolute" @input="titleInput" :disabled="!editable"
+               :style="{...inputStyle,width:titleWidth}"
+               :class="{'input-active':editable}"
+               :value="title"/>
+      </view>
+      <view class="top-item">
+        <picker v-if="editable" :range="repeatArray" @change="repeatChange">
+          <uni-icons :color="color" :size="fontSize" type="plus"></uni-icons>
+        </picker>
+      </view>
+    </view>
+    <!--    不显示详情，顶部为-->
+    <view v-else class="top-container">
+      <picker :disabled="!editable" mode="time" :value="time" @change="timeChange">
+        <text :style="{color:color,fontSize:fontSize+'px'}">{{ time }}</text>
+      </picker>
+      <picker v-if="editable" :range="repeatArray" @change="repeatChange">
+        <uni-icons :color="color" :size="fontSize" type="plus"></uni-icons>
+      </picker>
+    </view>
+    <!--          -->
+    <view class="center-line">
+      <picker mode="multiSelector" style="width: 12px" :disabled="!showDetail||!editable" :range="alarmArray"
+              @change="alarmChange">
+        <view class="line" :style="lineStyle"></view>
+      </picker>
+      <view class="line" :style="lineStyle"></view>
+      <picker style="width: 12px;" :disabled="!showDetail||!editable" :range="colorArray" range-key="name"
+              @change="colorChange">
+        <view class="line" :style="lineStyle"></view>
+      </picker>
+    </view>
+    <view class="bottom-content">
+      <input @input="e=> { if(showDetail)  detailInput(e) ;else titleInput(e)}"
+             :disabled="!editable" :value="showDetail?detail:title"
+             :style="{...inputStyle,width:showDetail?detailWidth:titleWidth}"
+             :class="{'input-active':editable}"/>
+    </view>
+  </view>
+</template>
+
+<script lang="ts">
+import Vue from "vue";
+
+export default Vue.extend({
+  name: "eventLine",
+  props: {
+    time: {
+      type: String,
+      default: '00:00:00'
+    },
+    title: {
+      type: String,
+      default: ''
+    },
+    detail: {
+      type: String,
+      default: ''
+    },
+    color: {
+      type: String,
+      default: '#000000'
+    },
+    alarm: {
+      type: String,
+      default: '0'
+    },
+    showDetail: {
+      type: Boolean,
+      default: true
+    },
+    editable: {
+      type: Boolean,
+      default: false
+    },
+    fontSize: {
+      type: Number,
+      default: 16
+    }
+  },
+  data() {
+    return {
+      colorArray: [
+        {name: '绿色-清新', value: '#27ae60'},
+        {name: '青色-纯净', value: '#00BCD4'},
+        {name: '蓝色-沉静', value: '#007aff'},
+        {name: '粉色-浪漫', value: '#F8BBD0'},
+        {name: '紫色-神秘', value: '#9C27B0'},
+        {name: '黄色-温暖', value: '#FBC02D'},
+        {name: '橙色-活力', value: '#FF9800'},
+        {name: '红色-炽热', value: '#F44336'},
+        // {name: '白色-永恒*', value: '#ffffff'},
+      ],
+      repeatArray: ['删除此事件', '删除此后的重复', '每天重复，100次', '每周重复，20次']
+    };
+  },
+  computed: {
+    alarmArray(): [string[], string[]] {
+      const array: [string[], string[]] = [[], []]
+      for (let i = 0; i < 31; i++) {
+        array[1].push('提前' + i * 2 + '分钟')
+      }
+      array[0].push('通知提醒', '闹钟提醒')
+      return array
+    },
+    lineStyle(): {
+      borderColor: string,
+      backgroundColor: string
+    } {
+      return {
+        borderColor: this.color,
+        backgroundColor: this.alarm.match(/^\*/) ? this.color : ''
+      }
+    },
+    inputStyle(): {
+      borderColor: string,
+      color: string,
+      fontSize: string,
+      height: string,
+    } {
+      return {
+        borderColor: this.color,
+        color: this.color,
+        fontSize: this.fontSize + 'px',
+        height: this.fontSize + 'px',
+      }
+    },
+    titleWidth(): string {
+      return this.computedLen(this.title)
+    },
+    detailWidth(): string {
+      return this.computedLen(this.detail)
+    }
+  },
+  methods: {
+    computedLen(text: string): string {
+      const array = text.split('\n')
+      let ml = array[0].replace(/[\uff00-\uffff\u4e00-\u9fa5]/g, "aa").length
+      array.forEach((e: string) => {
+        const l = e.replace(/[\uff00-\uffff\u4e00-\u9fa5]/g, "aa").length
+        if (l > ml) ml = l
+      })
+      return (ml) * this.fontSize / 2 + 4 + 'px'
+    },
+    titleInput(e: AnyObject): void {
+      this.$emit('title-input', e.detail.value as string)
+    },
+    detailInput(e: AnyObject): void {
+      this.$emit('detail-input', e.detail.value as string)
+    },
+    colorChange(e: AnyObject): void {
+      this.$emit('color-picker-change', this.colorArray[e.detail.value].value)
+    },
+    timeChange(e: AnyObject): void {
+      this.$emit('time-picker-change', e.target.value + ':00')
+    },
+    alarmChange(e: AnyObject) {
+      this.$emit('alarm-picker-change', (e.detail.value[0] === 0 ? '':'*')+e.detail.value[1] * 2)
+    },
+    repeatChange(e: AnyObject) {
+      this.$emit('repeat-picker-change', e.detail.value as number)
+    }
+  }
+})
+</script>
+
+<style scoped>
+.top-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 18px;
+}
+
+.top-item {
+  width: 33%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.center-line {
+  height: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.line {
+  flex: 1;
+  border-width: 1px;
+  height: 1px;
+  border-style: solid;
+}
+
+.bottom-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 18px;
+}
+
+.input {
+  text-align: center;
+}
+
+.input-active {
+  text-align: center;
+  min-width: 24px;
+  border-width: 1px;
+  border-style: dotted;
+}
+</style>
