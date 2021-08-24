@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import {
-    compareEvents, compareMarks,
+    compareEvents,
     dateFormat,
     dayFormat,
     getEventsDiff
@@ -37,6 +37,9 @@ const store = new Vuex.Store({
             if (!day.match(/\d{4}-\d{2}-\d{2}/)) throw '日期格式错误'
             state.activeDay = day
         },
+        /**
+         * 将缓存载入store的数据中
+         * */
         initAll(state) {
             let e = getStorage('events')
             if (!e) {
@@ -58,6 +61,9 @@ const store = new Vuex.Store({
             state.updateTime = getStorage('updateTime')
             state.activeDay = dayFormat(new Date())
         },
+        /**
+         * 用这个方法改变除event，mark的变量
+         * */
         setAnyString(state, kvs: ['email' | 'updateTime' | 'token' | 'eduToken' | 'school', string][]) {
          kvs.forEach(e => {
                 setStorage(e[0], e[1]);
@@ -102,6 +108,9 @@ const store = new Vuex.Store({
         updateEvents(state, newValue: Event[]) {
             state.events = newValue
         },
+        /**
+         * 更新某天的事件
+         * */
         updateDayEvents(state, payload: { dayEvents: Event[], day: string }) {
             const old = state.events.filter(i => i.day === payload.day) as Event[];
             (this as any).commit("removeEvents", old);

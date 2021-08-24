@@ -12,22 +12,25 @@
 
 <script lang="ts">
 import store from '../../store'
-import timeLine from '../time-line/timeLine.vue'
-import headerDate from "@/components/calendar-day/headerDate.vue";
-import theBuildButton from "@/components/the-build-button/theBuildButton.vue";
-import eventSchedule from "@/components/event-line/eventDaySchedule.vue"
+import TimeLine from '../event-components/timeLine.vue'
+import HeaderDate from "@/components/calendar-day/headerDate.vue";
+import TheBuildButton from "@/components/the-build-button/theBuildButton.vue";
 import Vue from "vue";
-import EventDaySchedule from "@/components/event-line/eventDaySchedule.vue";
-import {compareEvents, parseDayToDate, showPopMsg} from "@/util/util";
-import {getStorage} from "@/util/cache";
-import {Event} from "@/util/data";
+import EventDaySchedule from "@/components/event-components/eventDaySchedule.vue";
+
+/**
+ * *页面直接组件-日程-天
+ *
+ * @property {Boolean} editable = [true | false] 是否开启编辑模式
+ * @see EventDaySchedule
+ */
+
 	export default Vue.extend({
 	  components:{
       EventDaySchedule,
-      timeLine,
-      headerDate,
-      theBuildButton,
-      eventSchedule
+      TimeLine,
+      HeaderDate,
+      TheBuildButton,
     },
 		name: "calendarDay",
     props:{
@@ -36,32 +39,15 @@ import {Event} from "@/util/data";
         default:false
       }
     },
-		data() {
-			return {
-			};
-		},
 		computed:{
+	    /**
+       * 注入EventDaySchedule组件的日期
+       * */
 			day():string{
 				return store.state.activeDay
 			}
 		},
 		methods: {
-			commit():void{
-        const alarms = store.state.events.filter(e =>
-            e.alarm.match(/^\*/) && parseDayToDate(e.day).getTime() > new Date().getTime())
-        const cAlarms = (JSON.parse(getStorage('events')) as Event[]).filter(e =>
-            e.alarm.match(/^\*/) && parseDayToDate(e.day).getTime() > new Date().getTime())
-        const [a, b] = compareEvents(alarms, cAlarms)
-        if (a.length !== 0 || b.length !== 0) showPopMsg({
-          msg: '闹钟提醒发生变化，若要生效，请点击【更多】->【导出闹钟提醒】',
-          type: 'info',
-          duration: 2000
-        })
-        store.dispatch('cacheAndTryPush')
-			},
-			cancel():void{
-				(this.$refs.daySchedule as any).restore()
-			},
 			plusClick():void{
 				(this.$refs.daySchedule as any).add()
 			}

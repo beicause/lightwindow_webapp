@@ -28,21 +28,24 @@
 
 <script lang="ts">
 import store from '../../store'
-import theBuildButton from "@/components/the-build-button/theBuildButton.vue";
-import eventSchedule from "@/components/event-line/eventDaySchedule.vue"
-import timeLine from '@/components/time-line/timeLine.vue';
-import {compareEvents, dayFormat, parseDayToDate, showPopMsg} from "@/util/util";
-import {Event} from "@/util/data";
+import TheBuildButton from "@/components/the-build-button/theBuildButton.vue";
+import TimeLine from '@/components/event-components/timeLine.vue';
+import {dayFormat, parseDayToDate} from "@/util/util";
 import Vue from 'vue'
-import EventDaySchedule from "@/components/event-line/eventDaySchedule.vue";
-import {getStorage} from "@/util/cache";
+import EventDaySchedule from "@/components/event-components/eventDaySchedule.vue";
+
+/**
+ * *页面直接组件-日程-周
+ *
+ * @property {Boolean} editable = [true | false] 是否开启编辑模式
+ * @see EventDaySchedule
+ */
 
 export default Vue.extend({
   components: {
     EventDaySchedule,
-    theBuildButton,
-    eventSchedule,
-    timeLine
+    TheBuildButton,
+    TimeLine
   },
   name: "calendarWeek",
   props:{
@@ -65,6 +68,9 @@ export default Vue.extend({
     }
   },
   computed: {
+    /**
+     * 获取一周的Date对象
+     * */
     weekDate(): Date[] {
       const mWeekDate: Date[] = []
       const e = parseDayToDate(store.state.activeDay)
@@ -76,6 +82,9 @@ export default Vue.extend({
       }
       return mWeekDate
     },
+    /**
+     * 返回函数方便注入7天的day
+     * */
     day(): (index: number) => string {
       return (index) => dayFormat(this.weekDate[index])
     },
@@ -89,38 +98,31 @@ export default Vue.extend({
     }
   },
   methods: {
-    commit() {
-      const alarms = store.state.events.filter(e =>
-          e.alarm.match(/^\*/) && parseDayToDate(e.day).getTime() > new Date().getTime())
-      const cAlarms = (JSON.parse(getStorage('events')) as Event[]).filter(e =>
-          e.alarm.match(/^\*/) && parseDayToDate(e.day).getTime() > new Date().getTime())
-      const [a, b] = compareEvents(alarms, cAlarms)
-      if (a.length !== 0 || b.length !== 0) showPopMsg({
-        msg: '闹钟提醒发生变化，若要生效，请点击【更多】->【导出闹钟提醒】',
-        type: 'info',
-        duration: 2000
-      })
-      store.dispatch('cacheAndTryPush')
-    },
-    cancel() {
-      (this.$refs.weekSchedule as any[]).forEach(i => i.restore())
-    },
     plusClick(index: number): () => void {
       return () => {
         (this.$refs.weekSchedule as any[])[index].add()
       }
     },
+    /**
+     * 点击每个{@link EventDaySchedule}组件都会将{@link activeDay}切换到该日
+     * */
     dayEventsClick(index: number): () => void {
       return () => {
         store.commit("setActiveDay", dayFormat(this.weekDate[index]))
         console.log(store.state.activeDay)
       }
     },
+    /**
+     * 翻到下一周
+     * */
     nextWeek() {
       const date = parseDayToDate(store.state.activeDay)
       date.setDate(date.getDate() + 7)
       store.commit('setActiveDay', dayFormat(date))
     },
+    /**
+     * 翻到上一周
+     * */
     previousWeek() {
       const date = parseDayToDate(store.state.activeDay)
       date.setDate(date.getDate() - 7)

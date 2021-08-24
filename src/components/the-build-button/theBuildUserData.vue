@@ -15,20 +15,6 @@
       <text>绑定学校：{{ localSchool }}</text>
       <text>修改时间：{{ localUpdateTime }}</text>
     </view>
-    <view class="container-head">
-      <view class="line"></view>
-      <text>云端</text>
-      <view class="container-icon">
-        <view class="container-icon-content" @click="pull">
-          <uni-icons type="cloud-download" color="#007aff"></uni-icons>
-          <text>拉取</text>
-        </view>
-        <view class="container-icon-content" @click="push">
-          <uni-icons type="cloud-upload" color="#007aff"></uni-icons>
-          <text>推送</text>
-        </view>
-      </view>
-    </view>
   </view>
 </template>
 
@@ -39,9 +25,16 @@ import {
 } from '@/util/util'
 import {getStorage, removeStorage} from '@/util/cache'
 import Vue from "vue";
+import TheBuildButton from "@/components/the-build-button/theBuildButton.vue";
+
+/**
+ * 本地数据界面
+ * @see TheBuildButton
+ */
 
 export default Vue.extend({
   name: "theBuildUserData",
+  components: {TheBuildButton},
   data() {
     return {
       remoteSchool: '',
@@ -102,12 +95,6 @@ export default Vue.extend({
   background-color: #007aff;
   width: 3px;
   margin: 5px;
-}
-
-.container-login {
-  display: flex;
-  padding: 15px;
-  justify-content: space-between;
 }
 
 .container-icon {

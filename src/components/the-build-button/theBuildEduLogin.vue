@@ -25,15 +25,17 @@
 
 <script lang="ts">
 import {
-  getHfutEvents,
-  qcUpdateInfo,
-  getHfutEventsByToken,
   dateFormat,
-  getSimpleDiff, showPopMsg, getEventDiff, giveColor
+  getSimpleDiff, showPopMsg, giveColor
 } from '@/util/util'
 import store from '../../store'
 import Vue from 'vue'
 import {Mark} from "@/util/data";
+import {getHfutEvents, getHfutEventsByToken} from "@/util/hfut";
+
+/**
+ * 教务登陆界面
+ */
 
 export default Vue.extend({
   name: "theBuildEduLogin",
@@ -83,8 +85,6 @@ export default Vue.extend({
               this.btnSubExtra = false
               showPopMsg({msg: '正在导入', type: 'info'})
               getHfutEvents(r.username, r.password).then(([res, events, hfutToken]) => {
-                if (store.state.token) qcUpdateInfo(store.state.token, '合肥工业大学', hfutToken, store.state.updateTime)
-
                 const newMarks=[] as Mark[]
                 events.forEach(e=>{
                   if (!store.state.marks.has(e.day))newMarks.push({date:e.day,info:'有课'})
@@ -100,7 +100,7 @@ export default Vue.extend({
                 store.commit('cacheMarks')
                 store.commit('setAnyString', [['eduToken', hfutToken], ['school', '合肥工业大学'], ['updateTime', dateFormat(new Date())]])
                 store.commit('addEvents', newEvents)
-                store.dispatch('cacheAndTryPush')
+                store.commit('cacheEvents')
 
                 showPopMsg({msg: '导入成功', type: 'success', duration: 800})
                 this.btnSubExtra = true
@@ -123,15 +123,12 @@ export default Vue.extend({
             if (store.state.marks.get(e.day)==='上课')rMarks.push({date:e.day,info:'上课'})
           })
           store.commit('removeMarks',rMarks)
-
           const tEvents = getSimpleDiff(store.state.events, events)
           const rEvents = getSimpleDiff(store.state.events, tEvents)
           store.commit('removeEvents', rEvents)
-
           store.commit('cacheMarks')
           store.commit('setAnyString', [['eduToken', ''], ['school', ''], ['updateTime', dateFormat(new Date())]])
-          if (store.state.token) qcUpdateInfo(store.state.token, '', '', store.state.updateTime)
-          store.dispatch('cacheAndTryPush')
+          store.commit('cacheEvents')
           showPopMsg({msg: '抽除成功', type: 'success', duration: 800})
           this.btnOffExtra = true
         }).catch((err: AnyObject) => {

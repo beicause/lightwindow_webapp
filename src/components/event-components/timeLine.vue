@@ -6,6 +6,11 @@
 
 <script lang="ts">
 import Vue from 'vue'
+
+/**
+ * 左侧时间线组件，由canvas绘制
+ */
+
 	export default Vue.extend({
 		name: "timeLine",
 		data() {

@@ -16,23 +16,33 @@ function removeStorage(...ks: string[]) {
         uni.removeStorageSync(k)
     })
 }
-
-const Android: {setSystemAlarm:Function, addEvents: Function, removeEvents: Function, getEvents: () => string } | undefined = (window as any).Android
+/**
+ * 由Android webview提供
+ * */
+const Android:
+    {
+        setSystemAlarm:()=>void,
+        addEvents: (events:string)=>void,
+        removeEvents: (events:string)=>void,
+        getEvents: () => string
+    } | undefined = (window as any).Android
 
 function androidAddEvents(events: Event[]) {
-    // console.log("android new",JSON.stringify(events))
+    console.log("android add",JSON.stringify(events))
     Android?.addEvents(JSON.stringify(events))
 }
 
 function androidRemoveEvents(events: Event[]) {
-    // console.log("android delete",JSON.stringify(events))
+    console.log("android remove",JSON.stringify(events))
     Android?.removeEvents(JSON.stringify(events))
 }
 
 function androidGetEvents(): Event[] {
     return (Android?.getEvents() === undefined ? [] : JSON.parse(Android?.getEvents())) as Event[]
 }
-
+/**
+ * Android数据库与web数据同步
+ * */
 function androidSyncData(events: Event[]) {
     const [web, android] = compareEvents(events, androidGetEvents())
     androidRemoveEvents(android)

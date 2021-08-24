@@ -16,6 +16,13 @@
 import Vue from 'vue'
 import store from "@/store";
 
+/**
+ * 一天日程竖线排列组件
+ *
+ * @description 一天日程竖线排列组件，没有编辑功能
+ * @property {String} day 显示事件的日期，格式yyyy-MM-dd
+ */
+
 export default Vue.extend({
   name: "eventScheduleVertical",
   props: {

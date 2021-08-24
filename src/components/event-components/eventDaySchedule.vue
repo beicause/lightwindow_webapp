@@ -27,14 +27,25 @@
 <script lang="ts">
 import store from '../../store'
 import {Event} from "@/util/data";
-import {getStorage} from '@/util/cache'
-import eventLine from "@/components/event/eventLine.vue"
+import EventLine from "@/components/event-components/eventLine.vue"
 import Vue from "vue";
 import {compareEvents, dayFormat, getEventDiff, getEventsDiff, parseDayToDate, showPopMsg} from "@/util/util";
 
+/**
+ * 一天日程组件
+ *
+ * @property {Object} areaStyle 拖动区域movable-area的样式，movable-area需指定大小
+ * @property {String} day 显示事件的日期，格式yyyy-MM-dd
+ * @property {Boolean} showDetail = [true | false] 是否显示为详细模式
+ * @property {Boolean} editable = [true | false] 是否开启编辑模式
+ * @property {Number} fontSize 文字及图标大小
+ * @link add 添加事件方法
+ * @see EventLine
+ */
+
 export default Vue.extend({
   components: {
-    eventLine
+    EventLine
   },
   name: "eventDaySchedule",
   props: {
@@ -114,8 +125,6 @@ export default Vue.extend({
       const second = Math.floor(secondAll - hour * 3600 - min * 60)
       item.time = (hour / 10 < 1 ? ('0' + hour) : hour) + ':'
           + (min / 10 < 1 ? ('0' + min) : min) + ':' + (second / 10 < 1 ? ('0' + second) : second)
-      //更新位置，否则会颤动
-      // this.ys.set(this.mDayEvents.indexOf(item), y)
     },
     repeatChange(item: Event) {
       return (e: number) => {
@@ -162,12 +171,6 @@ export default Vue.extend({
     percent(time: string): number {
       const [hh, mm, ss] = time.split(':') as unknown as [number, number, number]
       return (hh * 3600 + mm * 60 + (ss << 0)) / (3600 * 24)
-    },
-    /**
-     * 从缓存中恢复课表，这里不调用，抛给父组件
-     * */
-    restore(): void {
-      store.commit('updateEvents', JSON.parse(getStorage('events')))
     },
     /**
      * 添加事件，这里不调用，抛给父组件

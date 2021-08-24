@@ -51,6 +51,28 @@
 
 <script lang="ts">
 import Vue from "vue";
+import EventDaySchedule from '@/components/event-components/eventDaySchedule.vue'
+
+/**
+ * 事件轴线组件，EventDaySchedule的子组件
+ *
+ * @property {String} title 事件标题
+ * @property {String} time 事件时间，格式HH:mm:ss
+ * @property {String} detail 事件详情
+ * @property {String} color 组件颜色
+ * @property {String} alarm 提醒方式及时间，以*开头为闹钟提醒，后面数字为提前提醒的分钟数
+ * @property {Boolean} showDetail = [true | false] 是否显示为详细模式
+ * @property {Boolean} editable = [true | false] 是否开启编辑模式
+ * @property {Number} fontSize 文字及图标大小
+ * @event title-input 编辑title的事件，e:string=title
+ * @event detail-input 编辑detail的事件，e:string=detail
+ * @event color-picker-change 颜色选择器选择事件，e:string=color
+ * @event time-picker-change 事件选择器选择事件，e:string=time
+ * @event alarm-picker-change 提醒选择器选择事件，e:string=alarm
+ * @event repeat-picker-change 重复选择器选择事件，e:number=[ 0 | 1 | 2 | 3 ]
+ * @see EventDaySchedule
+ */
+
 
 export default Vue.extend({
   name: "eventLine",
@@ -165,7 +187,7 @@ export default Vue.extend({
       this.$emit('time-picker-change', e.target.value + ':00')
     },
     alarmChange(e: AnyObject) {
-      this.$emit('alarm-picker-change', (e.detail.value[0] === 0 ? '':'*')+e.detail.value[1] * 2)
+      this.$emit('alarm-picker-change', (e.detail.value[0] === 0 ? '' : '*') + e.detail.value[1] * 2)
     },
     repeatChange(e: AnyObject) {
       this.$emit('repeat-picker-change', e.detail.value as number)

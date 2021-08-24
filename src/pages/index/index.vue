@@ -18,13 +18,20 @@
     </uni-transition>
     <the-build-button class="build-margin" @cancel-click="cancelClick"
                       @build-click="buildClick"></the-build-button>
+
+    <!--<editor-fold desc="全局提示框">-->
     <uni-popup ref="msg" type="message" :mask-click="false">
       <uni-popup-message :type="popType" :message="popMsg" :duration="0"></uni-popup-message>
     </uni-popup>
+    <!--</editor-fold>-->
+
+    <!--<editor-fold desc="全局对话框">-->
     <uni-popup ref="dialog" type="dialog" @maskClick="$refs.dialog.close()">
       <uni-popup-dialog @close="$refs.dialog.close()" :content="dialogText" :type="dialogType" @confirm="confirm()">
       </uni-popup-dialog>
     </uni-popup>
+    <!--</editor-fold>-->
+
   </view>
 </template>
 
@@ -35,26 +42,42 @@ import CalendarDay from "../../components/calendar-day/calendarDay.vue";
 import CalendarWeek from "../../components/calendar-week/calendarWeek.vue";
 import CalendarMonth from "../../components/calendar-month/calendarMonth.vue";
 import TheNavBar from "@/components/the-nav-bar/theNavBar.vue";
-import {PopMsg} from "@/util/data";
-import {showPopMsg} from "@/util/util";
+import {Event, marksArrayToMap, PopMsg} from "@/util/data";
+import {compareEvents, parseDayToDate, showPopMsg} from "@/util/util";
+import store from "@/store";
+import {getStorage} from "@/util/cache";
 
+/**
+ * 入口页面
+ * @description 入口页面，提供全局提示框和对话框
+ * @link showPopMsg 显示提示框
+ * @link closePopMsg 关闭提示框
+ * @link showDialog 显示对话框
+ * @link closeDialog 关闭对话框
+ * @see TheNavBar
+ * @see TheBuildButton
+ * @see CalendarDay
+ * @see CalendarWeek
+ * @see CalendarMonth
+ */
 
 export default Vue.extend({
   name: "index",
   components: {TheNavBar, CalendarMonth, CalendarWeek, CalendarDay, TheBuildButton},
   data() {
     return {
-      index: 0,
-      mode: 'fade',
-      editable: false,
-      popType: '',
-      popMsg: '',
-      dialogType: '',
-      dialogText: '',
+      index: 0,//日程表索引 日0，周1，月2
+      mode: 'fade',//过渡动画模式
+      editable: false,//是否开启编辑模式
+      popType: '',//下面是提示框和对话框参数
+      popMsg: '',//
+      dialogType: '',//
+      dialogText: '',//
       confirm: () => {
-      },
+      },//
     }
   },
+  //<!--<editor-fold desc="监听全局提示框和对话框事件">-->
   mounted() {
     uni.$on('showPopMsg', (e: PopMsg) => {
       this.showPop(e.msg, e.type)
@@ -66,10 +89,12 @@ export default Vue.extend({
     uni.$on('showDialog', (e: PopMsg) => {
       this.showDialog(e.msg, e.type, e.confirm)
     })
-    uni.$on('closeDialog',()=>{
+    uni.$on('closeDialog', () => {
       this.closeDialog()
     })
   },
+  //<!--</editor-fold>-->
+
   beforeDestroy() {
     uni.$off('showPopMsg')
     uni.$off('closePopMsg')
@@ -77,6 +102,7 @@ export default Vue.extend({
     uni.$off('closeDialog')
   },
   methods: {
+    // <!--<editor-fold desc="这些方法提供给uni.$on()监听回调">-->
     showPop(msg: string, type: string): void {
       this.popMsg = msg
       this.popType = type;
@@ -85,7 +111,9 @@ export default Vue.extend({
     closePop() {
       (this.$refs.msg as any).close()
     },
-    showDialog(msg: string, type: string, confirm: () => void = () => {(this.$refs.dialog as any).close()}){
+    showDialog(msg: string, type: string, confirm: () => void = () => {
+      (this.$refs.dialog as any).close()
+    }) {
       this.dialogText = msg;
       this.dialogType = type;
       this.confirm = confirm;
@@ -94,25 +122,44 @@ export default Vue.extend({
     closeDialog() {
       (this.$refs.dialog as any).close()
     },
+    // <!--</editor-fold>-->
+
+    /**
+     * 导航
+     * */
     nav(e: { from: number, to: number }): void {
-      uni.$emit('navigate',e)
+      uni.$emit('navigate', e)
       if (e.to > e.from) this.mode = 'slide-right'
       else this.mode = 'slide-left'
       this.index = e.to
     },
+
+    /**
+     * "取消按钮点击事件，从缓存复原数据"
+     * */
     cancelClick() {
       this.editable = false;
-      (this.$refs as any).day?.cancel();
-      (this.$refs as any).week?.cancel();
-      (this.$refs as any).mon?.cancel();
-
+      store.commit('updateEvents', JSON.parse(getStorage('events')))
+      store.commit('updateMarks', marksArrayToMap(JSON.parse(getStorage('marks'))))
     },
+
+    /**
+     * [编辑|保存]按钮点击事件，[开启编辑模式|缓存数据]
+     * */
     buildClick(editable: boolean) {
       this.editable = editable
       if (!editable) {
-        (this.$refs as any).day?.commit();
-        (this.$refs as any).week?.commit();
-        (this.$refs as any).mon?.commit();
+        const alarms = store.state.events.filter(e =>
+            e.alarm.match(/^\*/) && parseDayToDate(e.day).getTime() > new Date().getTime())
+        const cAlarms = (JSON.parse(getStorage('events')) as Event[]).filter(e =>
+            e.alarm.match(/^\*/) && parseDayToDate(e.day).getTime() > new Date().getTime())
+        const [a, b] = compareEvents(alarms, cAlarms)
+        if (a.length !== 0 || b.length !== 0) showPopMsg({
+          msg: '闹钟提醒发生变化，若要生效，请点击【更多】->【导出闹钟提醒】',
+          type: 'info',
+          duration: 2000
+        })
+        store.commit('cacheEvents')
       }
     }
   }
