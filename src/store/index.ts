@@ -4,10 +4,10 @@ import {
     compareEvents,
     dateFormat,
     dayFormat,
-    getEventsDiff
-} from '@/util/util'
-import {androidSyncData, getStorage, setStorage} from '@/util/cache'
-import {Event, Mark, marksArrayToMap, marksMapToArray} from '@/util/data'
+    getEventsDiff, timeToSecond
+} from '@/common/util'
+import {androidSyncData, getStorage, setStorage} from '@/common/cache'
+import {Event, Mark, marksArrayToMap, marksMapToArray} from '@/common/data'
 
 Vue.use(Vuex);
 //缓存
@@ -22,7 +22,7 @@ const store = new Vuex.Store({
     state: {
         token: '',
         events: [] as Event[],
-        marks:new Map<string,string>(),
+        marks: new Map<string, string>(),
         updateTime: '',
         eduToken: '',
         email: '',
@@ -30,7 +30,9 @@ const store = new Vuex.Store({
         activeDay: dayFormat(new Date()),
     },
     getters: {
-        getDayEvents: (state) => (day: string) => state.events.filter(i => i.day === day) as Event[]
+        getDayEvents: (state) =>
+            (day: string) => state.events.filter(i => i.day === day)
+            .sort((a, b) => timeToSecond(a.time) - timeToSecond(b.time)) as Event[]
     },
     mutations: {
         setActiveDay(state, day: string) {
@@ -52,7 +54,7 @@ const store = new Vuex.Store({
                 setStorage('marks', m)
             }
             state.events = JSON.parse(e)
-            state.marks =marksArrayToMap( JSON.parse(m))
+            state.marks = marksArrayToMap(JSON.parse(m))
             androidSyncData(state.events)
             state.token = getStorage('token')
             state.school = getStorage('school')
@@ -65,21 +67,21 @@ const store = new Vuex.Store({
          * 用这个方法改变除event，mark的变量
          * */
         setAnyString(state, kvs: ['email' | 'updateTime' | 'token' | 'eduToken' | 'school', string][]) {
-         kvs.forEach(e => {
+            kvs.forEach(e => {
                 setStorage(e[0], e[1]);
                 (state as any)[e[0]] = e[1]
             })
         },
-        updateMarks(state, marks: Map<string,string>) {
+        updateMarks(state, marks: Map<string, string>) {
             state.marks = marks
         },
-        addMarks(state, marks:Mark[]){
-            marks.forEach(mark=>state.marks.set(mark.date,mark.info))
-            state.marks=new Map<string, string>(state.marks)
+        addMarks(state, marks: Mark[]) {
+            marks.forEach(mark => state.marks.set(mark.date, mark.info))
+            state.marks = new Map<string, string>(state.marks)
         },
-        removeMarks(state,marks:Mark[]){
-          marks.forEach(mark=>state.marks.delete(mark.date))
-          state.marks=new Map<string, string>(state.marks)
+        removeMarks(state, marks: Mark[]) {
+            marks.forEach(mark => state.marks.delete(mark.date))
+            state.marks = new Map<string, string>(state.marks)
         },
         cacheMarks(state) {
             console.log('缓存marks')
@@ -95,7 +97,7 @@ const store = new Vuex.Store({
             }
             setStorage('events', JSON.stringify(state.events));
             androidSyncData(state.events);
-            (this as any).commit('setAnyString',[['updateTime', dateFormat(new Date())]])
+            (this as any).commit('setAnyString', [['updateTime', dateFormat(new Date())]])
             console.log('缓存更新', state.updateTime)
         },
         addEvents(state, events: Event[]) {

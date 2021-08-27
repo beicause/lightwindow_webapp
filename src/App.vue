@@ -1,16 +1,19 @@
 <script lang="ts">
 import store from "@/store";
 import Vue from 'vue'
+
 export default Vue.extend({
   mpType: 'app',
   onLaunch: function () {
     console.warn('当前组件仅支持 uni_modules 目录结构 ，请升级 HBuilderX 到 3.1.0 版本以上！')
     console.log('App Launch')
     store.commit('initAll');
+
     // #ifdef H5
     (window as any)['getVersion'] = () => 100
     console.log((window as any).getVersion());
     // #endif
+
     console.log(store.state.updateTime)
     console.log(store.state.events)
     uni.preloadPage({url: "/pages/day/day"})

@@ -33,20 +33,24 @@
     </uni-popup>
     <!--</editor-fold>-->
     <uni-popup ref="popEduLogin">
-      <the-build-edu-login @close="$refs.popEduLogin.close()"></the-build-edu-login>
+      <the-edu-login @close="$refs.popEduLogin.close()"></the-edu-login>
     </uni-popup>
     <uni-popup ref="popUserData">
-      <the-build-user-data></the-build-user-data>
+        <the-user-data></the-user-data>
     </uni-popup>
   </view>
 </template>
 
 <script lang="ts">
-import theBuildUserData from "@/components/the-build-button/theBuildUserData.vue";
-import theBuildEduLogin from "@/components/the-build-button/theBuildEduLogin.vue";
+import TheUserData from "@/components/the-build-button/theUserData.vue";
+import TheEduLogin from "@/components/the-build-button/theEduLogin.vue";
 import Vue from 'vue'
-import {androidSetAlarm} from "@/util/cache";
-import {showDialog} from "@/util/util";
+import {androidSetAlarm} from "@/common/cache";
+import {showDialog} from "@/common/util";
+import UniTag from "@/uni-ui/lib/uni-tag/uni-tag.vue";
+import UniTransition from "@/uni-ui/lib/uni-transition/uni-transition.vue";
+import UniPopup from "@/uni-ui/lib/uni-popup/uni-popup.vue";
+import UniIcons from "@/uni-ui/lib/uni-icons/uni-icons.vue";
 
 /**
  * *页面直接组件-底部按钮组
@@ -57,8 +61,12 @@ import {showDialog} from "@/util/util";
 export default Vue.extend({
   name: "theBuildButton",
   components: {
-    theBuildUserData,
-    theBuildEduLogin
+    UniIcons,
+    UniPopup,
+    UniTransition,
+    UniTag,
+    TheUserData,
+    TheEduLogin
   },
   data() {
     return {

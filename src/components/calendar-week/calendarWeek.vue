@@ -30,7 +30,7 @@
 import store from '../../store'
 import TheBuildButton from "@/components/the-build-button/theBuildButton.vue";
 import TimeLine from '@/components/event-components/timeLine.vue';
-import {dayFormat, parseDayToDate} from "@/util/util";
+import {dayFormat, parseDayToDate} from "@/common/util";
 import Vue from 'vue'
 import EventDaySchedule from "@/components/event-components/eventDaySchedule.vue";
 

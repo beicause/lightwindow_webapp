@@ -10,14 +10,13 @@
     <event-schedule-vertical :day="activeDay"></event-schedule-vertical>
   </view>
 </template>
-
 <script lang="ts">
-import theBuildButton from "@/components/the-build-button/theBuildButton.vue";
 import Vue from 'vue'
 import store from "@/store";
 import EventScheduleVertical from "@/components/event-components/eventScheduleVertical.vue";
-import { Mark, marksMapToArray} from "@/util/data";
-
+import { Mark, marksMapToArray} from "@/common/data";
+import UniCalendar from "@/uni-ui/lib/uni-calendar/uni-calendar.vue";
+import UniTransition from "@/uni-ui/lib/uni-transition/uni-transition.vue";
 /**
  * 页面直接组件-日程-月
  *
@@ -27,7 +26,7 @@ import { Mark, marksMapToArray} from "@/util/data";
  */
 
 export default Vue.extend({
-  components: {EventScheduleVertical, theBuildButton},
+  components: {UniTransition, UniCalendar, EventScheduleVertical},
   name: "calendarMonth",
   props: {
     editable: {

@@ -26,10 +26,12 @@
 
 <script lang="ts">
 import store from '../../store'
-import {Event} from "@/util/data";
+import {Event} from "@/common/data";
 import EventLine from "@/components/event-components/eventLine.vue"
 import Vue from "vue";
-import {compareEvents, dayFormat, getEventDiff, getEventsDiff, parseDayToDate, showPopMsg} from "@/util/util";
+import {compareEvents, dayFormat, getEventDiff, timeToSecond, parseDayToDate} from "@/common/util";
+import UniTransition from "@/uni-ui/lib/uni-transition/uni-transition.vue";
+import UniIcons from "@/uni-ui/lib/uni-icons/uni-icons.vue";
 
 /**
  * 一天日程组件
@@ -45,6 +47,8 @@ import {compareEvents, dayFormat, getEventDiff, getEventsDiff, parseDayToDate, s
 
 export default Vue.extend({
   components: {
+    UniIcons,
+    UniTransition,
     EventLine
   },
   name: "eventDaySchedule",
@@ -54,6 +58,10 @@ export default Vue.extend({
       default() {
         return {}
       }
+    },
+    day: {
+      type: String,
+      required: true
     },
     editable: {
       type: Boolean,
@@ -67,10 +75,6 @@ export default Vue.extend({
       type: Number,
       default: 12
     },
-    day: {
-      type: String,
-      required: true
-    }
   },
   data() {
     return {
@@ -86,9 +90,6 @@ export default Vue.extend({
       this.mDayEvents = JSON.parse(JSON.stringify(store.getters.getDayEvents(this.day)))
     })
   },
-  mounted() {
-
-  },
   beforeDestroy() {
     this.off()
   },
@@ -96,7 +97,7 @@ export default Vue.extend({
     day: {
       immediate: true,
       handler(newValue: string): void {
-        this.mDayEvents =  JSON.parse(JSON.stringify(store.getters.getDayEvents(newValue)))
+        this.mDayEvents = JSON.parse(JSON.stringify(store.getters.getDayEvents(newValue)))
       }
     },
     mDayEvents: {
@@ -114,7 +115,7 @@ export default Vue.extend({
     initYs() {
       this.ys.clear()
       this.mDayEvents.forEach((value, index) => {
-        this.ys.set(index, this.percent(value.time) * 400)
+        this.ys.set(index, timeToSecond(value.time) * 400 / (3600 * 24))
       })
     },
     initTime(y: number, item: Event) {
@@ -168,10 +169,7 @@ export default Vue.extend({
         }
       }
     },
-    percent(time: string): number {
-      const [hh, mm, ss] = time.split(':') as unknown as [number, number, number]
-      return (hh * 3600 + mm * 60 + (ss << 0)) / (3600 * 24)
-    },
+
     /**
      * 添加事件，这里不调用，抛给父组件
      * */

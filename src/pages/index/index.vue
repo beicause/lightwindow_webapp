@@ -31,7 +31,6 @@
       </uni-popup-dialog>
     </uni-popup>
     <!--</editor-fold>-->
-
   </view>
 </template>
 
@@ -42,10 +41,15 @@ import CalendarDay from "../../components/calendar-day/calendarDay.vue";
 import CalendarWeek from "../../components/calendar-week/calendarWeek.vue";
 import CalendarMonth from "../../components/calendar-month/calendarMonth.vue";
 import TheNavBar from "@/components/the-nav-bar/theNavBar.vue";
-import {Event, marksArrayToMap, PopMsg} from "@/util/data";
-import {compareEvents, parseDayToDate, showPopMsg} from "@/util/util";
+import {Event, marksArrayToMap, PopMsg} from "@/common/data";
+import {compareEvents, parseDayToDate, showPopMsg} from "@/common/util";
 import store from "@/store";
-import {getStorage} from "@/util/cache";
+import {getStorage} from "@/common/cache";
+import UniTransition from "@/uni-ui/lib/uni-transition/uni-transition.vue";
+import UniPopup from "@/uni-ui/lib/uni-popup/uni-popup.vue";
+import UniPopupMessage from "@/uni-ui/lib/uni-popup-message/uni-popup-message.vue";
+import UniPopupDialog from "@/uni-ui/lib/uni-popup-dialog/uni-popup-dialog.vue";
+import TheUserDataGraph from "@/components/the-build-button/theUserDataGraph.vue";
 
 /**
  * 入口页面
@@ -63,7 +67,11 @@ import {getStorage} from "@/util/cache";
 
 export default Vue.extend({
   name: "index",
-  components: {TheNavBar, CalendarMonth, CalendarWeek, CalendarDay, TheBuildButton},
+  components: {
+    TheUserDataGraph,
+    UniPopupDialog,
+    UniPopupMessage,
+    UniPopup, UniTransition, TheNavBar, CalendarMonth, CalendarWeek, CalendarDay, TheBuildButton},
   data() {
     return {
       index: 0,//日程表索引 日0，周1，月2

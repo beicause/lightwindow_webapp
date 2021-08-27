@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import UniSegmentedControl from '@dcloudio/uni-ui/lib/uni-segmented-control/uni-segmented-control.vue'
+import UniSegmentedControl from "@/uni-ui/lib/uni-segmented-control/uni-segmented-control.vue";
 
 /**
  * *页面直接组件-顶部导航栏

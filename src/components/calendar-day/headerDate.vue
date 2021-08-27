@@ -19,7 +19,7 @@
 <script lang="ts">
 import store from '../../store'
 import Vue from "vue";
-import {dayFormat, parseDayToDate} from '@/util/util';
+import {dayFormat, parseDayToDate} from '@/common/util';
 import CalendarDay from "@/components/calendar-day/calendarDay.vue";
 
 /**

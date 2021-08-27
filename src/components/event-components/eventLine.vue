@@ -52,6 +52,8 @@
 <script lang="ts">
 import Vue from "vue";
 import EventDaySchedule from '@/components/event-components/eventDaySchedule.vue'
+import {colorArray} from "@/common/data";
+import UniIcons from "@/uni-ui/lib/uni-icons/uni-icons.vue";
 
 /**
  * 事件轴线组件，EventDaySchedule的子组件
@@ -76,6 +78,7 @@ import EventDaySchedule from '@/components/event-components/eventDaySchedule.vue
 
 export default Vue.extend({
   name: "eventLine",
+  components: {UniIcons},
   props: {
     time: {
       type: String,
@@ -97,32 +100,22 @@ export default Vue.extend({
       type: String,
       default: '0'
     },
-    showDetail: {
-      type: Boolean,
-      default: true
-    },
     editable: {
       type: Boolean,
       default: false
     },
+    showDetail: {
+      type: Boolean,
+      default: true
+    },
     fontSize: {
       type: Number,
-      default: 16
-    }
+      default: 12
+    },
   },
   data() {
     return {
-      colorArray: [
-        {name: '绿色-清新', value: '#27ae60'},
-        {name: '青色-纯净', value: '#00BCD4'},
-        {name: '蓝色-沉静', value: '#007aff'},
-        {name: '粉色-浪漫', value: '#F8BBD0'},
-        {name: '紫色-神秘', value: '#9C27B0'},
-        {name: '黄色-温暖', value: '#FBC02D'},
-        {name: '橙色-活力', value: '#FF9800'},
-        {name: '红色-炽热', value: '#F44336'},
-        // {name: '白色-永恒*', value: '#ffffff'},
-      ],
+      colorArray: colorArray,
       repeatArray: ['删除此事件', '删除此后的重复', '每天重复，100次', '每周重复，20次']
     };
   },
