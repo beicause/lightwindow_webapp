@@ -2,12 +2,13 @@
 
 ## 简介
 
-轻程日程表，轻程的子项目，是基于Vue的web应用，部分Android原生功能由轻程APP实现，
+轻程日程表，是基于Vue的web应用，轻程APP的一部分，
 参见主项目[qingchengapp](https://gitee.com/beicause/qingchengapp)
 
 ## 预览
 
-网页预览版：请点击[这里](https://qingcheng.asia/cld/)
+网页预览版：请点击[这里](https://qingcheng.asia/cld/)  
+体验完整app：请点击[下载](https://qingcheng.asia/app-release.apk)
 
 ## 功能
 
@@ -17,14 +18,7 @@
 - 目前支持导入下列大学的教务课表：
   - 合肥工业大学
 
-## 技术栈
-
-> 日程表：框架Vue（uni-app）  
-编程语言：Typescript  
-其他库：vuex，axios，uni-ui
-
 ## 参与贡献
 
-本项目完全出于学习交流和方便大家使用而开发，致力于打造一款优秀的开源软件   
-如果有任何问题，请联系开发者QQ：1494181792，邮箱：1494181792@qq.com  
-同时欢迎提 issue 和提交 pull request
+本项目注释详细，如果您有任何想法或改进，欢迎联系开发者和提交 pull request。  
+QQ：1494181792，邮箱：1494181792@qq.com  

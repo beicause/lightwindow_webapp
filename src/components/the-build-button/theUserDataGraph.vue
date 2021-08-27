@@ -1,5 +1,6 @@
 <template>
   <view>
+<!--    采用iframe，直接使用div和echarts存在图标拖动无效的问题-->
     <iframe ref="iframe" style="height: 360px;width: 310px;border: none" src="/cld/hybrid/html/graph.html"></iframe>
   </view>
 </template>
@@ -47,24 +48,21 @@ export default Vue.extend({
       //生成每个系列
       for (let i = 0; i < num; i++) {
         const data = [] as any[]//系列的数据
-        const dataLabel = [] as string[]//系列数据对应的time
         this.dayEvents.forEach((value) => {
           const event = value[i]
           if (i < value.length) {
             data.push({
+              name:event.time.substring(0,5),
               value: timeToSecond(event.time) - (i === 0 ? 0 : timeToSecond(value[i - 1].time)),
               itemStyle: {
                 borderColor: event.color
               },
               label: {
-                color: event.color
+                color: event.color,
+                formatter: '{b}'//不能是函数，否则JSON.stringify无效
               }
             })
-            dataLabel.push(event.time.substring(0, 5))
-          } else {
-            data.push(null)
-            dataLabel.push('')
-          }
+          } else data.push(null)
         })
         series.push(
             {
@@ -78,7 +76,6 @@ export default Vue.extend({
                 position: 'right',
                 offset: [-4, 0],
                 fontSize: 8,
-                formatter: (params: any) => dataLabel[params.dataIndex].substring(0, 5)
               },
               data
             }
@@ -135,6 +132,7 @@ export default Vue.extend({
     }
   },
   beforeMount() {
+    //监听graph.html加载完成，否则立刻发送消息接收不到
     window.addEventListener('message',()=>{
       const dom=this.$refs.iframe as any
       dom.contentWindow.postMessage(JSON.stringify(this.option),"*")
