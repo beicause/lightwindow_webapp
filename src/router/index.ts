@@ -1,37 +1,46 @@
 import Vue from 'vue'
-import VueRouter, { RouteConfig } from 'vue-router'
-import Feature from "@/views/Feature.vue";
+import VueRouter, {RouteConfig} from 'vue-router'
 
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
-  {
-    path:'/',
-    redirect:'/feature'
-  },
-  {
-    path: '/feature',
-    name: 'feature',
-    component: Feature
-  },
-  {
-    path:'/guide',
-    name:'guide',
-    component:()=>import('../views/Guide.vue')
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+    {
+        path:"/",
+        component:()=>import("@/index/IndexApp.vue")
+    },
+    {
+        path: '/guide',
+        component: () => import ("@/guide/GuideApp.vue"),
+        children: [
+            {
+                path: '',
+                redirect: 'feature'
+            },
+            {
+                path: 'feature',
+                name: 'feature',
+                component: () => import ("@/guide/views/Feature.vue")
+            },
+            {
+                path: 'guide',
+                name: 'guide',
+                component: () => import('../guide/views/Guide.vue')
+            },
+            {
+                path: 'about',
+                name: 'about',
+                component: () => import(/* webpackChunkName: "about" */ '../guide/views/About.vue')
+            }]
+    },
+    {
+        path:'/music',
+        component:()=>import('@/music/MusicApp.vue')
+    }
 ]
 
 const router = new VueRouter({
-  mode:"hash",
-  routes
+    mode: "hash",
+    routes
 })
 
 export default router

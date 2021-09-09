@@ -1,49 +1,49 @@
 <template>
   <v-app>
-    <v-app-bar height="30" app extension-height="35" color="white">
-      <template v-slot:default>
-        <v-img contain height="20" src="@/assets/bandmin.png"></v-img>
-        <v-icon dense @click="()=>{if (Android)Android.close()}" color="blue" style="position: absolute;right: 5px;">
-          fal fa-times-circle</v-icon>
-      </template>
+    <div>
+      <v-expand-transition>
+        <div class="alert" v-show="show">
+          <v-alert dense text :type="type">{{ text }}</v-alert>
+        </div>
+      </v-expand-transition>
 
-      <template v-slot:extension>
-        <v-tabs grow>
-          <v-tab :to="{name:'feature'}">
-            <v-icon>mdi-database-outline</v-icon>
-            <span>功能</span>
-          </v-tab>
-          <v-tab :to="{name:'guide'}">
-            <v-icon>mdi-script-text-outline</v-icon>
-            <span>说明</span>
-          </v-tab>
-          <v-tab :to="{name:'about'}">
-            <v-icon>mdi-information-outline</v-icon>
-            <span>关于</span>
-          </v-tab>
-        </v-tabs>
-      </template>
-    </v-app-bar>
-    <v-main>
-      <router-view/>
-    </v-main>
+      <router-view></router-view>
+    </div>
   </v-app>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import {Android} from "@/common/android";
+import Vue from 'vue'
+import {closePop} from "@/common/util";
 
 export default Vue.extend({
-  name: 'App',
+  name: "App",
   data() {
     return {
-      Android
+      show: false,
+      type: 'info' as 'info' | 'error' | 'success' | 'warning',
+      text: ''
     }
   },
-  mounted() {
-    (window as any)['getVersion']=()=>100
-    console.log((window as any).getVersion())
+  created() {
+    this.$on('close-pop',()=>this.show=false)
+    this.$on('show-pop', ({text, type, duration}:
+                              {text:string,type:'info' | 'error' | 'success' | 'warning',duration:number})=>{
+      this.text=text
+      this.type=type
+      this.show=true
+      setTimeout(()=>closePop(this),duration)
+    })
   }
-});
+})
 </script>
+
+<style scoped>
+.alert {
+  left: 0;
+  right: 0;
+  z-index: 6;
+  position: absolute;
+  background-color: white;
+}
+</style>
