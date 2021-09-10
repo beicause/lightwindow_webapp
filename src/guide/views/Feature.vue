@@ -6,8 +6,7 @@
           <v-icon dense class="pl-5 pr-1" color="blue">fal fa-calendar-week</v-icon>
           <div class="blue--text">日程表</div>
           <v-spacer></v-spacer>
-          <v-btn icon small class="mx-auto mr-2" @click="()=>{this.isCldRunning=!isCldRunning
-          if (Android){if (isCldRunning)Android.startCldService();else Android.stopCldService()}}"
+          <v-btn icon small class="mx-auto mr-2" @click="clickCld"
                  :color="isCldRunning?'blue':'red'">
             <v-icon dense :color="isCldRunning?'blue':'red'">{{
                 isCldRunning ? 'fas fa-spinner fa-spin' : 'mdi-play-speed'
@@ -72,12 +71,21 @@ export default Vue.extend({
   data() {
     return {
       isCldRunning: false,
-      isPetRunning:false,
+      isPetRunning: false,
       Android
     }
   },
   mounted() {
     this.isCldRunning = !!Android?.isCldRunning()
+  },
+  methods: {
+    clickCld() {
+      this.isCldRunning = !this.isCldRunning
+      if (Android) {
+        if (this.isCldRunning) Android.startCldService(); else Android.stopCldService()
+      } else window.location.href = 'https://qingcheng.asia/cld/'
+
+    }
   }
 })
 </script>

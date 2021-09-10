@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-icon v-show="!drawer" class="expand-arrow" color="blue" @click="()=>{this.drawer=true}">fal fa-chevron-circle-right</v-icon>
-    <v-navigation-drawer style="z-index: 999" absolute mini-variant v-model="drawer">
+    <v-navigation-drawer style="z-index: 6" absolute mini-variant v-model="drawer">
       <v-list dense>
         <v-list-item-group color="blue" @change="onItemClick" :value="selectItem">
           <v-list-item>
@@ -35,10 +35,10 @@
         你可以轻松编辑每个事件：
       </p>
       <v-img height="140" contain src="@/guide/assets/cld_guide.jpg"></v-img>
-      <p class="body-2">注：</p>
-      <p class="body-2">数据存储于本地，清除缓存后无法恢复。</p>
-      <p class="body-2">通知提醒的实际效果取决于您的通知管理。</p>
-      <p class="body-2">闹钟提醒仅作为标记，若要生效，请导出至系统闹钟。</p>
+      <div class="body-2">注：</div>
+      <div class="body-2">数据存储于本地，清除缓存后无法恢复。</div>
+      <div class="body-2">通知提醒的实际效果（振动，横幅，铃声等）取决于您的通知管理设置。</div>
+      <div class="body-2">闹钟提醒仅作为标记，若要生效，请导出至系统闹钟。</div>
     </div>
     <div v-show="selectItem===1">
       <p>小宠物</p>

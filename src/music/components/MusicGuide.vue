@@ -38,7 +38,7 @@
     </tr>
     </tbody>
   </v-simple-table>
-  <div style="font-size: 14px">注：<br/>默认每小节四拍<br/>速度每分钟120个四分音符</div>
+  <div style="font-size: 14px">注：<br/>默认钢琴，每小节四拍<br/>速度每分钟120个四分音符</div>
 </v-container>
 </template>
 

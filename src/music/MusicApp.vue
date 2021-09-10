@@ -5,7 +5,7 @@
         fal fa-arrow-square-left
       </v-icon>
       <v-spacer></v-spacer>
-      <v-icon dense color="blue">fal fa-music</v-icon>
+      <v-icon class="ml-n4" dense color="blue">fal fa-music</v-icon>
       <div class="blue--text ml-1">音乐谱</div>
       <v-spacer></v-spacer>
       <v-icon dense @click="()=>{if (Android)Android.close()}" color="blue" class="mr-n3">
