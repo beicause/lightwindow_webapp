@@ -53,7 +53,6 @@
             <v-icon dense color="red">mdi-play-speed</v-icon>
           </v-btn>
         </v-row>
-
         <v-row class="pt-2">
           <v-divider></v-divider>
         </v-row>

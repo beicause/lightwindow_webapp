@@ -4,9 +4,9 @@
                 @input="e=>onInput(1)(e)"></v-textarea>
     <v-textarea style="padding: 0" auto-grow :value="getInputValue(-1)" label="低音谱" :rules="rules"
                 @input="e=>onInput(-1)(e)"></v-textarea>
-    <v-slider :step="STEP" @change="sliderChange" :max="maxTime" :value="musicTime"
+    <v-slider dense :step="STEP" @change="sliderChange" :max="maxTime" :value="musicTime"
               :append-icon="isPlaying ? 'fal fa-pause' : 'fal fa-play'" @click:append="onPlay"></v-slider>
-    <music-guide></music-guide>
+    <music-guide class="pt-0"></music-guide>
   </v-container>
 </template>
 
