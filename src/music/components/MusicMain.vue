@@ -4,13 +4,8 @@
                 @input="e=>onInput(1)(e)"></v-textarea>
     <v-textarea style="padding: 0" auto-grow :value="getInputValue(-1)" label="低音谱" :rules="rules"
                 @input="e=>onInput(-1)(e)"></v-textarea>
-    <v-row>
-      <v-slider step="0.00125" @change="sliderChange" :max="maxTime" :value="musicTime"></v-slider>
-      <v-btn @click="onPlay"
-             class="ml-2 mr-2" icon color="blue">
-        <v-icon dense>{{ isPlaying ? 'fal fa-pause' : 'fal fa-play' }}</v-icon>
-      </v-btn>
-    </v-row>
+    <v-slider :step="STEP" @change="sliderChange" :max="maxTime" :value="musicTime"
+              :append-icon="isPlaying ? 'fal fa-pause' : 'fal fa-play'" @click:append="onPlay"></v-slider>
     <music-guide></music-guide>
   </v-container>
 </template>
@@ -19,7 +14,6 @@
 import Vue from 'vue'
 import MusicGuide from "@/music/components/MusicGuide.vue";
 import SoundFont from 'soundfont-player'
-import * as gsap from "gsap";
 
 export default Vue.extend({
   name: "MusicMain",
@@ -28,6 +22,7 @@ export default Vue.extend({
     return {
       //每拍0.5秒
       BEAT_DURATION: 0.5,
+      STEP: 0.0125,
       player: {} as SoundFont.Player,
       audio: {} as AudioContext,
       musicTime: 0,
@@ -109,19 +104,34 @@ export default Vue.extend({
       }
       this.player.schedule(0, [...getSchedule(1), ...getSchedule(-1)])
       this.isPlaying = true
-      this.anim = gsap.gsap.to(this.$data, {
-        duration: this.maxTime - this.musicTime,
-        musicTime: this.maxTime,
-        ease:'none',
-        onUpdate: () => {
-          if (!this.isPlaying) this.anim.pause()
-        },
-        onComplete: () => {
+
+      const step = 0.1
+      const timerId = setInterval(() => {
+        if (!this.isPlaying) clearInterval(timerId)
+        this.musicTime += step
+        if (this.musicTime >= this.maxTime) {
+          clearInterval(timerId)
           this.onPlay()
-          this.musicTime=0
-          setTimeout(()=> this.onPlay(),300)
+          this.musicTime = 0
+          setTimeout(() => this.onPlay(), 300)
         }
-      })
+      }, step * 1000)
+      // const target={musicTime:this.musicTime}
+      // this.anim = gsap.gsap.to(target, {
+      //   duration: this.maxTime - this.musicTime,
+      //   musicTime: this.maxTime,
+      //   ease:'none',
+      //   onUpdate: () => {
+      //     if (!this.isPlaying) this.anim.pause()
+      //     const value=Math.floor(target.musicTime/this.STEP)*this.STEP
+      //     if (this.musicTime!==value)this.musicTime=value
+      //   },
+      //   onComplete: () => {
+      //     this.onPlay()
+      //     this.musicTime=0
+      //     setTimeout(()=> this.onPlay(),300)
+      //   }
+      // })
       // const update = () => {
       //   if (this.musicTime >= this.maxTime) {
       //     this.onPlay()
@@ -135,6 +145,7 @@ export default Vue.extend({
     },
 
     sliderChange(value: number) {
+      this.player.stop()
       this.isPlaying = false
       this.musicTime = value
     },

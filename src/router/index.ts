@@ -33,8 +33,12 @@ const routes: Array<RouteConfig> = [
             }]
     },
     {
-        path:'/music',
-        component:()=>import('@/music/MusicApp.vue')
+        path: '/music',
+        component: () => import('@/music/MusicApp.vue')
+    },
+    {
+        path: '/cld',
+        beforeEnter: () => window.location.href = 'https://qingcheng.asia/cld/'
     }
 ]
 
