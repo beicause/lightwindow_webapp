@@ -31,6 +31,7 @@ export default Vue.extend({
 
 <style>
 /*每个页面公共css */
+
 .app-container {
   padding: 0 5px;
 }

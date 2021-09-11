@@ -6,9 +6,15 @@ interface Event {
     color: string,
     alarm: string
 }
-interface Mark{
-    date:string,
-    info:string
+interface Mark {
+    date: string,
+    info: string
+}
+
+interface EduUserInfo {
+    username: string
+    password: string
+    school: string
 }
 function marksMapToArray(m:Map<string,string>):Mark[]{
     const ms:Mark[]=[]
@@ -44,4 +50,4 @@ interface PopMsg {
     confirm?:()=>void
 }
 
-export {colorArray, Event,PopMsg,Mark,marksArrayToMap,marksMapToArray}
+export {EduUserInfo, colorArray, Event, PopMsg, Mark, marksArrayToMap, marksMapToArray}

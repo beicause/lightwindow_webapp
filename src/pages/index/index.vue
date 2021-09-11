@@ -36,20 +36,20 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import TheBuildButton from "../../components/the-build-button/theBuildButton.vue";
-import CalendarDay from "../../components/calendar-day/calendarDay.vue";
-import CalendarWeek from "../../components/calendar-week/calendarWeek.vue";
-import CalendarMonth from "../../components/calendar-month/calendarMonth.vue";
-import TheNavBar from "@/components/the-nav-bar/theNavBar.vue";
+import TheBuildButton from "../../components/the-build-button/TheBuildButton.vue";
+import CalendarDay from "../../components/calendar/CalendarDay.vue";
+import CalendarWeek from "../../components/calendar/CalendarWeek.vue";
+import CalendarMonth from "../../components/calendar/CalendarMonth.vue";
+import TheNavBar from "@/components/the-nav-bar/TheNavBar.vue";
 import {Event, marksArrayToMap, PopMsg} from "@/common/data";
-import {compareEvents, parseDayToDate, showPopMsg} from "@/common/util";
+import {compareEvents, getEventDate, showPopMsg} from "@/common/util";
 import store from "@/store";
 import {getStorage} from "@/common/cache";
-import UniTransition from "@/uni-ui/lib/uni-transition/uni-transition.vue";
-import UniPopup from "@/uni-ui/lib/uni-popup/uni-popup.vue";
-import UniPopupMessage from "@/uni-ui/lib/uni-popup-message/uni-popup-message.vue";
-import UniPopupDialog from "@/uni-ui/lib/uni-popup-dialog/uni-popup-dialog.vue";
-import TheUserDataGraph from "@/components/the-build-button/theUserDataGraph.vue";
+import UniTransition from "@/plugins/uni-ui/lib/uni-transition/uni-transition.vue";
+import UniPopup from "@/plugins/uni-ui/lib/uni-popup/uni-popup.vue";
+import UniPopupMessage from "@/plugins/uni-ui/lib/uni-popup-message/uni-popup-message.vue";
+import UniPopupDialog from "@/plugins/uni-ui/lib/uni-popup-dialog/uni-popup-dialog.vue";
+import TheUserDataGraph from "@/components/the-build-button/TheUserDataGraph.vue";
 
 /**
  * 入口页面
@@ -158,12 +158,13 @@ export default Vue.extend({
       this.editable = editable
       if (!editable) {
         const alarms = store.state.events.filter(e =>
-            e.alarm.match(/^\*/) && parseDayToDate(e.day).getTime() > new Date().getTime())
+            e.alarm.match(/^\*/) && getEventDate(e).getTime() > new Date().getTime())
         const cAlarms = (JSON.parse(getStorage('events')) as Event[]).filter(e =>
-            e.alarm.match(/^\*/) && parseDayToDate(e.day).getTime() > new Date().getTime())
+            e.alarm.match(/^\*/) && getEventDate(e).getTime() > new Date().getTime())
         const [a, b] = compareEvents(alarms, cAlarms)
+
         if (a.length !== 0 || b.length !== 0) showPopMsg({
-          msg: '闹钟提醒发生变化，若要生效，请点击【更多】->【导出闹钟提醒】',
+          msg: '闹钟提醒发生变化，若要生效，请导出闹钟提醒',
           type: 'info',
           duration: 2000
         })

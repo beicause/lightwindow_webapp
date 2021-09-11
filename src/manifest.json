@@ -63,8 +63,8 @@
             }
         },
         "router" : {
-            "mode" : "history",
-            "base" : "/cld"
+          "mode": "hash",
+          "base": "/cld"
         },
         "title" : "日程表",
         "domain" : "qingcheng.asia/cld/"

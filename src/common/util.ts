@@ -3,7 +3,7 @@ import {colorArray, Event, Mark, PopMsg} from "@/common/data";
 /**
  * 返回日期格式 yyyy-MM-dd
  * */
-function dayFormat(date: Date) {
+function dayFormat(date: Date): string {
     const y = date.getFullYear()
     const m = date.getMonth() + 1
     const d = date.getDate()
@@ -13,7 +13,7 @@ function dayFormat(date: Date) {
 /**
  * 返回日期格式 HH:mm:ss
  * */
-function timeFormat(date: Date) {
+function timeFormat(date: Date): string {
     const h = date.getHours()
     const m = date.getMinutes()
     const s = date.getSeconds()
@@ -23,7 +23,7 @@ function timeFormat(date: Date) {
 /**
  * 返回日期格式 yyyy-MM-dd HH:mm:ss
  * */
-function dateFormat(date: Date) {
+function dateFormat(date: Date): string {
     return dayFormat(date) + ' ' + timeFormat(date)
 }
 
@@ -35,26 +35,42 @@ function timeToSecond(time: string): number {
     const [hh, mm, ss] = time.split(':') as unknown as [number, number, number]
     return (hh * 3600 + mm * 60 + (ss << 0))
 }
+
 /**
  * 秒数转HH:mm:ss
  * */
-function secondToTime(second:number):string{
-    const s=second%3600%60
-    const m=(second%3600-s)/60
-    const h=(second-60*m-s)/3600
-    const plusZero = (n:number) =>(n<10?'0':'')+n
-    return plusZero(h)+':'+plusZero(m)+':'+plusZero(s)
+function secondToTime(second: number): string {
+    const s = second % 3600 % 60
+    const m = (second % 3600 - s) / 60
+    const h = (second - 60 * m - s) / 3600
+    const plusZero = (n: number) => (n < 10 ? '0' : '') + n
+    return plusZero(h) + ':' + plusZero(m) + ':' + plusZero(s)
 }
+
 /**
  * yyyy-MM-dd字符串转Date对象
  * */
-function parseDayToDate(date: string): Date {
-    if (!date.match(/^\d{4}-\d{2}-\d{2}/)) throw '日期格式错误'
-    const [y, m, d] = date.split('-') as unknown as [number, number, number]
+function getEventDate(event: Event | string): Date {
     const mDate = new Date()
+    let y: number, m: number, d: number, h: number, s: number, ms: number
+    if (typeof event === 'string') {
+        if (event.match(/\d{4}-\d{2}-\d{2}/)) {
+            if (!event.match(/ \d{2}:\d{2}:\d{2}/)) event += ' 00:00:00'
+        } else throw '日期格式错误'
+        const [day, time] = event.split(' ') as [string, string]
+        [y, m, d] = day.split('-').map(value => value as unknown as number << 0);
+        [h, s, ms] = time.split(':').map(value => value as unknown as number << 0)
+    } else {
+        [y, m, d] = event.day.split('-').map(value => value as unknown as number << 0);
+        [h, s, ms] = event.time.split(':').map(value => value as unknown as number << 0)
+
+    }
     mDate.setFullYear(y)
     mDate.setMonth(m - 1)
     mDate.setDate(d)
+    mDate.setHours(h)
+    mDate.setSeconds(s)
+    mDate.setMilliseconds(ms)
     return mDate
 }
 
@@ -184,7 +200,7 @@ export {
     compareMarks,
     dayFormat,
     timeFormat,
-    parseDayToDate,
+    getEventDate,
     dateFormat,
     giveColor,
     compareEvents,

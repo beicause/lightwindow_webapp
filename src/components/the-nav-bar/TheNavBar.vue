@@ -1,0 +1,98 @@
+<template>
+  <view>
+    <view class="container-band">
+      <text :style="{visibility:zoom?'visible':'hidden'}" @click="onClickZoom"
+            class="mdi mdi-arrow-top-left-bottom-right border"
+            style=" display:flex;color: #2196F3;border-color: #007AFF;font-size: 18px"></text>
+      <view style="color:#2196F3;height: 20px;">
+        <text class="fal fa-calendar-week"></text>
+        <text>日程表</text>
+      </view>
+      <text @click="()=>{if(Android)Android.close()}" class="fal fa-times-circle"
+            style="color: #2196F3;font-size: 20px"></text>
+    </view>
+    <uni-segmented-control class="segmented" :current="current" :values="['日','周','月']" styleType="button"
+                           @clickItem="onClickItem">
+    </uni-segmented-control>
+  </view>
+</template>
+
+<script lang="ts">
+import Vue from 'vue'
+import UniSegmentedControl from "@/plugins/uni-ui/lib/uni-segmented-control/uni-segmented-control.vue";
+import {Android} from "@/common/android";
+
+/**
+ * *页面直接组件-顶部导航栏
+ * @event nav 分段器点击事件，e:{from:number,to:number}
+ */
+
+export default Vue.extend({
+  name: "TheNavBar",
+  components: {
+    UniSegmentedControl
+  },
+  data() {
+    return {
+      current: 0,
+      zoom: true,
+      Android
+    }
+  },
+  created() {
+    (window as any)['showZoom'] = () => this.zoom = true
+  },
+  methods: {
+    onClickZoom() {
+      this.zoom = false
+      Android?.showZoom()
+    },
+    onClickItem(e: any) {
+      switch (e.currentIndex) {
+        case 0:
+          this.$emit('nav', {
+            from: this.current,
+            to: 0
+          })
+          break
+        case 1:
+          this.$emit('nav', {
+            from: this.current,
+            to: 1
+          })
+          break
+        case 2:
+          this.$emit('nav', {
+            from: this.current,
+            to: 2
+          })
+          break
+      }
+      this.current = e.currentIndex
+    }
+  }
+})
+</script>
+
+<style scoped>
+.segmented {
+  height: 25px;
+}
+
+.container-band {
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.border {
+  border: solid 1px;
+}
+
+i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
