@@ -8,7 +8,7 @@ function getStorage(k: 'updateTime' | 'events' | 'marks' | 'eduUserInfo'): strin
     else return JSON.stringify(s)
 }
 
-function removeStorage(...ks: ('updateTime' | 'events' | 'marks' | 'eduUserInfo')[]) {
+function removeStorage(ks: ('updateTime' | 'events' | 'marks' | 'eduUserInfo')[]) {
     ks.forEach(k => {
         uni.removeStorageSync(k)
     })

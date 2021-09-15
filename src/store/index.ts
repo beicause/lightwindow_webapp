@@ -37,9 +37,9 @@ const store = new Vuex.Store({
             let m = getStorage('marks')
             let u = getStorage('eduUserInfo')
 
-            if (e) state.events = JSON.parse(e)
-            if (m) state.marks = marksArrayToMap(JSON.parse(m))
-            if (u) state.eduUserInfo = JSON.parse(u)
+            state.events = e?JSON.parse(e):[]
+            state.marks = m?marksArrayToMap(JSON.parse(m)):new Map<string, string>()
+            state.eduUserInfo = u?JSON.parse(u):{school: '', username: '', password: ''} as EduUserInfo
             androidSyncData(state.events)
             state.updateTime = getStorage('updateTime')
             state.activeDay = dayFormat(new Date())

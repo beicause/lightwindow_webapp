@@ -27,13 +27,14 @@
 import {dateFormat, getSimpleDiff, giveColor, showPopMsg} from '@/common/util'
 import store from '../../store'
 import Vue from 'vue'
-import {EduUserInfo, Mark} from "@/common/data";
+import {EduUserInfo, Mark, Event} from "@/common/data";
 import {getHfutEvents} from "@/common/hfut";
 import UniIcons from "@/plugins/uni-ui/lib/uni-icons/uni-icons.vue";
 import UniForms from "@/plugins/uni-ui/lib/uni-forms/uni-forms.vue";
 import UniFormsItem from "@/plugins/uni-ui/lib/uni-forms-item/uni-forms-item.vue";
 import UniEasyinput from "@/plugins/uni-ui/lib/uni-easyinput/uni-easyinput.vue";
 import UniTag from "@/plugins/uni-ui/lib/uni-tag/uni-tag.vue";
+import {Android} from "@/common/android";
 
 /**
  * 教务登陆界面
@@ -44,7 +45,7 @@ export default Vue.extend({
   components: {UniTag, UniEasyinput, UniFormsItem, UniForms, UniIcons},
   data() {
     return {
-      schools: ['合肥工业大学'],
+      schools: ['合肥工业大学', '长沙理工大学'],
       mSchool: '请选择',
       btnSubExtra: true,
       btnOffExtra: true,
@@ -81,79 +82,94 @@ export default Vue.extend({
   },
   methods: {
     selectSchool(e: any): void {
+      console.log(e)
       this.mSchool = this.schools[e.detail.value]
     },
 
     submit(): void {
-      if (!this.isImported) (this.$refs.form as any).validate()
+      if (this.isImported) {
+        this.mSchool = this.school
+        this.formData.username = this.eduUserInfo.username
+        this.formData.password = this.eduUserInfo.password
+      }
+      this.mSubmit()
+    },
+    mSubmit() {
+      (this.$refs.form as any).validate()
           .then((r: any) => {
-            if (this.mSchool === '合肥工业大学') {
-              this.importHfutSchedule(r.username, r.password)
-            }
+            this.btnSubExtra = false
+            showPopMsg({msg: '正在导入', type: 'info'})
+            this.getEduEvents(this.mSchool, r.username, r.password).then(events => {
+              this.addSchedule(events)
+              store.commit('cacheMarks')
+              store.commit('setAndCache', [
+                ['eduUserInfo', JSON.stringify({
+                  school: this.mSchool,
+                  username: r.username,
+                  password: r.password
+                } as EduUserInfo)],
+                ['updateTime', dateFormat(new Date())]
+              ])
+              store.commit('cacheEvents')
+              showPopMsg({msg: '导入成功', type: 'success', duration: 800})
+              this.btnSubExtra = true
+
+            }).catch((err: any) => {
+              showPopMsg({msg: '失败'+err, type: 'error', duration: 800})
+              this.btnSubExtra = true
+            })
+
           })
           .catch((err: any) => console.log('表单错误:', err))
-      else {
-        if (this.eduUserInfo.school === '合肥工业大学')
-          this.importHfutSchedule(this.eduUserInfo.username, this.eduUserInfo.password)
+    },
+    getEduEvents: async function (school: string, username: string, password: string) {
+      switch (school) {
+        case '合肥工业大学':
+          return (await getHfutEvents(username, password))[1]
+        case '长沙理工大学':
+          if (!Android)throw Error("android only")
+          return JSON.parse(Android.requestCsustEvents(username,password)) as Event[]
+        default:
+          return [] as Event[]
       }
     },
-    importHfutSchedule(username: string, password: string) {
-      this.btnSubExtra = false
-      showPopMsg({msg: '正在导入', type: 'info'})
-      getHfutEvents(username, password).then(([res, events, eduToken]) => {
-            const newMarks = [] as Mark[]
-            events.forEach(e => {
-              if (!store.state.marks.has(e.day)) newMarks.push({date: e.day, info: '有课'})
-            })
-            store.commit('addMarks', newMarks)
-
-            const newEvents = getSimpleDiff(events, store.state.events)
-            giveColor(newEvents)
-            newEvents.forEach(e => {
-              e.alarm = "0"
-            })
-            store.commit('cacheMarks')
-            store.commit('setAndCache', [
-              ['eduUserInfo', JSON.stringify({school: '合肥工业大学', username, password} as EduUserInfo)],
-              ['updateTime', dateFormat(new Date())]
-            ])
-            store.commit('addEvents', newEvents)
-            store.commit('cacheEvents')
-
-            showPopMsg({msg: '导入成功', type: 'success', duration: 800})
-            this.btnSubExtra = true
-          }
-      ).catch((err: any) => {
-        showPopMsg({msg: '失败', type: 'error', duration: 800})
-        this.btnSubExtra = true
+    addSchedule(events: Event[]) {
+      const newMarks = [] as Mark[]
+      events.forEach(e => {
+        if (!store.state.marks.has(e.day)) newMarks.push({date: e.day, info: '有课'})
       })
+      store.commit('addMarks', newMarks)
+      const newEvents = getSimpleDiff(events, store.state.events)
+      giveColor(newEvents)
+      newEvents.forEach(e => {
+        e.alarm = "0"
+      })
+      store.commit('addEvents', newEvents)
     },
     pullOff() {
-      if (this.school === '合肥工业大学') {
-        this.btnOffExtra = false
-        showPopMsg({msg: '正在抽除', type: 'info'})
-        getHfutEvents(this.eduUserInfo.username, this.eduUserInfo.password).then(([res, events, eduToken]) => {
-          const rMarks = [] as Mark[]
-          events.forEach(e => {
-            if (store.state.marks.get(e.day) === '有课') rMarks.push({date: e.day, info: '有课'})
-          })
-          store.commit('removeMarks', rMarks)
-          const tEvents = getSimpleDiff(store.state.events, events)
-          const rEvents = getSimpleDiff(store.state.events, tEvents)
-          store.commit('removeEvents', rEvents)
-          store.commit('cacheMarks')
-          store.commit('setAndCache', [
-            ['eduUserInfo', JSON.stringify({school: '', username: '', password: ''} as EduUserInfo)],
-            ['updateTime', dateFormat(new Date())]
-          ])
-          store.commit('cacheEvents')
-          showPopMsg({msg: '抽除成功', type: 'success', duration: 800})
-          this.btnOffExtra = true
-        }).catch((err: AnyObject) => {
-          showPopMsg({msg: '失败', type: 'error', duration: 800})
-          this.btnOffExtra = true
+      this.btnOffExtra = false
+      showPopMsg({msg: '正在抽除', type: 'info'})
+      this.getEduEvents(this.eduUserInfo.school, this.eduUserInfo.username, this.eduUserInfo.password).then(events => {
+        const rMarks = [] as Mark[]
+        events.forEach(e => {
+          if (store.state.marks.get(e.day) === '有课') rMarks.push({date: e.day, info: '有课'})
         })
-      }
+        store.commit('removeMarks', rMarks)
+        const tEvents = getSimpleDiff(store.state.events, events)
+        const rEvents = getSimpleDiff(store.state.events, tEvents)
+        store.commit('removeEvents', rEvents)
+        store.commit('cacheMarks')
+        store.commit('setAndCache', [
+          ['eduUserInfo', JSON.stringify({school: '', username: '', password: ''} as EduUserInfo)],
+          ['updateTime', dateFormat(new Date())]
+        ])
+        store.commit('cacheEvents')
+        showPopMsg({msg: '抽除成功', type: 'success', duration: 800})
+        this.btnOffExtra = true
+      }).catch((err: any) => {
+        showPopMsg({msg: '失败'+err, type: 'error', duration: 800})
+        this.btnOffExtra = true
+      })
     },
   }
 })

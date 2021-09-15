@@ -1,12 +1,12 @@
 <template>
   <movable-area style="height: 442px" :style="areaStyle">
-    <movable-view v-for="(item,index) in mDayEvents" :y="ys.get(index)" :key="index" :disabled="!editable"
+    <movable-view v-for="(item,index) in mDayEvents" :y="timeToSecond(item.time) * 400 / (3600 * 24)" :key="index" :disabled="!editable"
                   direction="vertical" style="width: 100%;height: 42px;"
                   @change="e=> {
-				    if (e.detail.source==='touch')initTime(e.detail.y,item)
+				    if (e.detail.source==='touch')changeTime(e.detail.y,item)
       }">
       <event-line @alarm-picker-change="e=>{item.alarm=e}"
-                  @time-picker-change="e=>{item.time=e;}"
+                  @time-picker-change="e=>{item.time=e}"
                   @color-picker-change="e=>{item.color=e}"
                   @title-input="e=>{item.title=e}"
                   @detail-input="e=>{item.detail=e}"
@@ -79,15 +79,16 @@ export default Vue.extend({
   data() {
     return {
       mDayEvents: [] as Event[],
-      ys: new Map<number, number>(),
-      off: () => {
-      }
+      off: () => {}
     }
   },
   created() {
-    this.initYs()
     this.off = store.watch((state) => state.events, () => {
-      this.mDayEvents = JSON.parse(JSON.stringify(store.getters.getDayEvents(this.day)))
+      const dayEvents= JSON.parse(JSON.stringify(store.getters.getDayEvents(this.day)))
+      const [me,e]=compareEvents(this.mDayEvents,dayEvents)
+      e.forEach(event=>this.mDayEvents.push(event))
+      me.forEach(e=>this.mDayEvents.splice(this.mDayEvents.indexOf(e),1))
+      console.log(this.mDayEvents)
     })
   },
   beforeDestroy() {
@@ -104,7 +105,6 @@ export default Vue.extend({
       immediate: true,
       deep: true,
       handler(newValue: Event[]) {
-        this.initYs()
         const [ns, os] = compareEvents(newValue, store.getters.getDayEvents(this.day))
         if (ns.length === 0 && os.length === 0) return
         store.commit('updateDayEvents', {dayEvents: newValue, day: this.day})
@@ -112,13 +112,10 @@ export default Vue.extend({
     }
   },
   methods: {
-    initYs() {
-      this.ys.clear()
-      this.mDayEvents.forEach((value, index) => {
-        this.ys.set(index, timeToSecond(value.time) * 400 / (3600 * 24))
-      })
+    timeToSecond(time:string):number{
+      return timeToSecond(time)
     },
-    initTime(y: number, item: Event) {
+    changeTime(y: number, item: Event) {
       const percent = y / 400
       const secondAll = percent === 1 ? (24 * 3600 - 1) : 24 * 3600 * percent
       const hour = Math.floor(secondAll / 3600)

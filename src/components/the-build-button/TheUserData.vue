@@ -42,7 +42,6 @@ export default Vue.extend({
   components: {TheUserDataGraph, UniIcons},
   data() {
     return {
-      remoteSchool: '',
       localSchool: '',
       localEventsNum: '',
       localUpdateTime: '',
@@ -61,7 +60,7 @@ export default Vue.extend({
     trash(): void {
       const dialogText = '确定清空本地缓存数据吗？';
       const confirm = () => {
-        removeStorage('events', 'eduUserInfo', 'updateTime', 'marks')
+        removeStorage(['events', 'eduUserInfo', 'updateTime', 'marks'])
         this.initLocal()
         store.commit('initAll')
       }

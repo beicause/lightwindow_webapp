@@ -180,7 +180,7 @@ import keypress from './keypress'
 				handler(newVal, oldVal) {
 					if (newVal) {
 						this.parseValue(this.fixIosDateFormat(newVal)) //兼容 iOS、safari 日期格式
-						this.initTime(false)
+						this.changeTime(false)
 					} else {
 						this.parseValue(Date.now())
 					}
@@ -697,7 +697,7 @@ import keypress from './keypress'
 			/**
 			 * 初始化返回值，并抛出 change 事件
 			 */
-			initTime(emit = true) {
+			changeTime(emit = true) {
 				this.time = this.createDomSting()
 				if (!emit) return
 				if (this.returnType === 'timestamp' && this.type !== 'time') {
@@ -760,7 +760,7 @@ import keypress from './keypress'
 			 * 用户点击“确定”按钮
 			 */
 			setTime() {
-				this.initTime()
+				this.changeTime()
 				this.tiggerTimePicker()
 			}
 		}
