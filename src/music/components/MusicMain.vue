@@ -2,10 +2,10 @@
   <v-container>
     <v-textarea auto-grow :value="firstScore.inputValue" :label="levelName.get(firstScore.level)" :rules="rules"
                 @input="e=>onInput(firstScore)(e)" append-icon="fal fa-cog"
-                @click:append="$refs.picker.open()"></v-textarea>
+                @click:append="()=>{this.activeSettingPicker=0;$refs.picker.open()}"></v-textarea>
     <v-textarea style="padding: 0" auto-grow :value="secondScore.inputValue" :label="levelName.get(secondScore.level)"
                 :rules="rules" append-icon="fal fa-cog"
-                @click:append="$refs.picker.open()"
+                @click:append="()=>{this.activeSettingPicker=1;$refs.picker.open()}"
                 @input="e=>onInput(secondScore)(e)"></v-textarea>
     <v-slider dense :step="STEP" @change="sliderChange" :max="maxTime" :value="musicTime"
               :append-icon="isPlaying ? 'fal fa-pause' : 'fal fa-play'" @click:append="onPlay"></v-slider>
@@ -13,19 +13,35 @@
     <music-guide class="pt-0"></music-guide>
     <bottom-picker ref="picker">
       <v-container>
-        <v-row align="center" justify="center">
-          <v-btn @click="()=>{
-        this.initMusic()
+        <setting-item
+            @down-click="()=>{
+            this.activeSettingScore.level--
+            if (this.activeSettingScore.level===-2)this.activeSettingScore.level=1
+        this.initMusic()}"
+            @up-click="()=>{
+          this.activeSettingScore.level++
+          if (this.activeSettingScore.level===2)this.activeSettingScore.level=-1
+          this.initMusic()}">
+          音调：1={{ activeSettingScore.level === 0 ? 'c1' : (activeSettingScore.level === 1 ? 'c2' : 'c') }}
+        </setting-item>
+
+        <setting-item
+            @down-click="()=>{
+        this.activeSettingScore.gain--
+        this.initMusic()}"
+            @up-click="()=>{
+          this.activeSettingScore.gain++
+          this.initMusic()}">音量：{{ activeSettingScore.gain }}
+        </setting-item>
+
+        <setting-item
+            @down-click="()=>{
         this.BEAT_DURATION=60/(60/BEAT_DURATION-10)
-      }" small color="blue" outlined fab width="16" height="16">-
-          </v-btn>
-          <div class="blue--text mx-2">{{ Math.floor(60 / BEAT_DURATION) }}拍/分钟</div>
-          <v-btn @click="()=>{
-        this.initMusic()
+        this.initMusic()}"
+            @up-click="()=>{
         this.BEAT_DURATION=60/(60/BEAT_DURATION+10)
-      }" small color="blue" outlined fab width="16" height="16">+
-          </v-btn>
-        </v-row>
+        this.initMusic()}">速度：{{ Math.floor(60 / BEAT_DURATION) }}
+        </setting-item>
       </v-container>
     </bottom-picker>
   </v-container>
@@ -36,6 +52,7 @@ import Vue from 'vue'
 import MusicGuide from "@/music/components/MusicGuide.vue";
 import SoundFont from 'soundfont-player'
 import BottomPicker from "@/music/components/BottomPicker.vue";
+import SettingItem from "@/music/components/SettingItem.vue";
 
 interface ScoreInfo {
   inputValue: string
@@ -45,7 +62,7 @@ interface ScoreInfo {
 
 export default Vue.extend({
   name: "MusicMain",
-  components: {BottomPicker, MusicGuide},
+  components: {SettingItem, BottomPicker, MusicGuide},
   data() {
     return {
       //每拍0.5秒
@@ -63,6 +80,11 @@ export default Vue.extend({
     }
   },
   computed: {
+    activeSettingScore(): ScoreInfo {
+      if (this.activeSettingPicker === 0) return this.firstScore
+      if (this.activeSettingPicker === 1) return this.secondScore
+      throw new Error()
+    },
     levelName(): Map<0 | 1 | -1, string> {
       const map = new Map<0 | 1 | -1, string>()
       map.set(1, '高音谱')
@@ -90,8 +112,8 @@ export default Vue.extend({
   },
   methods: {
     initMusic() {
-      this.onInput(this.firstScore)
-      this.onInput(this.secondScore)
+      this.onInput(this.firstScore)(this.firstScore.inputValue)
+      this.onInput(this.secondScore)(this.secondScore.inputValue)
     },
     onInput(score: ScoreInfo) {
       return (value: string) => {
@@ -129,7 +151,7 @@ export default Vue.extend({
           const noteString = input.substring(0, i)
           const info = this.lastNoteInfo(noteString, score.level)
           if (!info) continue
-          schedule.push({time: maxTime, note: info.note, duration: info.duration, gain: 5})
+          schedule.push({time: maxTime, note: info.note, duration: info.duration, gain: score.gain})
           maxTime += info.duration
         }
         //剔除时间小于滑块值的
@@ -252,4 +274,5 @@ export default Vue.extend({
 </script>
 
 <style scoped>
+
 </style>

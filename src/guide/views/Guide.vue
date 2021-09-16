@@ -36,7 +36,7 @@
         </v-expansion-panel>
       </v-expansion-panels>
       <p class="blue--text mt-2">开始使用</p>
-      <div class="body-2 indent-2 text-decoration-underline">在主界面运行日程表服务后，将手机正面朝下，即可通过重力感应打开日程表</div>
+      <div class="body-2 indent-2 text-decoration-underline">运行日程表服务后，将手机正面朝下，即可随时通过重力感应打开日程表</div>
       <div class="body-2 indent-2">
         你可以轻松编辑每个事件：
       </div>
