@@ -1,5 +1,6 @@
 <template>
   <div>
+    主页
     <v-btn @click="onClick">click</v-btn>
     <v-btn @click="onClick1"></v-btn>
   </div>
@@ -8,6 +9,7 @@
 <script lang="ts">
 import Vue from "vue";
 import SoundFont from 'soundfont-player'
+
 export default Vue.extend({
   name: "IndexApp",
   data(){return{

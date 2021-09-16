@@ -33,12 +33,11 @@
       <th>减时线，时值减半</th>
     </tr>
     <tr>
-      <th>后置加号（+）</th>
+      <th>后置波浪线（~）</th>
       <th>增时线，延长一拍</th>
     </tr>
     </tbody>
   </v-simple-table>
-  <div style="font-size: 14px">注：<br/>默认钢琴，每小节四拍<br/>速度每分钟120个四分音符</div>
 </v-container>
 </template>
 

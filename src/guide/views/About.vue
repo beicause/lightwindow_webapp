@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <p class="body-2">这是关于页面</p>
+    <p style="user-select: text">https://gitee.com/beicause/qingchengapp</p>
   </v-container>
 </template>
 <script lang="ts">

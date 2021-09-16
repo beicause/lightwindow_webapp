@@ -2,9 +2,14 @@
   <v-app>
     <v-app-bar height="30" app extension-height="35" color="white">
       <template v-slot:default>
+        <v-icon dense :style="{visibility:zoom?'visible':'hidden'}" @click="onClickZoom"
+                color="blue" style="border: #2196f3 solid 1px;">
+          mdi mdi-arrow-top-left-bottom-right border
+        </v-icon>
         <v-img contain height="20" src="@/guide/assets/bandmin.png"></v-img>
-        <v-icon dense @click="()=>{if (Android)Android.close()}" color="blue" style="position: absolute;right: 4px;">
-          fal fa-times-circle</v-icon>
+        <v-icon dense @click="()=>{if (Android)Android.close()}" color="blue">
+          fal fa-times-circle
+        </v-icon>
       </template>
 
       <template v-slot:extension>
@@ -38,12 +43,21 @@ export default Vue.extend({
   name: 'GuideApp',
   data() {
     return {
+      zoom: true,
       Android
     }
   },
-  mounted() {
-    (window as any)['getVersion']=()=>100
-    console.log((window as any).getVersion())
+  created() {
+    (window as any)['getVersion'] = () => 100
+    console.log((window as any).getVersion());
+    (window as any)['showZoom'] = () => this.zoom = true
+    console.log((window as any).showZoom)
+  },
+  methods: {
+    onClickZoom() {
+      this.zoom = false
+      Android?.showZoom()
+    },
   }
 });
 </script>
