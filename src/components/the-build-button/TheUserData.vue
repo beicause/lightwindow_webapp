@@ -42,9 +42,9 @@ export default Vue.extend({
   components: {TheUserDataGraph, UniIcons},
   data() {
     return {
-      localSchool: '',
-      localEventsNum: '',
-      localUpdateTime: '',
+      localSchool: '---',
+      localEventsNum: '---',
+      localUpdateTime: '---',
     }
   },
   mounted() {
@@ -52,17 +52,17 @@ export default Vue.extend({
   },
   methods: {
     initLocal(): void {
-      this.localSchool = store.state.eduUserInfo.school
+      this.localSchool = store.state.eduUserInfo.school?store.state.eduUserInfo.school: '---'
       const e = getStorage('events')
-      this.localEventsNum = e ? JSON.parse(e).length : ''
-      this.localUpdateTime = store.state.updateTime
+      this.localEventsNum = e ? JSON.parse(e).length : '---'
+      this.localUpdateTime = store.state.updateTime?store.state.updateTime: '---'
     },
     trash(): void {
       const dialogText = '确定清空本地缓存数据吗？';
       const confirm = () => {
-        removeStorage(['events', 'eduUserInfo', 'updateTime', 'marks'])
-        this.initLocal()
+        removeStorage(['events', 'eduUserInfo', 'updateTime', 'marks','eduEvents'])
         store.commit('initAll')
+        this.initLocal()
       }
       showDialog({msg: dialogText, type: "warn", confirm: confirm})
     }

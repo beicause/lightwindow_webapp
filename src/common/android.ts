@@ -11,7 +11,8 @@ const Android = (window as any).Android as {
     getEvents: () => string,
     close: () => void,
     showZoom: () => void,
-    requestCsustEvents:(username:string,password:string)=>string
+    requestCsustEvents:(username:string,password:string)=>string,
+    requestGnnuEvents:(username:string,password:string)=>string
 } | undefined
 
 function androidAddEvents(events: Event[]) {

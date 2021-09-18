@@ -136,6 +136,7 @@ export default Vue.extend({
     //监听graph.html加载完成，否则立刻发送消息接收不到
     window.addEventListener('message', () => {
       const dom = this.$refs.iframe as any
+      if (!dom)return;
       dom.contentWindow.postMessage(JSON.stringify(this.option), "*")
       this.off = store.watch((state) => state.events, () => {
         dom.contentWindow.postMessage(JSON.stringify(this.option), "*")

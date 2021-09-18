@@ -7,22 +7,24 @@ import {androidSyncData} from "@/common/android";
 
 Vue.use(Vuex);
 //缓存
-//updateTime
-//events
-//eduUserInfo
-//marks
+//updateTime修改事件
+//events事件
+//eduUserInfo教务账号信息
+//marks月历标记
+//eduEvents课程事件
 const store = new Vuex.Store({
     state: {
         events: [] as Event[],
         marks: new Map<string, string>(),
         updateTime: '',
         activeDay: dayFormat(new Date()),
-        eduUserInfo: {school: '', username: '', password: ''} as EduUserInfo
+        eduUserInfo: {school: '', username: '', password: ''} as EduUserInfo,
+        eduEvents: [] as Event[]
     },
     getters: {
         getDayEvents: (state) =>
             (day: string) => state.events.filter(i => i.day === day)
-            .sort((a, b) => timeToSecond(a.time) - timeToSecond(b.time)) as Event[]
+                .sort((a, b) => timeToSecond(a.time) - timeToSecond(b.time)) as Event[]
     },
     mutations: {
         setActiveDay(state, day: string) {
@@ -33,13 +35,14 @@ const store = new Vuex.Store({
          * 将缓存载入store的数据中
          * */
         initAll(state) {
-            let e = getStorage('events')
-            let m = getStorage('marks')
-            let u = getStorage('eduUserInfo')
-
-            state.events = e?JSON.parse(e):[]
-            state.marks = m?marksArrayToMap(JSON.parse(m)):new Map<string, string>()
-            state.eduUserInfo = u?JSON.parse(u):{school: '', username: '', password: ''} as EduUserInfo
+            const e = getStorage('events')
+            const m = getStorage('marks')
+            const u = getStorage('eduUserInfo')
+            const ee = getStorage('eduEvents')
+            state.events = e ? JSON.parse(e) : []
+            state.marks = m ? marksArrayToMap(JSON.parse(m)) : new Map<string, string>()
+            state.eduUserInfo = u ? JSON.parse(u) : {school: '', username: '', password: ''} as EduUserInfo
+            state.eduEvents = ee ? JSON.parse(ee) : []
             androidSyncData(state.events)
             state.updateTime = getStorage('updateTime')
             state.activeDay = dayFormat(new Date())
@@ -47,11 +50,12 @@ const store = new Vuex.Store({
         /**
          * 用这个方法改变除event，mark的变量
          * */
-        setAndCache(state, payload: ['updateTime' | 'eduUserInfo', string][]) {
-            payload.forEach(e => {
-                setStorage(e[0], e[1]);
-                (state as any)[e[0]] = e[0] === 'eduUserInfo' ? JSON.parse(e[1]) : e[1]
-            })
+        setAndCache(state, payload: { updateTime?: string, eduUserInfo?: EduUserInfo, eduEvents?: Event[] }) {
+            for (let payloadKey in payload) {
+                const setValue:any=(payload as any)[payloadKey];
+                (state as any)[payloadKey] =setValue
+                setStorage(payloadKey as any,typeof setValue==='string'?setValue:JSON.stringify(setValue))
+            }
         },
         updateMarks(state, marks: Map<string, string>) {
             state.marks = marks
@@ -78,7 +82,7 @@ const store = new Vuex.Store({
             }
             setStorage('events', JSON.stringify(state.events));
             androidSyncData(state.events);
-            (this as any).commit('setAndCache', [['updateTime', dateFormat(new Date())]])
+            (this as any).commit('setAndCache', {updateTime: dateFormat(new Date())})
             console.log('缓存更新', state.updateTime)
         },
         addEvents(state, events: Event[]) {

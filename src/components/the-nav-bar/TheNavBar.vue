@@ -1,15 +1,12 @@
 <template>
   <view>
     <view class="container-band">
-      <text :style="{visibility:zoom?'visible':'hidden'}" @click="onClickZoom"
-            class="mdi mdi-arrow-top-left-bottom-right border"
-            style=" display:flex;color: #2196F3;border-color: #007AFF;font-size: 18px"></text>
       <view style="color:#2196F3;height: 20px;">
         <text class="fal fa-calendar-week"></text>
         <text>日程表</text>
       </view>
       <text @click="()=>{if(Android)Android.close()}" class="fal fa-times-circle"
-            style="color: #2196F3;font-size: 20px"></text>
+            style="color: #2196F3;font-size: 20px;position: absolute;right: 16px"></text>
     </view>
     <uni-segmented-control class="segmented" :current="current" :values="['日','周','月']" styleType="button"
                            @clickItem="onClickItem">
@@ -39,14 +36,7 @@ export default Vue.extend({
       Android
     }
   },
-  created() {
-    (window as any)['showZoom'] = () => this.zoom = true
-  },
   methods: {
-    onClickZoom() {
-      this.zoom = false
-      Android?.showZoom()
-    },
     onClickItem(e: any) {
       switch (e.currentIndex) {
         case 0:
@@ -82,8 +72,8 @@ export default Vue.extend({
 .container-band {
   height: 30px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: center;
 }
 
 .border {

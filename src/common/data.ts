@@ -46,6 +46,7 @@ const colorArray = [
 interface PopMsg {
     msg: string,
     type: 'success' | 'error' | 'info' | 'warn',
+    //duration undefined则不自动关闭
     duration?: number,
     confirm?:()=>void
 }

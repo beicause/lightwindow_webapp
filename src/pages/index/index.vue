@@ -42,7 +42,7 @@ import CalendarWeek from "../../components/calendar/CalendarWeek.vue";
 import CalendarMonth from "../../components/calendar/CalendarMonth.vue";
 import TheNavBar from "@/components/the-nav-bar/TheNavBar.vue";
 import {Event, marksArrayToMap, PopMsg} from "@/common/data";
-import {compareEvents, getEventDate, showPopMsg} from "@/common/util";
+import {closePopMsg, compareEvents, getEventDate, showPopMsg} from "@/common/util";
 import store from "@/store";
 import {getStorage} from "@/common/cache";
 import UniTransition from "@/plugins/uni-ui/lib/uni-transition/uni-transition.vue";
@@ -81,6 +81,7 @@ export default Vue.extend({
       popMsg: '',//
       dialogType: '',//
       dialogText: '',//
+      timerId:0,
       confirm: () => {
       },//
     }
@@ -88,10 +89,14 @@ export default Vue.extend({
   //<!--<editor-fold desc="监听全局提示框和对话框事件">-->
   mounted() {
     uni.$on('showPopMsg', (e: PopMsg) => {
+      clearTimeout(this.timerId)
+      this.timerId=0
       this.showPop(e.msg, e.type)
-      if (e.duration) setTimeout(() => this.closePop(), e.duration)
+      if (e.duration)this.timerId= setTimeout(() =>this.closePop(), e.duration)
     })
     uni.$on('closePopMsg', () => {
+      clearTimeout(this.timerId)
+      this.timerId=0
       this.closePop()
     })
     uni.$on('showDialog', (e: PopMsg) => {

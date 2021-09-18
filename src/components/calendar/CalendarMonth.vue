@@ -61,7 +61,7 @@ export default Vue.extend({
     }
   },
   methods: {
-    select(e: AnyObject) {
+    select(e: any) {
       store.commit('setActiveDay', e.fulldate as string)
     }
   }
