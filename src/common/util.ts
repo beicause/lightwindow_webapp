@@ -1,9 +1,12 @@
-import Vue from "vue";
+import {vm} from "@/main";
 
-function showPop(vm:Vue,text:string,type:'info' | 'error' | 'success' | 'warning'='info',duration=800):void{
-    vm.$emit('show-pop',{text,type,duration})
+function showPop(text: string, type: 'info' | 'error' | 'success' | 'warning' = 'info', duration = 800): void {
+    closePop()
+    vm.$emit('show-pop', {text, type, duration})
 }
-function closePop(vm:Vue):void{
+
+function closePop(): void {
     vm.$emit('close-pop')
 }
-export {showPop,closePop}
+
+export {showPop, closePop}

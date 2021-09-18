@@ -5,8 +5,10 @@ import vuetify from '@/plugins/vuetify'
 import '@/plugins/fontawesome/css/all.css'
 
 Vue.config.productionTip = false
-new Vue({
+const vm = new Vue({
     router,
     vuetify,
     render: h => h(App)
-}).$mount('#app')
+})
+vm.$mount('#app')
+export {vm}

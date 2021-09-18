@@ -3,7 +3,7 @@
     <div>
       <v-expand-transition>
         <div class="alert" v-show="show">
-          <v-alert dense text :type="type">{{ text }}</v-alert>
+          <v-alert class="ma-0" dense text :type="type">{{ text }}</v-alert>
         </div>
       </v-expand-transition>
 
@@ -15,6 +15,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import {closePop} from "@/common/util";
+import {vm} from "@/main";
 
 export default Vue.extend({
   name: "App",
@@ -25,14 +26,15 @@ export default Vue.extend({
       text: ''
     }
   },
-  created() {
-    this.$on('close-pop',()=>this.show=false)
-    this.$on('show-pop', ({text, type, duration}:
-                              {text:string,type:'info' | 'error' | 'success' | 'warning',duration:number})=>{
-      this.text=text
-      this.type=type
-      this.show=true
-      setTimeout(()=>closePop(this),duration)
+  mounted() {
+    vm.$on('close-pop', () => this.show = false)
+    vm.$on('show-pop', ({text, type, duration}:
+                            { text: string, type: 'info' | 'error' | 'success' | 'warning', duration: number }) => {
+      this.text = text
+      this.type = type
+      this.show = true
+      console.log('show pop ', text)
+      setTimeout(() => closePop(), duration)
     })
   }
 })
@@ -42,7 +44,7 @@ export default Vue.extend({
 .alert {
   left: 0;
   right: 0;
-  z-index: 6;
+  z-index: 8;
   position: absolute;
   background-color: white;
 }

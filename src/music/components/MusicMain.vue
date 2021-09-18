@@ -11,7 +11,9 @@
               :append-icon="isPlaying ? 'fal fa-pause' : 'fal fa-play'" @click:append="onPlay"></v-slider>
 
     <music-guide class="pt-0"></music-guide>
-    <bottom-picker ref="picker">
+    <setting-picker ref="picker">
+      <setting-clipboard @copied="onCopied" @pasted="onPasted"
+                         :copy-value="activeSettingScore.inputValue"></setting-clipboard>
       <v-container>
         <setting-item
             @down-click="()=>{
@@ -43,7 +45,7 @@
         this.initMusic()}">速度：{{ Math.floor(60 / BEAT_DURATION) }}
         </setting-item>
       </v-container>
-    </bottom-picker>
+    </setting-picker>
   </v-container>
 </template>
 
@@ -51,8 +53,10 @@
 import Vue from 'vue'
 import MusicGuide from "@/music/components/MusicGuide.vue";
 import SoundFont from 'soundfont-player'
-import BottomPicker from "@/music/components/BottomPicker.vue";
 import SettingItem from "@/music/components/SettingItem.vue";
+import SettingPicker from "@/music/components/SettingPicker.vue";
+import SettingClipboard from "@/music/components/SettingClipboard.vue";
+import {showPop} from "@/common/util";
 
 interface ScoreInfo {
   inputValue: string
@@ -62,7 +66,7 @@ interface ScoreInfo {
 
 export default Vue.extend({
   name: "MusicMain",
-  components: {SettingItem, BottomPicker, MusicGuide},
+  components: {SettingClipboard, SettingPicker, SettingItem, MusicGuide},
   data() {
     return {
       //每拍0.5秒
@@ -261,6 +265,16 @@ export default Vue.extend({
         if (/\d/.test(r[i])) num++
       }
       return num
+    },
+    onCopied(isSuccess: boolean) {
+      if (isSuccess) showPop('内容复制成功', 'success')
+      else showPop('内容为空')
+    },
+    onPasted(clipValue: string) {
+      if (clipValue) {
+        this.activeSettingScore.inputValue += clipValue
+        showPop('剪切板粘贴成功')
+      } else showPop('剪切板为空')
     }
   },
   mounted() {
