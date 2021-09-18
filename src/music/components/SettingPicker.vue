@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mask" v-show="mask" @click="drawer=false"></div>
+    <div class="mask" v-show="mask" @click="close"></div>
     <transition name="drawer-slide" @after-leave="mask=false">
       <div class="drawer" v-if="drawer">
         <slot></slot>
@@ -24,6 +24,9 @@ export default Vue.extend({
     open() {
       this.mask = true
       this.drawer = true
+    },
+    close() {
+      this.drawer = false
     }
   },
 })

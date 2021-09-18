@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import {Android} from "@/guide/common/android";
+import {Android} from "@/common/android";
 import MusicMain from "@/music/components/MusicMain.vue";
 
 export default Vue.extend({

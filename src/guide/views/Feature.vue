@@ -63,7 +63,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import {Android} from "@/guide/common/android";
+import {Android} from "@/common/android";
 
 export default Vue.extend({
   name: 'feature',

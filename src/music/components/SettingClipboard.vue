@@ -7,6 +7,7 @@
 
 <script lang="ts">
 import Vue from "vue";
+import {Android} from "@/common/android";
 
 export default Vue.extend({
   name: "SettingClipboard",
@@ -30,7 +31,8 @@ export default Vue.extend({
       this.$emit('copied', isSuccess && this.copyValue)
     },
     paste() {
-      navigator.clipboard.readText()
+      if (Android) this.$emit('pasted', Android.getClipboardText())
+      else navigator.clipboard.readText()
           .then(text => this.$emit('pasted', text))
           .catch(err => {
             console.log(err)

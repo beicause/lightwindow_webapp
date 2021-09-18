@@ -2,10 +2,10 @@
   <v-container>
     <v-textarea auto-grow :value="firstScore.inputValue" :label="levelName.get(firstScore.level)" :rules="rules"
                 @input="e=>onInput(firstScore)(e)" append-icon="fal fa-cog"
-                @click:append="()=>{this.activeSettingPicker=0;$refs.picker.open()}"></v-textarea>
+                @click:append="()=>{this.blur();this.activeSettingPicker=0;$refs.picker.open()}"></v-textarea>
     <v-textarea style="padding: 0" auto-grow :value="secondScore.inputValue" :label="levelName.get(secondScore.level)"
                 :rules="rules" append-icon="fal fa-cog"
-                @click:append="()=>{this.activeSettingPicker=1;$refs.picker.open()}"
+                @click:append="()=>{this.blur();this.activeSettingPicker=1;$refs.picker.open()}"
                 @input="e=>onInput(secondScore)(e)"></v-textarea>
     <v-slider dense :step="STEP" @change="sliderChange" :max="maxTime" :value="musicTime"
               :append-icon="isPlaying ? 'fal fa-pause' : 'fal fa-play'" @click:append="onPlay"></v-slider>
@@ -103,14 +103,14 @@ export default Vue.extend({
         (value: string) => (/^[0-7\r\n/_~ud#]*$/.test(value) || !value) || '出现非法字符',
         (value: string) => !/_{3,}/.test(value) || '不能小于十六分音符',
         // (value: string) => !/_#*\.*[0-7]?\.*\-/.test(value) || '增时线和减时线不可共用',
-        (value: string) => {
-          let error = false
-          const sections = value.split('/')
-          sections.forEach(r => {
-            if (this.sectionBeat(r) > 4) error = true
-          })
-          return (!error) || '每小节不超过四拍'
-        }
+        // (value: string) => {
+        //   let error = false
+        //   const sections = value.split('/')
+        //   sections.forEach(r => {
+        //     if (this.sectionBeat(r) > 4) error = true
+        //   })
+        //   return (!error) || '每小节不超过四拍'
+        // }
       ]
     }
   },
@@ -121,6 +121,8 @@ export default Vue.extend({
     },
     onInput(score: ScoreInfo) {
       return (value: string) => {
+        console.log(value)
+        this.isPlaying = false
         this.player.stop()
         //如果长度增加
         if (value.length > score.inputValue.length) {
@@ -273,8 +275,13 @@ export default Vue.extend({
     onPasted(clipValue: string) {
       if (clipValue) {
         this.activeSettingScore.inputValue += clipValue
-        showPop('剪切板粘贴成功')
+        showPop('剪切板粘贴成功', 'success')
       } else showPop('剪切板为空')
+    },
+    blur() {
+      for (let element of document.getElementsByTagName('textarea')) {
+        element.blur()
+      }
     }
   },
   mounted() {

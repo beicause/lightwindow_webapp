@@ -3,7 +3,8 @@ const Android=(window as any).Android as {
     startCldService: () => void,
     stopCldService: () => void,
     close: () => void,
-    showZoom: () => void
+    showZoom: () => void,
+    getClipboardText: () => string
 }|undefined
 
 export {Android}
