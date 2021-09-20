@@ -1,14 +1,10 @@
 <template>
   <view>
     <view class="container-band">
-      <text @click="toMain" class="fal fa-arrow-square-left"
-            style="color: #2196F3;font-size: 20px;position: absolute;left: 16px"></text>
-
       <view style="color:#2196F3;height: 20px;">
         <text class="fal fa-calendar-week"></text>
         <text>日程表</text>
       </view>
-
       <text @click="()=>{if(Android)Android.close()}" class="fal fa-times-circle"
             style="color: #2196F3;font-size: 20px;position: absolute;right: 16px"></text>
     </view>
@@ -41,9 +37,6 @@ export default Vue.extend({
     }
   },
   methods: {
-    toMain() {
-      window.location.href = "https://qingcheng.asia/main"
-    },
     onClickItem(e: any) {
       switch (e.currentIndex) {
         case 0:
