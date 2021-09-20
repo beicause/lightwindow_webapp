@@ -33,7 +33,6 @@ export default Vue.extend({
       this.text = text
       this.type = type
       this.show = true
-      console.log('show pop ', text)
       setTimeout(() => closePop(), duration)
     })
   }

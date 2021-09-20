@@ -1,0 +1,113 @@
+<template>
+  <v-container>
+    <v-row no-gutters align="center">
+      <v-col cols="3">App版本：</v-col>
+      <v-col>{{ versionName }}</v-col>
+      <v-col cols="1">
+        <v-btn @click="update" :disabled="!(version&&version.app_version)" icon color="blue">
+          <v-icon dense>fal fa-arrow-alt-circle-up</v-icon>
+        </v-btn>
+      </v-col>
+    </v-row>
+    <div class="pb-2">
+      <v-divider></v-divider>
+    </div>
+
+    <v-row no-gutters align="center">
+      <v-col cols="3">网页地址：</v-col>
+      <v-col style="overflow: auto">{{ INDEX_URL }}</v-col>
+      <v-col cols="1">
+        <v-btn @click="copy(INDEX_URL)" icon color="blue">
+          <v-icon dense>fal fa-copy</v-icon>
+        </v-btn>
+      </v-col>
+    </v-row>
+    <div class="pb-2">
+      <v-divider></v-divider>
+    </div>
+
+    <v-row no-gutters align="center">
+      <v-col cols="3">问题反馈：</v-col>
+      <v-col style="overflow: auto">{{ EMAIL }}</v-col>
+      <v-col cols="1">
+        <v-btn @click="copy(EMAIL)" icon color="blue">
+          <v-icon dense>fal fa-copy</v-icon>
+        </v-btn>
+      </v-col>
+    </v-row>
+    <div class="pb-2">
+      <v-divider></v-divider>
+    </div>
+
+    <v-row no-gutters align="center">
+      <v-col cols="3">开源仓库：</v-col>
+      <v-col style="overflow: auto">{{ GIT_URL }}</v-col>
+      <v-col cols="1">
+        <v-btn @click="copy(GIT_URL)" icon color="blue">
+          <v-icon dense>fal fa-copy</v-icon>
+        </v-btn>
+      </v-col>
+    </v-row>
+    <div class="pb-2">
+      <v-divider></v-divider>
+    </div>
+
+    <v-row class="mt-4" no-gutters align="center">
+      <div>developed by the students of hfut</div>
+    </v-row>
+
+  </v-container>
+</template>
+<script lang="ts">
+import Vue from 'vue'
+import {showPop} from "@/common/util";
+import {Android} from "@/common/android";
+
+export default Vue.extend({
+  name: 'About',
+  data() {
+    return {
+      Android,
+      GIT_URL: 'https://gitee.com/beicause/qingchengapp',
+      EMAIL: '1494181792@qq.com',
+      INDEX_URL: 'https://qingcheng.asia',
+      version: undefined as {
+        is_app_update: boolean,
+        is_web_update: boolean,
+        local_web_version: string,
+        local_app_version: string,
+        web_version: string,
+        app_version: string,
+        force_update: boolean,
+        version_info: string
+      } | undefined
+    }
+  },
+  mounted() {
+    this.version = Android?.checkVersion()
+  },
+  computed: {
+    versionName(): string {
+      return this.version ? 'v' + this.version.app_version.split("").join('.') : '---'
+    }
+  },
+  methods: {
+    copy(value: string) {
+      const text = document.createElement('textarea');
+      text.value = value
+      document.body.appendChild(text);
+      text.select();
+      const isSuccess = document.execCommand('Copy');
+      text.remove();
+      if (isSuccess) showPop("复制成功", 'success')
+      else showPop("复制失败", 'error')
+    },
+    update() {
+      Android?.showVersionUpdate()
+    }
+  }
+})
+</script>
+<style scoped>
+
+</style>

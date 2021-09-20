@@ -6,7 +6,7 @@
                 color="blue" style="border: #2196f3 solid 1px;">
           mdi mdi-arrow-top-left-bottom-right border
         </v-icon>
-        <v-img contain height="20" src="@/guide/assets/bandmin.png"></v-img>
+        <v-img contain height="20" src="@/main/assets/bandmin.png"></v-img>
         <v-icon dense @click="()=>{if (Android)Android.close()}" color="blue">
           fal fa-times-circle
         </v-icon>
@@ -51,7 +51,6 @@ export default Vue.extend({
     (window as any)['getVersion'] = () => 100
     console.log((window as any).getVersion());
     (window as any)['showZoom'] = () => this.zoom = true
-    console.log((window as any).showZoom)
   },
   methods: {
     onClickZoom() {

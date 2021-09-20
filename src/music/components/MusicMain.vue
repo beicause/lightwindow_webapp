@@ -188,32 +188,6 @@ export default Vue.extend({
           setTimeout(() => this.onPlay(), 300)
         }
       }, step * 1000)
-      // const target={musicTime:this.musicTime}
-      // this.anim = gsap.gsap.to(target, {
-      //   duration: this.maxTime - this.musicTime,
-      //   musicTime: this.maxTime,
-      //   ease:'none',
-      //   onUpdate: () => {
-      //     if (!this.isPlaying) this.anim.pause()
-      //     const value=Math.floor(target.musicTime/this.STEP)*this.STEP
-      //     if (this.musicTime!==value)this.musicTime=value
-      //   },
-      //   onComplete: () => {
-      //     this.onPlay()
-      //     this.musicTime=0
-      //     setTimeout(()=> this.onPlay(),300)
-      //   }
-      // })
-      // const update = () => {
-      //   if (this.musicTime >= this.maxTime) {
-      //     this.onPlay()
-      //     this.onPlay()
-      //     return
-      //   }
-      //   if (this.isPlaying) requestAnimationFrame(update)
-      //   this.musicTime = baseTime + this.audio.currentTime - startTime
-      // }
-      // update()
     },
 
     sliderChange(value: number) {

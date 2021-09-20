@@ -9,8 +9,8 @@ const routes: Array<RouteConfig> = [
         component:()=>import("@/index/IndexApp.vue")
     },
     {
-        path: '/guide',
-        component: () => import ("@/guide/GuideApp.vue"),
+        path: '/main',
+        component: () => import ("@/main/MainApp.vue"),
         children: [
             {
                 path: '',
@@ -19,17 +19,17 @@ const routes: Array<RouteConfig> = [
             {
                 path: 'feature',
                 name: 'feature',
-                component: () => import ("@/guide/views/Feature.vue")
+                component: () => import ("@/main/views/Feature.vue")
             },
             {
                 path: 'guide',
                 name: 'guide',
-                component: () => import('../guide/views/Guide.vue')
+                component: () => import('../main/views/Guide.vue')
             },
             {
                 path: 'about',
                 name: 'about',
-                component: () => import(/* webpackChunkName: "about" */ '../guide/views/About.vue')
+                component: () => import(/* webpackChunkName: "about" */ '../main/views/About.vue')
             }]
     },
     {

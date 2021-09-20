@@ -40,7 +40,7 @@
       <div class="body-2 indent-2">
         你可以轻松编辑每个事件：
       </div>
-      <v-img height="140" contain src="@/guide/assets/cld_guide.jpg"></v-img>
+      <v-img height="140" contain src="@/main/assets/cld_guide.jpg"></v-img>
       <div class="body-2">注：</div>
       <div class="body-2 indent-2">数据存储于本地，清除缓存后无法恢复。</div>
       <div class="body-2 indent-2">通知提醒的实际效果（振动，横幅，铃声等）取决于您的通知管理设置。</div>
