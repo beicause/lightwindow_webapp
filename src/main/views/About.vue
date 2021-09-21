@@ -52,10 +52,6 @@
       <v-divider></v-divider>
     </div>
 
-    <v-row class="mt-4" no-gutters align="center">
-      <div>developed by the students of hfut</div>
-    </v-row>
-
   </v-container>
 </template>
 <script lang="ts">

@@ -1,7 +1,7 @@
 const Android = (window as any).Android as {
-    isCldRunning: () => boolean,
-    startCldService: () => void,
-    stopCldService: () => void,
+    isNoticeRunning: () => boolean,
+    startNoticeService: () => void,
+    stopNoticeService: () => void,
     close: () => void,
     showZoom: () => void,
     getClipboardText: () => string,
@@ -15,7 +15,9 @@ const Android = (window as any).Android as {
         force_update: boolean,
         version_info: string
     },
-    showVersionUpdate: () => void
+    showVersionUpdate: () => void,
+    redirectToMain: () => void,
+    redirectToCalendar: () => void
 } | undefined
 
 export {Android}

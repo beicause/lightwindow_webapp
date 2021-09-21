@@ -1,7 +1,7 @@
 <template>
   <v-container>
-    <feature-item name="日程表" :is-running="isCldRunning" prepend-icon="fal fa-calendar-week"
-                  @prepend-click="clickCld"></feature-item>
+    <feature-item name="日程表" :is-running="isNoticeRunning" prepend-icon="fal fa-calendar-week"
+                  @prepend-click="clickCalendar"></feature-item>
     <feature-item name="音乐谱" :is-running="false" prepend-icon="fal fa-music"
                   @prepend-click="$router.push('/music')"></feature-item>
   </v-container>
@@ -17,21 +17,23 @@ export default Vue.extend({
   components: {FeatureItem},
   data() {
     return {
-      isCldRunning: false,
+      isNoticeRunning: false,
       isPetRunning: false,
       Android
     }
   },
   mounted() {
-    this.isCldRunning = !!Android?.isCldRunning()
+    this.isNoticeRunning = !!Android?.isNoticeRunning()
   },
   methods: {
-    clickCld() {
-      this.isCldRunning = !this.isCldRunning
+    clickCalendar() {
+      this.isNoticeRunning = !this.isNoticeRunning
       if (Android) {
-        if (this.isCldRunning) Android.startCldService(); else Android.stopCldService()
-      } else window.location.href = 'https://qingcheng.asia/cld/'
-
+        if (this.isNoticeRunning) {
+          Android.startNoticeService()
+          Android.redirectToCalendar()
+        } else Android.stopNoticeService()
+      } else window.location.href = 'https://qingcheng.asia/calendar/'
     }
   }
 })

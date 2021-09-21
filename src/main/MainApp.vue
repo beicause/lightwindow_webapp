@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar height="30" app extension-height="35" color="white">
       <template v-slot:default>
-        <v-icon dense :style="{visibility:zoom?'visible':'hidden'}" @click="onClickZoom"
+        <v-icon size="18" :style="{visibility:zoom?'visible':'hidden'}" @click="onClickZoom"
                 color="blue" style="border: #2196f3 solid 1px;">
           mdi mdi-arrow-top-left-bottom-right border
         </v-icon>

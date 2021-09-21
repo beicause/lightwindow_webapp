@@ -37,8 +37,8 @@ const routes: Array<RouteConfig> = [
         component: () => import('@/music/MusicApp.vue')
     },
     {
-        path: '/cld',
-        beforeEnter: () => window.location.href = 'https://qingcheng.asia/cld/'
+        path: '/calendar',
+        beforeEnter: () => window.location.href = 'https://qingcheng.asia/calendar/'
     }
 ]
 
