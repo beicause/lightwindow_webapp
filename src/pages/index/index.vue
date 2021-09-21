@@ -2,17 +2,17 @@
   <view class="app-container">
     <the-nav-bar @nav="nav"></the-nav-bar>
     <uni-transition v-show="index===0" :show="index===0" :mode-class="mode">
-      <view class="cld-com-height">
+      <view class="calendar-com-height">
         <calendar-day :editable="editable" ref="day"></calendar-day>
       </view>
     </uni-transition>
     <uni-transition v-show="index===1" :show="index===1" :mode-class="mode">
-      <view class="cld-com-height">
+      <view class="calendar-com-height">
         <calendar-week :editable="editable" ref="week"></calendar-week>
       </view>
     </uni-transition>
     <uni-transition v-show="index===2" :show="index===2" :mode-class="mode">
-      <view class="cld-com-height">
+      <view class="calendar-com-height">
         <calendar-month :editable="editable" ref="mon"></calendar-month>
       </view>
     </uni-transition>

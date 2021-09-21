@@ -4,7 +4,7 @@
       <i class="fas fa-spinner fa-spin"></i>
     </view>
     <!--    采用iframe，直接使用div和echarts存在图标拖动无效的问题-->
-    <iframe v-show="off" ref="iframe" class="iframe" src="/cld/hybrid/html/graph.html"></iframe>
+    <iframe v-show="off" ref="iframe" class="iframe" src="/calendar/hybrid/html/graph.html"></iframe>
   </view>
 </template>
 
