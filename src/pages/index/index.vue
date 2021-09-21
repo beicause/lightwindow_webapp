@@ -45,10 +45,6 @@ import {Event, marksArrayToMap, PopMsg} from "@/common/data";
 import {closePopMsg, compareEvents, getEventDate, showPopMsg} from "@/common/util";
 import store from "@/store";
 import {getStorage} from "@/common/cache";
-import UniTransition from "@/plugins/uni-ui/lib/uni-transition/uni-transition.vue";
-import UniPopup from "@/plugins/uni-ui/lib/uni-popup/uni-popup.vue";
-import UniPopupMessage from "@/plugins/uni-ui/lib/uni-popup-message/uni-popup-message.vue";
-import UniPopupDialog from "@/plugins/uni-ui/lib/uni-popup-dialog/uni-popup-dialog.vue";
 import TheUserDataGraph from "@/components/the-build-button/TheUserDataGraph.vue";
 
 /**
@@ -69,9 +65,8 @@ export default Vue.extend({
   name: "index",
   components: {
     TheUserDataGraph,
-    UniPopupDialog,
-    UniPopupMessage,
-    UniPopup, UniTransition, TheNavBar, CalendarMonth, CalendarWeek, CalendarDay, TheBuildButton},
+    TheNavBar, CalendarMonth, CalendarWeek, CalendarDay, TheBuildButton
+  },
   data() {
     return {
       index: 0,//日程表索引 日0，周1，月2
@@ -81,7 +76,7 @@ export default Vue.extend({
       popMsg: '',//
       dialogType: '',//
       dialogText: '',//
-      timerId:0,
+      timerId: 0,
       confirm: () => {
       },//
     }

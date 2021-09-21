@@ -27,13 +27,8 @@
 import {dateFormat, giveColor, showPopMsg} from '@/common/util'
 import store from '../../store'
 import Vue from 'vue'
-import {EduUserInfo, Mark, Event} from "@/common/data";
+import {EduUserInfo, Event, Mark} from "@/common/data";
 import {getHfutEvents} from "@/common/hfut";
-import UniIcons from "@/plugins/uni-ui/lib/uni-icons/uni-icons.vue";
-import UniForms from "@/plugins/uni-ui/lib/uni-forms/uni-forms.vue";
-import UniFormsItem from "@/plugins/uni-ui/lib/uni-forms-item/uni-forms-item.vue";
-import UniEasyinput from "@/plugins/uni-ui/lib/uni-easyinput/uni-easyinput.vue";
-import UniTag from "@/plugins/uni-ui/lib/uni-tag/uni-tag.vue";
 import {Android} from "@/common/android";
 
 /**
@@ -42,7 +37,7 @@ import {Android} from "@/common/android";
 
 export default Vue.extend({
   name: "TheEduLogin",
-  components: {UniTag, UniEasyinput, UniFormsItem, UniForms, UniIcons},
+  components: {},
   data() {
     return {
       schools: ['合肥工业大学', '长沙理工大学', '赣南师范大学'],
@@ -138,6 +133,7 @@ export default Vue.extend({
       }
     },
     addSchedule(newEvents: Event[]) {
+      console.log(newEvents)
       const newMarks = [] as Mark[]
       newEvents.forEach(e => {
         if (!store.state.marks.has(e.day)) newMarks.push({date: e.day, info: '有课'})

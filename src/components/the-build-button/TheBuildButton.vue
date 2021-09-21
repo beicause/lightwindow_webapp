@@ -46,10 +46,6 @@ import TheUserData from "@/components/the-build-button/TheUserData.vue";
 import TheEduLogin from "@/components/the-build-button/TheEduLogin.vue";
 import Vue from 'vue'
 import {showDialog} from "@/common/util";
-import UniTag from "@/plugins/uni-ui/lib/uni-tag/uni-tag.vue";
-import UniTransition from "@/plugins/uni-ui/lib/uni-transition/uni-transition.vue";
-import UniPopup from "@/plugins/uni-ui/lib/uni-popup/uni-popup.vue";
-import UniIcons from "@/plugins/uni-ui/lib/uni-icons/uni-icons.vue";
 import {androidSetAlarm} from "@/common/android";
 
 /**
@@ -61,10 +57,6 @@ import {androidSetAlarm} from "@/common/android";
 export default Vue.extend({
   name: "TheBuildButton",
   components: {
-    UniIcons,
-    UniPopup,
-    UniTransition,
-    UniTag,
     TheUserData,
     TheEduLogin
   },

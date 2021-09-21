@@ -15,8 +15,6 @@ import Vue from 'vue'
 import store from "@/store";
 import EventScheduleVertical from "@/components/event-components/EventScheduleVertical.vue";
 import {Mark, marksMapToArray} from "@/common/data";
-import UniCalendar from "@/plugins/uni-ui/lib/uni-calendar/uni-calendar.vue";
-import UniTransition from "@/plugins/uni-ui/lib/uni-transition/uni-transition.vue";
 
 /**
  * 页面直接组件-日程-月
@@ -27,7 +25,7 @@ import UniTransition from "@/plugins/uni-ui/lib/uni-transition/uni-transition.vu
  */
 
 export default Vue.extend({
-  components: {UniTransition, UniCalendar, EventScheduleVertical},
+  components: {EventScheduleVertical},
   name: "CalendarMonth",
   props: {
     editable: {

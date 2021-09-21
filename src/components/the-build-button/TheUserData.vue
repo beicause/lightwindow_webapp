@@ -29,7 +29,6 @@ import {showDialog} from '@/common/util'
 import {getStorage, removeStorage} from '@/common/cache'
 import Vue from "vue";
 import TheBuildButton from "@/components/the-build-button/TheBuildButton.vue";
-import UniIcons from "@/plugins/uni-ui/lib/uni-icons/uni-icons.vue";
 import TheUserDataGraph from "@/components/the-build-button/TheUserDataGraph.vue";
 
 /**
@@ -39,7 +38,7 @@ import TheUserDataGraph from "@/components/the-build-button/TheUserDataGraph.vue
 
 export default Vue.extend({
   name: "TheUserData",
-  components: {TheUserDataGraph, UniIcons},
+  components: {TheUserDataGraph},
   data() {
     return {
       localSchool: '---',

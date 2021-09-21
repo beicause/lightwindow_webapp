@@ -48,7 +48,7 @@ const store = new Vuex.Store({
             state.activeDay = dayFormat(new Date())
         },
         /**
-         * 用这个方法改变除event，mark的变量
+         * 用这个方法改变的变量
          * */
         setAndCache(state, payload: { updateTime?: string, eduUserInfo?: EduUserInfo, eduEvents?: Event[] }) {
             for (let payloadKey in payload) {

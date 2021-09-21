@@ -30,8 +30,6 @@ import {Event} from "@/common/data";
 import EventLine from "@/components/event-components/EventLine.vue"
 import Vue from "vue";
 import {compareEvents, dayFormat, getEventDate, getEventDiff, timeToSecond} from "@/common/util";
-import UniTransition from "@/plugins/uni-ui/lib/uni-transition/uni-transition.vue";
-import UniIcons from "@/plugins/uni-ui/lib/uni-icons/uni-icons.vue";
 
 /**
  * 一天日程组件
@@ -47,8 +45,6 @@ import UniIcons from "@/plugins/uni-ui/lib/uni-icons/uni-icons.vue";
 
 export default Vue.extend({
   components: {
-    UniIcons,
-    UniTransition,
     EventLine
   },
   name: "EventDaySchedule",

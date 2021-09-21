@@ -53,7 +53,6 @@
 import Vue from "vue";
 import EventDaySchedule from '@/components/event-components/EventDaySchedule.vue'
 import {colorArray} from "@/common/data";
-import UniIcons from "@/plugins/uni-ui/lib/uni-icons/uni-icons.vue";
 
 /**
  * 事件轴线组件，EventDaySchedule的子组件
@@ -78,7 +77,7 @@ import UniIcons from "@/plugins/uni-ui/lib/uni-icons/uni-icons.vue";
 
 export default Vue.extend({
   name: "EventLine",
-  components: {UniIcons},
+  components: {},
   props: {
     time: {
       type: String,
