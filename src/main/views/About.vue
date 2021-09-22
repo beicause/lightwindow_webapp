@@ -2,7 +2,7 @@
   <v-container>
     <v-row no-gutters align="center">
       <v-col cols="3">App版本：</v-col>
-      <v-col>{{ versionName }}</v-col>
+      <v-col>{{ appVersion }}</v-col>
       <v-col cols="1">
         <v-btn @click="update" :disabled="!(version&&version.app_version)" icon color="blue">
           <v-icon dense>fal fa-arrow-alt-circle-up</v-icon>
@@ -26,18 +26,6 @@
       <v-divider></v-divider>
     </div>
 
-    <v-row no-gutters align="center">
-      <v-col cols="3">问题反馈：</v-col>
-      <v-col style="overflow: auto">{{ EMAIL }}</v-col>
-      <v-col cols="1">
-        <v-btn @click="copy(EMAIL)" icon color="blue">
-          <v-icon dense>fal fa-copy</v-icon>
-        </v-btn>
-      </v-col>
-    </v-row>
-    <div class="pb-2">
-      <v-divider></v-divider>
-    </div>
 
     <v-row no-gutters align="center">
       <v-col cols="3">开源仓库：</v-col>
@@ -52,12 +40,24 @@
       <v-divider></v-divider>
     </div>
 
+    <v-row no-gutters align="center">
+      <v-col cols="3">问题反馈：</v-col>
+      <v-col style="overflow: auto">{{ EMAIL }}</v-col>
+      <v-col cols="1">
+        <v-btn @click="copy(EMAIL)" icon color="blue">
+          <v-icon dense>fal fa-copy</v-icon>
+        </v-btn>
+      </v-col>
+    </v-row>
+    <div class="pb-2">
+      <v-divider></v-divider>
+    </div>
   </v-container>
 </template>
 <script lang="ts">
 import Vue from 'vue'
 import {showPop} from "@/common/util";
-import {Android} from "@/common/android";
+import {Android, AppVersionInfo} from "@/common/android";
 
 export default Vue.extend({
   name: 'About',
@@ -67,27 +67,25 @@ export default Vue.extend({
       GIT_URL: 'https://gitee.com/beicause/qingchengapp',
       EMAIL: '1494181792@qq.com',
       INDEX_URL: 'https://qingcheng.asia',
-      version: undefined as {
-        is_app_update: boolean,
-        is_web_update: boolean,
-        local_web_version: string,
-        local_app_version: string,
-        web_version: string,
-        app_version: string,
-        force_update: boolean,
-        version_info: string
-      } | undefined
+      version: undefined as AppVersionInfo | undefined
     }
   },
   mounted() {
-    this.version = Android?.checkVersion()
+    if (Android) {
+      this.version = JSON.parse(Android.checkVersion()) as AppVersionInfo
+    }
   },
   computed: {
-    versionName(): string {
-      return this.version ? 'v' + this.version.app_version.split("").join('.') : '---'
+    appVersion(): string {
+      if (!this.version) return '---'
+      return this.versionCodeToName(this.version.local_app_version)
+          + (this.version.is_app_update ? '（发现新版本）' : '')
     }
   },
   methods: {
+    versionCodeToName(code: string): string {
+      return 'v' + code.split("").join('.')
+    },
     copy(value: string) {
       const text = document.createElement('textarea');
       text.value = value
@@ -99,7 +97,9 @@ export default Vue.extend({
       else showPop("复制失败", 'error')
     },
     update() {
-      Android?.showVersionUpdate()
+      if (this.version?.is_app_update) {
+        Android?.showVersionUpdate()
+      } else showPop("目前已是最新版本", 'success')
     }
   }
 })
