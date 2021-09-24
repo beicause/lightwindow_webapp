@@ -1,61 +1,68 @@
 {
-  "name": "qc_app_main",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
-  },
-  "dependencies": {
-    "axios": "^0.21.4",
-    "core-js": "^3.6.5",
-    "soundfont-player": "^0.12.0",
-    "vue": "^2.6.11",
-    "vue-axios": "^3.3.6",
-    "vue-router": "^3.2.0",
-    "vuetify": "^2.4.0"
-  },
-  "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.18.0",
-    "@typescript-eslint/parser": "^4.18.0",
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-plugin-router": "~4.5.0",
-    "@vue/cli-plugin-typescript": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "@vue/eslint-config-typescript": "^7.0.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.2.2",
-    "sass": "~1.32.0",
-    "sass-loader": "^10.0.0",
-    "typescript": "~4.1.5",
-    "vue-cli-plugin-vuetify": "~2.4.2",
-    "vue-template-compiler": "^2.6.11",
-    "vuetify-loader": "^1.7.0"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended",
-      "@vue/typescript/recommended"
-    ],
-    "parserOptions": {
-      "ecmaVersion": 2020
-    },
-    "rules": {
-      "@typescript-eslint/no-explicit-any": [
-        "off"
-      ]
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+	"name": "qc_app_main",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"serve": "vue-cli-service serve",
+		"build": "vue-cli-service build",
+		"lint": "vue-cli-service lint",
+		"dev": "vite",
+		"start": "vite",
+		"preview": "vite preview",
+		"vite-build": "vite build"
+	},
+	"dependencies": {
+		"axios": "^0.21.4",
+		"core-js": "^3.6.5",
+		"soundfont-player": "^0.12.0",
+		"vue": "^2.6.11",
+		"vue-axios": "^3.3.6",
+		"vue-router": "^3.2.0",
+		"vuetify": "^2.5.8"
+	},
+	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^4.18.0",
+		"@typescript-eslint/parser": "^4.18.0",
+		"@vitejs/plugin-legacy": "^1.4.4",
+		"@vue/cli-plugin-babel": "~4.5.0",
+		"@vue/cli-plugin-eslint": "~4.5.0",
+		"@vue/cli-plugin-router": "~4.5.0",
+		"@vue/cli-plugin-typescript": "~4.5.0",
+		"@vue/cli-service": "~4.5.0",
+		"@vue/eslint-config-typescript": "^7.0.0",
+		"eslint": "^6.7.2",
+		"eslint-plugin-vue": "^6.2.2",
+		"sass": "~1.32.0",
+		"sass-loader": "^10.0.0",
+		"typescript": "~4.1.5",
+		"vite": "2",
+		"vite-plugin-vue2": "latest",
+		"vue-cli-plugin-vuetify": "~2.4.2",
+		"vue-template-compiler": "^2.6.11",
+		"vuetify-loader": "^1.7.0"
+	},
+	"eslintConfig": {
+		"root": true,
+		"env": {
+			"node": true
+		},
+		"extends": [
+			"plugin:vue/essential",
+			"eslint:recommended",
+			"@vue/typescript/recommended"
+		],
+		"parserOptions": {
+			"ecmaVersion": 2020
+		},
+		"rules": {
+			"@typescript-eslint/no-explicit-any": [
+				"off"
+			]
+		}
+	},
+	"browserslist": [
+		"> 1%",
+		"last 2 versions",
+		"not dead"
+	]
 }
