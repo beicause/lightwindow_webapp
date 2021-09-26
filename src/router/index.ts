@@ -1,16 +1,27 @@
 import Vue from 'vue'
 import VueRouter, {RouteConfig} from 'vue-router'
+import {Android} from "@/common/android";
+import {POLICY_VERSION} from "@/common/const";
 
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
     {
-        path:"/",
-        component:()=>import("@/index/IndexApp.vue")
+        path: "/",
+        component: () => import("@/index/IndexApp.vue")
+    },
+    {
+        path: "/policy",
+        component: () => import("@/policy/PolicyApp.vue")
     },
     {
         path: '/main',
         component: () => import ("@/main/MainApp.vue"),
+        beforeEnter(to, from, next) {
+            if (!Android) next()
+            else if (Android.getPolicy() !== POLICY_VERSION) next('/policy')
+            else next()
+        },
         children: [
             {
                 path: '',
@@ -38,13 +49,18 @@ const routes: Array<RouteConfig> = [
     },
     {
         path: '/calendar',
-        beforeEnter: () => window.location.href = 'https://qingcheng.asia/calendar/'
+        beforeEnter(to, from, next) {
+            if (!Android)
+                window.location.href = 'https://qingcheng.asia/calendar/'
+            else if (Android.getPolicy() !== POLICY_VERSION) next('/policy')
+            else window.location.href = 'https://qingcheng.asia/calendar/'
+        },
     }
 ]
 
 const router = new VueRouter({
     mode: "history",
-    routes
+    routes,
 })
 
 export default router

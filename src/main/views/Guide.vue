@@ -1,6 +1,8 @@
 <template>
   <v-container>
-    <v-icon v-show="!drawer" class="expand-arrow" color="blue" @click="()=>{this.drawer=true}">fal fa-chevron-circle-right</v-icon>
+    <v-icon v-show="!drawer" class="expand-arrow" color="blue"
+            @click="()=>{this.drawer=true}">fal fa-chevron-circle-right
+    </v-icon>
     <v-navigation-drawer style="z-index: 6" absolute mini-variant v-model="drawer">
       <v-list dense>
         <v-list-item-group color="blue" @change="onItemClick" :value="selectItem">
@@ -40,7 +42,7 @@
       <div class="body-2 indent-2">
         你可以轻松编辑每个事件：
       </div>
-      <v-img height="140" contain src="/src/main/assets/cld_guide.jpg"></v-img>
+      <v-img height="140" contain src="@/main/assets/cld_guide.jpg"></v-img>
       <div class="body-2">注：</div>
       <div class="body-2 indent-2">数据存储于本地，清除缓存后无法恢复。</div>
       <div class="body-2 indent-2">通知提醒的实际效果（振动，横幅，铃声等）取决于您的通知管理设置。</div>
@@ -83,7 +85,7 @@ export default Vue.extend({
 <style scoped>
 .expand-arrow {
   position: fixed;
-  z-index: 999;
+  z-index: 1;
   top: 60%;
   left: 0
 }

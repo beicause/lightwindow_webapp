@@ -52,21 +52,35 @@
     <div class="pb-2">
       <v-divider></v-divider>
     </div>
+
+    <v-row no-gutters align="center">
+      <v-col cols="3">隐私政策：</v-col>
+      <v-col style="overflow: auto">{{ INDEX_URL + '/policy' }}</v-col>
+      <v-col cols="1">
+        <v-btn @click="$router.push('/policy')" icon color="blue">
+          <v-icon dense color="blue">mdi-play-speed</v-icon>
+        </v-btn>
+      </v-col>
+    </v-row>
+    <div class="pb-2">
+      <v-divider></v-divider>
+    </div>
   </v-container>
 </template>
 <script lang="ts">
 import Vue from 'vue'
 import {showPop} from "@/common/util";
 import {Android, AppVersionInfo} from "@/common/android";
+import {EMAIL, GIT_URL, INDEX_URL} from "@/common/const";
 
 export default Vue.extend({
   name: 'About',
   data() {
     return {
       Android,
-      GIT_URL: 'https://gitee.com/beicause/qingchengapp',
-      EMAIL: '1494181792@qq.com',
-      INDEX_URL: 'https://qingcheng.asia',
+      GIT_URL,
+      EMAIL,
+      INDEX_URL,
       version: undefined as AppVersionInfo | undefined
     }
   },
@@ -78,7 +92,7 @@ export default Vue.extend({
   computed: {
     appVersion(): string {
       if (!this.version) return '---'
-      return this.versionCodeToName(this.version.local_app_version)
+      return '窗隙流光' + this.versionCodeToName(this.version.local_app_version)
           + (this.version.is_app_update ? '（发现新版本）' : '')
     }
   },

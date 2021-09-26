@@ -14,7 +14,7 @@
   "resolved" "https://repo.huaweicloud.com/repository/npm/@babel/compat-data/-/compat-data-7.15.0.tgz"
   "version" "7.15.0"
 
-"@babel/core@^7.0.0", "@babel/core@^7.0.0-0", "@babel/core@^7.11.0", "@babel/core@^7.11.6", "@babel/core@^7.12.0", "@babel/core@^7.13.0", "@babel/core@^7.4.0-0":
+"@babel/core@^7.0.0", "@babel/core@^7.0.0-0", "@babel/core@^7.11.0", "@babel/core@^7.12.0", "@babel/core@^7.13.0", "@babel/core@^7.4.0-0":
   "integrity" "sha512-tXtmTminrze5HEUPn/a0JtOzzfp0nk+UEXQ/tqIJo3WDGypl/2OFQEMll/zSFU8f/lfmfLXvTaORHF3cfXIQMw=="
   "resolved" "https://repo.huaweicloud.com/repository/npm/@babel/core/-/core-7.15.0.tgz"
   "version" "7.15.0"
@@ -69,7 +69,7 @@
     "browserslist" "^4.16.6"
     "semver" "^6.3.0"
 
-"@babel/helper-create-class-features-plugin@^7.14.5", "@babel/helper-create-class-features-plugin@^7.15.4":
+"@babel/helper-create-class-features-plugin@^7.14.5":
   "integrity" "sha512-7ZmzFi+DwJx6A7mHRwbuucEYpyBwmh2Ca0RvI6z2+WLZYCqV0JOaLb+u0zbtmDicebgKBZgqbYfLaKNqSgv5Pw=="
   "resolved" "https://repo.huaweicloud.com/repository/npm/@babel/helper-create-class-features-plugin/-/helper-create-class-features-plugin-7.15.4.tgz"
   "version" "7.15.4"
@@ -251,7 +251,7 @@
     "chalk" "^2.0.0"
     "js-tokens" "^4.0.0"
 
-"@babel/parser@^7.13.10", "@babel/parser@^7.15.0", "@babel/parser@^7.15.4":
+"@babel/parser@^7.15.0", "@babel/parser@^7.15.4":
   "integrity" "sha512-S/TSCcsRuCkmpUuoWijua0Snt+f3ewU/8spLo+4AXJCZfT0bVCzLD5MuOKdrx0mlAptbKzn5AdgEIIKXxXkz9Q=="
   "resolved" "https://repo.huaweicloud.com/repository/npm/@babel/parser/-/parser-7.15.6.tgz"
   "version" "7.15.6"
@@ -291,7 +291,7 @@
     "@babel/helper-plugin-utils" "^7.14.5"
     "@babel/plugin-syntax-class-static-block" "^7.14.5"
 
-"@babel/plugin-proposal-decorators@^7.14.5", "@babel/plugin-proposal-decorators@^7.8.3":
+"@babel/plugin-proposal-decorators@^7.8.3":
   "integrity" "sha512-LYz5nvQcvYeRVjui1Ykn28i+3aUiXwQ/3MGoEy0InTaz1pJo/lAzmIDXX+BQny/oufgHzJ6vnEEiXQ8KZjEVFg=="
   "resolved" "https://repo.huaweicloud.com/repository/npm/@babel/plugin-proposal-decorators/-/plugin-proposal-decorators-7.14.5.tgz"
   "version" "7.14.5"
@@ -510,13 +510,6 @@
 "@babel/plugin-syntax-top-level-await@^7.14.5":
   "integrity" "sha512-hx++upLv5U1rgYfwe1xBQUhRmU41NEvpUvrp8jkrSCdvGSnM5/qdRMtylJ6PG5OFkBaHkbTAKTnd3/YyESRHFw=="
   "resolved" "https://repo.huaweicloud.com/repository/npm/@babel/plugin-syntax-top-level-await/-/plugin-syntax-top-level-await-7.14.5.tgz"
-  "version" "7.14.5"
-  dependencies:
-    "@babel/helper-plugin-utils" "^7.14.5"
-
-"@babel/plugin-syntax-typescript@^7.14.5":
-  "integrity" "sha512-u6OXzDaIXjEstBRRoBCQ/uKQKlbuaeE5in0RvWdA4pN6AhqxTIwUsnHPU1CFZA/amYObMsuWhYfRl3Ch90HD0Q=="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/@babel/plugin-syntax-typescript/-/plugin-syntax-typescript-7.14.5.tgz"
   "version" "7.14.5"
   dependencies:
     "@babel/helper-plugin-utils" "^7.14.5"
@@ -766,15 +759,6 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.14.5"
 
-"@babel/plugin-transform-typescript@^7.13.0":
-  "integrity" "sha512-sM1/FEjwYjXvMwu1PJStH11kJ154zd/lpY56NQJ5qH2D0mabMv1CAy/kdvS9RP4Xgfj9fBBA3JiSLdDHgXdzOA=="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/@babel/plugin-transform-typescript/-/plugin-transform-typescript-7.15.4.tgz"
-  "version" "7.15.4"
-  dependencies:
-    "@babel/helper-create-class-features-plugin" "^7.15.4"
-    "@babel/helper-plugin-utils" "^7.14.5"
-    "@babel/plugin-syntax-typescript" "^7.14.5"
-
 "@babel/plugin-transform-unicode-escapes@^7.14.5":
   "integrity" "sha512-crTo4jATEOjxj7bt9lbYXcBAM3LZaUrbP2uUdxb6WIorLmjNKSpHfIybgY4B8SRpbf8tEVIWH3Vtm7ayCrKocA=="
   "resolved" "https://repo.huaweicloud.com/repository/npm/@babel/plugin-transform-unicode-escapes/-/plugin-transform-unicode-escapes-7.14.5.tgz"
@@ -998,14 +982,6 @@
   dependencies:
     "@nodelib/fs.scandir" "2.1.5"
     "fastq" "^1.6.0"
-
-"@rollup/pluginutils@^4.1.0":
-  "integrity" "sha512-clDjivHqWGXi7u+0d2r2sBi4Ie6VLEAzWMIkvJLnDmxoOhBYOTfzGbOQBA32THHm11/LiJbd01tJUpJsbshSWQ=="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/@rollup/pluginutils/-/pluginutils-4.1.1.tgz"
-  "version" "4.1.1"
-  dependencies:
-    "estree-walker" "^2.0.1"
-    "picomatch" "^2.2.2"
 
 "@soda/friendly-errors-webpack-plugin@^1.7.1":
   "integrity" "sha512-RLotfx6k1+nfLacwNCenj7VnTMPxVwYKoGOcffMFoJDKM8tXzBiCN0hMHFJNnoAojduYAsxuiMm0EOMixgiRow=="
@@ -1585,7 +1561,7 @@
     "@vue/compiler-dom" "3.2.11"
     "@vue/shared" "3.2.11"
 
-"@vue/component-compiler-utils@^3.1.0", "@vue/component-compiler-utils@^3.1.2", "@vue/component-compiler-utils@^3.2.0":
+"@vue/component-compiler-utils@^3.1.0", "@vue/component-compiler-utils@^3.1.2":
   "integrity" "sha512-rAYMLmgMuqJFWAOb3Awjqqv5X3Q3hVr4jH/kgrFJpiU0j3a90tnNBplqbj+snzrgZhC9W128z+dtgMifOiMfJg=="
   "resolved" "https://repo.huaweicloud.com/repository/npm/@vue/component-compiler-utils/-/component-compiler-utils-3.2.2.tgz"
   "version" "3.2.2"
@@ -2062,11 +2038,6 @@
   "resolved" "https://repo.huaweicloud.com/repository/npm/asynckit/-/asynckit-0.4.0.tgz"
   "version" "0.4.0"
 
-"at-least-node@^1.0.0":
-  "integrity" "sha512-+q/t7Ekv1EDY2l6Gda6LLiX14rU9TV20Wa3ofeQmwPFZbOMo9DXrLbOjFaaclkXKWidIaopwAObQDqwWtGUjqg=="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/at-least-node/-/at-least-node-1.0.0.tgz"
-  "version" "1.0.0"
-
 "atob@^2.1.2":
   "integrity" "sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg=="
   "resolved" "https://repo.huaweicloud.com/repository/npm/atob/-/atob-2.1.2.tgz"
@@ -2107,7 +2078,7 @@
   dependencies:
     "follow-redirects" "^1.14.0"
 
-"babel-code-frame@^6.22.0", "babel-code-frame@^6.26.0":
+"babel-code-frame@^6.22.0":
   "integrity" "sha1-Y/1D99weO7fONZR9uP42mj9Yx0s="
   "resolved" "https://repo.huaweicloud.com/repository/npm/babel-code-frame/-/babel-code-frame-6.26.0.tgz"
   "version" "6.26.0"
@@ -2115,111 +2086,6 @@
     "chalk" "^1.1.3"
     "esutils" "^2.0.2"
     "js-tokens" "^3.0.2"
-
-"babel-helper-builder-binary-assignment-operator-visitor@^6.24.1":
-  "integrity" "sha1-zORReto1b0IgvK6KAsKzRvmlZmQ="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-helper-builder-binary-assignment-operator-visitor/-/babel-helper-builder-binary-assignment-operator-visitor-6.24.1.tgz"
-  "version" "6.24.1"
-  dependencies:
-    "babel-helper-explode-assignable-expression" "^6.24.1"
-    "babel-runtime" "^6.22.0"
-    "babel-types" "^6.24.1"
-
-"babel-helper-call-delegate@^6.24.1":
-  "integrity" "sha1-7Oaqzdx25Bw0YfiL/Fdb0Nqi340="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-helper-call-delegate/-/babel-helper-call-delegate-6.24.1.tgz"
-  "version" "6.24.1"
-  dependencies:
-    "babel-helper-hoist-variables" "^6.24.1"
-    "babel-runtime" "^6.22.0"
-    "babel-traverse" "^6.24.1"
-    "babel-types" "^6.24.1"
-
-"babel-helper-define-map@^6.24.1":
-  "integrity" "sha1-pfVtq0GiX5fstJjH66ypgZ+Vvl8="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-helper-define-map/-/babel-helper-define-map-6.26.0.tgz"
-  "version" "6.26.0"
-  dependencies:
-    "babel-helper-function-name" "^6.24.1"
-    "babel-runtime" "^6.26.0"
-    "babel-types" "^6.26.0"
-    "lodash" "^4.17.4"
-
-"babel-helper-explode-assignable-expression@^6.24.1":
-  "integrity" "sha1-8luCz33BBDPFX3BZLVdGQArCLKo="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-helper-explode-assignable-expression/-/babel-helper-explode-assignable-expression-6.24.1.tgz"
-  "version" "6.24.1"
-  dependencies:
-    "babel-runtime" "^6.22.0"
-    "babel-traverse" "^6.24.1"
-    "babel-types" "^6.24.1"
-
-"babel-helper-function-name@^6.24.1":
-  "integrity" "sha1-00dbjAPtmCQqJbSDUasYOZ01gKk="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-helper-function-name/-/babel-helper-function-name-6.24.1.tgz"
-  "version" "6.24.1"
-  dependencies:
-    "babel-helper-get-function-arity" "^6.24.1"
-    "babel-runtime" "^6.22.0"
-    "babel-template" "^6.24.1"
-    "babel-traverse" "^6.24.1"
-    "babel-types" "^6.24.1"
-
-"babel-helper-get-function-arity@^6.24.1":
-  "integrity" "sha1-j3eCqpNAfEHTqlCQj4mwMbG2hT0="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-helper-get-function-arity/-/babel-helper-get-function-arity-6.24.1.tgz"
-  "version" "6.24.1"
-  dependencies:
-    "babel-runtime" "^6.22.0"
-    "babel-types" "^6.24.1"
-
-"babel-helper-hoist-variables@^6.24.1":
-  "integrity" "sha1-HssnaJydJVE+rbyZFKc/VAi+enY="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-helper-hoist-variables/-/babel-helper-hoist-variables-6.24.1.tgz"
-  "version" "6.24.1"
-  dependencies:
-    "babel-runtime" "^6.22.0"
-    "babel-types" "^6.24.1"
-
-"babel-helper-optimise-call-expression@^6.24.1":
-  "integrity" "sha1-96E0J7qfc/j0+pk8VKl4gtEkQlc="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-helper-optimise-call-expression/-/babel-helper-optimise-call-expression-6.24.1.tgz"
-  "version" "6.24.1"
-  dependencies:
-    "babel-runtime" "^6.22.0"
-    "babel-types" "^6.24.1"
-
-"babel-helper-regex@^6.24.1":
-  "integrity" "sha1-MlxZ+QL4LyS3T6zu0DY5VPZJXnI="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-helper-regex/-/babel-helper-regex-6.26.0.tgz"
-  "version" "6.26.0"
-  dependencies:
-    "babel-runtime" "^6.26.0"
-    "babel-types" "^6.26.0"
-    "lodash" "^4.17.4"
-
-"babel-helper-remap-async-to-generator@^6.24.1":
-  "integrity" "sha1-XsWBgnrXI/7N04HxySg5BnbkVRs="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-helper-remap-async-to-generator/-/babel-helper-remap-async-to-generator-6.24.1.tgz"
-  "version" "6.24.1"
-  dependencies:
-    "babel-helper-function-name" "^6.24.1"
-    "babel-runtime" "^6.22.0"
-    "babel-template" "^6.24.1"
-    "babel-traverse" "^6.24.1"
-    "babel-types" "^6.24.1"
-
-"babel-helper-replace-supers@^6.24.1":
-  "integrity" "sha1-v22/5Dk40XNpohPKiov3S2qQqxo="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-helper-replace-supers/-/babel-helper-replace-supers-6.24.1.tgz"
-  "version" "6.24.1"
-  dependencies:
-    "babel-helper-optimise-call-expression" "^6.24.1"
-    "babel-messages" "^6.23.0"
-    "babel-runtime" "^6.22.0"
-    "babel-template" "^6.24.1"
-    "babel-traverse" "^6.24.1"
-    "babel-types" "^6.24.1"
 
 "babel-loader@^8.1.0":
   "integrity" "sha512-JvTd0/D889PQBtUXJ2PXaKU/pjZDMtHA9V2ecm+eNRmmBCMR09a+fmpGTNwnJtFmFl5Ei7Vy47LjBb+L0wQ99g=="
@@ -2230,20 +2096,6 @@
     "loader-utils" "^1.4.0"
     "make-dir" "^3.1.0"
     "schema-utils" "^2.6.5"
-
-"babel-messages@^6.23.0":
-  "integrity" "sha1-8830cDhYA1sqKVHG7F7fbGLyYw4="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-messages/-/babel-messages-6.23.0.tgz"
-  "version" "6.23.0"
-  dependencies:
-    "babel-runtime" "^6.22.0"
-
-"babel-plugin-check-es2015-constants@^6.22.0":
-  "integrity" "sha1-NRV7EBQm/S/9PaP3XH0ekYNbv4o="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-plugin-check-es2015-constants/-/babel-plugin-check-es2015-constants-6.22.0.tgz"
-  "version" "6.22.0"
-  dependencies:
-    "babel-runtime" "^6.22.0"
 
 "babel-plugin-dynamic-import-node@^2.3.3":
   "integrity" "sha512-jZVI+s9Zg3IqA/kdi0i6UDCybUI3aSBLnglhYbSSjKlV7yF1F/5LWv8MakQmvYpnbJDS6fcBL2KzHSxNCMtWSQ=="
@@ -2275,329 +2127,6 @@
   "version" "0.2.2"
   dependencies:
     "@babel/helper-define-polyfill-provider" "^0.2.2"
-
-"babel-plugin-syntax-async-functions@^6.8.0":
-  "integrity" "sha1-ytnK0RkbWtY0vzCuCHI5HgZHvpU="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-plugin-syntax-async-functions/-/babel-plugin-syntax-async-functions-6.13.0.tgz"
-  "version" "6.13.0"
-
-"babel-plugin-syntax-exponentiation-operator@^6.8.0":
-  "integrity" "sha1-nufoM3KQ2pUoggGmpX9BcDF4MN4="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-plugin-syntax-exponentiation-operator/-/babel-plugin-syntax-exponentiation-operator-6.13.0.tgz"
-  "version" "6.13.0"
-
-"babel-plugin-syntax-trailing-function-commas@^6.22.0":
-  "integrity" "sha1-ugNgk3+NBuQBgKQ/4NVhb/9TLPM="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-plugin-syntax-trailing-function-commas/-/babel-plugin-syntax-trailing-function-commas-6.22.0.tgz"
-  "version" "6.22.0"
-
-"babel-plugin-transform-async-to-generator@^6.22.0":
-  "integrity" "sha1-ZTbjeK/2yx1VF6wOQOs+n8jQh2E="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-plugin-transform-async-to-generator/-/babel-plugin-transform-async-to-generator-6.24.1.tgz"
-  "version" "6.24.1"
-  dependencies:
-    "babel-helper-remap-async-to-generator" "^6.24.1"
-    "babel-plugin-syntax-async-functions" "^6.8.0"
-    "babel-runtime" "^6.22.0"
-
-"babel-plugin-transform-es2015-arrow-functions@^6.22.0":
-  "integrity" "sha1-RSaSy3EdX3ncf4XkQM5BufJE0iE="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-plugin-transform-es2015-arrow-functions/-/babel-plugin-transform-es2015-arrow-functions-6.22.0.tgz"
-  "version" "6.22.0"
-  dependencies:
-    "babel-runtime" "^6.22.0"
-
-"babel-plugin-transform-es2015-block-scoped-functions@^6.22.0":
-  "integrity" "sha1-u8UbSflk1wy42OC5ToICRs46YUE="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-plugin-transform-es2015-block-scoped-functions/-/babel-plugin-transform-es2015-block-scoped-functions-6.22.0.tgz"
-  "version" "6.22.0"
-  dependencies:
-    "babel-runtime" "^6.22.0"
-
-"babel-plugin-transform-es2015-block-scoping@^6.23.0":
-  "integrity" "sha1-1w9SmcEwjQXBL0Y4E7CgnnOxiV8="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-plugin-transform-es2015-block-scoping/-/babel-plugin-transform-es2015-block-scoping-6.26.0.tgz"
-  "version" "6.26.0"
-  dependencies:
-    "babel-runtime" "^6.26.0"
-    "babel-template" "^6.26.0"
-    "babel-traverse" "^6.26.0"
-    "babel-types" "^6.26.0"
-    "lodash" "^4.17.4"
-
-"babel-plugin-transform-es2015-classes@^6.23.0":
-  "integrity" "sha1-WkxYpQyclGHlZLSyo7+ryXolhNs="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-plugin-transform-es2015-classes/-/babel-plugin-transform-es2015-classes-6.24.1.tgz"
-  "version" "6.24.1"
-  dependencies:
-    "babel-helper-define-map" "^6.24.1"
-    "babel-helper-function-name" "^6.24.1"
-    "babel-helper-optimise-call-expression" "^6.24.1"
-    "babel-helper-replace-supers" "^6.24.1"
-    "babel-messages" "^6.23.0"
-    "babel-runtime" "^6.22.0"
-    "babel-template" "^6.24.1"
-    "babel-traverse" "^6.24.1"
-    "babel-types" "^6.24.1"
-
-"babel-plugin-transform-es2015-computed-properties@^6.22.0":
-  "integrity" "sha1-b+Ko0WiV1WNPTNmZttNICjCBWbM="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-plugin-transform-es2015-computed-properties/-/babel-plugin-transform-es2015-computed-properties-6.24.1.tgz"
-  "version" "6.24.1"
-  dependencies:
-    "babel-runtime" "^6.22.0"
-    "babel-template" "^6.24.1"
-
-"babel-plugin-transform-es2015-destructuring@^6.23.0":
-  "integrity" "sha1-mXux8auWf2gtKwh2/jWNYOdlxW0="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-plugin-transform-es2015-destructuring/-/babel-plugin-transform-es2015-destructuring-6.23.0.tgz"
-  "version" "6.23.0"
-  dependencies:
-    "babel-runtime" "^6.22.0"
-
-"babel-plugin-transform-es2015-duplicate-keys@^6.22.0":
-  "integrity" "sha1-c+s9MQypaePvnskcU3QabxV2Qj4="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-plugin-transform-es2015-duplicate-keys/-/babel-plugin-transform-es2015-duplicate-keys-6.24.1.tgz"
-  "version" "6.24.1"
-  dependencies:
-    "babel-runtime" "^6.22.0"
-    "babel-types" "^6.24.1"
-
-"babel-plugin-transform-es2015-for-of@^6.23.0":
-  "integrity" "sha1-9HyVsrYT3x0+zC/bdXNiPHUkhpE="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-plugin-transform-es2015-for-of/-/babel-plugin-transform-es2015-for-of-6.23.0.tgz"
-  "version" "6.23.0"
-  dependencies:
-    "babel-runtime" "^6.22.0"
-
-"babel-plugin-transform-es2015-function-name@^6.22.0":
-  "integrity" "sha1-g0yJhTvDaxrw86TF26qU/Y6sqos="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-plugin-transform-es2015-function-name/-/babel-plugin-transform-es2015-function-name-6.24.1.tgz"
-  "version" "6.24.1"
-  dependencies:
-    "babel-helper-function-name" "^6.24.1"
-    "babel-runtime" "^6.22.0"
-    "babel-types" "^6.24.1"
-
-"babel-plugin-transform-es2015-literals@^6.22.0":
-  "integrity" "sha1-T1SgLWzWbPkVKAAZox0xklN3yi4="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-plugin-transform-es2015-literals/-/babel-plugin-transform-es2015-literals-6.22.0.tgz"
-  "version" "6.22.0"
-  dependencies:
-    "babel-runtime" "^6.22.0"
-
-"babel-plugin-transform-es2015-modules-amd@^6.22.0", "babel-plugin-transform-es2015-modules-amd@^6.24.1":
-  "integrity" "sha1-Oz5UAXI5hC1tGcMBHEvS8AoA0VQ="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-plugin-transform-es2015-modules-amd/-/babel-plugin-transform-es2015-modules-amd-6.24.1.tgz"
-  "version" "6.24.1"
-  dependencies:
-    "babel-plugin-transform-es2015-modules-commonjs" "^6.24.1"
-    "babel-runtime" "^6.22.0"
-    "babel-template" "^6.24.1"
-
-"babel-plugin-transform-es2015-modules-commonjs@^6.23.0", "babel-plugin-transform-es2015-modules-commonjs@^6.24.1":
-  "integrity" "sha512-CV9ROOHEdrjcwhIaJNBGMBCodN+1cfkwtM1SbUHmvyy35KGT7fohbpOxkE2uLz1o6odKK2Ck/tz47z+VqQfi9Q=="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-plugin-transform-es2015-modules-commonjs/-/babel-plugin-transform-es2015-modules-commonjs-6.26.2.tgz"
-  "version" "6.26.2"
-  dependencies:
-    "babel-plugin-transform-strict-mode" "^6.24.1"
-    "babel-runtime" "^6.26.0"
-    "babel-template" "^6.26.0"
-    "babel-types" "^6.26.0"
-
-"babel-plugin-transform-es2015-modules-systemjs@^6.23.0":
-  "integrity" "sha1-/4mhQrkRmpBhlfXxBuzzBdlAfSM="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-plugin-transform-es2015-modules-systemjs/-/babel-plugin-transform-es2015-modules-systemjs-6.24.1.tgz"
-  "version" "6.24.1"
-  dependencies:
-    "babel-helper-hoist-variables" "^6.24.1"
-    "babel-runtime" "^6.22.0"
-    "babel-template" "^6.24.1"
-
-"babel-plugin-transform-es2015-modules-umd@^6.23.0":
-  "integrity" "sha1-rJl+YoXNGO1hdq22B9YCNErThGg="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-plugin-transform-es2015-modules-umd/-/babel-plugin-transform-es2015-modules-umd-6.24.1.tgz"
-  "version" "6.24.1"
-  dependencies:
-    "babel-plugin-transform-es2015-modules-amd" "^6.24.1"
-    "babel-runtime" "^6.22.0"
-    "babel-template" "^6.24.1"
-
-"babel-plugin-transform-es2015-object-super@^6.22.0":
-  "integrity" "sha1-JM72muIcuDp/hgPa0CH1cusnj40="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-plugin-transform-es2015-object-super/-/babel-plugin-transform-es2015-object-super-6.24.1.tgz"
-  "version" "6.24.1"
-  dependencies:
-    "babel-helper-replace-supers" "^6.24.1"
-    "babel-runtime" "^6.22.0"
-
-"babel-plugin-transform-es2015-parameters@^6.23.0":
-  "integrity" "sha1-V6w1GrScrxSpfNE7CfZv3wpiXys="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-plugin-transform-es2015-parameters/-/babel-plugin-transform-es2015-parameters-6.24.1.tgz"
-  "version" "6.24.1"
-  dependencies:
-    "babel-helper-call-delegate" "^6.24.1"
-    "babel-helper-get-function-arity" "^6.24.1"
-    "babel-runtime" "^6.22.0"
-    "babel-template" "^6.24.1"
-    "babel-traverse" "^6.24.1"
-    "babel-types" "^6.24.1"
-
-"babel-plugin-transform-es2015-shorthand-properties@^6.22.0":
-  "integrity" "sha1-JPh11nIch2YbvZmkYi5R8U3jiqA="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-plugin-transform-es2015-shorthand-properties/-/babel-plugin-transform-es2015-shorthand-properties-6.24.1.tgz"
-  "version" "6.24.1"
-  dependencies:
-    "babel-runtime" "^6.22.0"
-    "babel-types" "^6.24.1"
-
-"babel-plugin-transform-es2015-spread@^6.22.0":
-  "integrity" "sha1-1taKmfia7cRTbIGlQujdnxdG+NE="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-plugin-transform-es2015-spread/-/babel-plugin-transform-es2015-spread-6.22.0.tgz"
-  "version" "6.22.0"
-  dependencies:
-    "babel-runtime" "^6.22.0"
-
-"babel-plugin-transform-es2015-sticky-regex@^6.22.0":
-  "integrity" "sha1-AMHNsaynERLN8M9hJsLta0V8zbw="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-plugin-transform-es2015-sticky-regex/-/babel-plugin-transform-es2015-sticky-regex-6.24.1.tgz"
-  "version" "6.24.1"
-  dependencies:
-    "babel-helper-regex" "^6.24.1"
-    "babel-runtime" "^6.22.0"
-    "babel-types" "^6.24.1"
-
-"babel-plugin-transform-es2015-template-literals@^6.22.0":
-  "integrity" "sha1-qEs0UPfp+PH2g51taH2oS7EjbY0="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-plugin-transform-es2015-template-literals/-/babel-plugin-transform-es2015-template-literals-6.22.0.tgz"
-  "version" "6.22.0"
-  dependencies:
-    "babel-runtime" "^6.22.0"
-
-"babel-plugin-transform-es2015-typeof-symbol@^6.23.0":
-  "integrity" "sha1-3sCfHN3/lLUqxz1QXITfWdzOs3I="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-plugin-transform-es2015-typeof-symbol/-/babel-plugin-transform-es2015-typeof-symbol-6.23.0.tgz"
-  "version" "6.23.0"
-  dependencies:
-    "babel-runtime" "^6.22.0"
-
-"babel-plugin-transform-es2015-unicode-regex@^6.22.0":
-  "integrity" "sha1-04sS9C6nMj9yk4fxinxa4frrNek="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-plugin-transform-es2015-unicode-regex/-/babel-plugin-transform-es2015-unicode-regex-6.24.1.tgz"
-  "version" "6.24.1"
-  dependencies:
-    "babel-helper-regex" "^6.24.1"
-    "babel-runtime" "^6.22.0"
-    "regexpu-core" "^2.0.0"
-
-"babel-plugin-transform-exponentiation-operator@^6.22.0":
-  "integrity" "sha1-KrDJx/MJj6SJB3cruBP+QejeOg4="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-plugin-transform-exponentiation-operator/-/babel-plugin-transform-exponentiation-operator-6.24.1.tgz"
-  "version" "6.24.1"
-  dependencies:
-    "babel-helper-builder-binary-assignment-operator-visitor" "^6.24.1"
-    "babel-plugin-syntax-exponentiation-operator" "^6.8.0"
-    "babel-runtime" "^6.22.0"
-
-"babel-plugin-transform-regenerator@^6.22.0":
-  "integrity" "sha1-4HA2lvveJ/Cj78rPi03KL3s6jy8="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-plugin-transform-regenerator/-/babel-plugin-transform-regenerator-6.26.0.tgz"
-  "version" "6.26.0"
-  dependencies:
-    "regenerator-transform" "^0.10.0"
-
-"babel-plugin-transform-strict-mode@^6.24.1":
-  "integrity" "sha1-1fr3qleKZbvlkc9e2uBKDGcCB1g="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-plugin-transform-strict-mode/-/babel-plugin-transform-strict-mode-6.24.1.tgz"
-  "version" "6.24.1"
-  dependencies:
-    "babel-runtime" "^6.22.0"
-    "babel-types" "^6.24.1"
-
-"babel-preset-env@^1.7.0":
-  "integrity" "sha512-9OR2afuKDneX2/q2EurSftUYM0xGu4O2D9adAhVfADDhrYDaxXV0rBbevVYoY9n6nyX1PmQW/0jtpJvUNr9CHg=="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-preset-env/-/babel-preset-env-1.7.0.tgz"
-  "version" "1.7.0"
-  dependencies:
-    "babel-plugin-check-es2015-constants" "^6.22.0"
-    "babel-plugin-syntax-trailing-function-commas" "^6.22.0"
-    "babel-plugin-transform-async-to-generator" "^6.22.0"
-    "babel-plugin-transform-es2015-arrow-functions" "^6.22.0"
-    "babel-plugin-transform-es2015-block-scoped-functions" "^6.22.0"
-    "babel-plugin-transform-es2015-block-scoping" "^6.23.0"
-    "babel-plugin-transform-es2015-classes" "^6.23.0"
-    "babel-plugin-transform-es2015-computed-properties" "^6.22.0"
-    "babel-plugin-transform-es2015-destructuring" "^6.23.0"
-    "babel-plugin-transform-es2015-duplicate-keys" "^6.22.0"
-    "babel-plugin-transform-es2015-for-of" "^6.23.0"
-    "babel-plugin-transform-es2015-function-name" "^6.22.0"
-    "babel-plugin-transform-es2015-literals" "^6.22.0"
-    "babel-plugin-transform-es2015-modules-amd" "^6.22.0"
-    "babel-plugin-transform-es2015-modules-commonjs" "^6.23.0"
-    "babel-plugin-transform-es2015-modules-systemjs" "^6.23.0"
-    "babel-plugin-transform-es2015-modules-umd" "^6.23.0"
-    "babel-plugin-transform-es2015-object-super" "^6.22.0"
-    "babel-plugin-transform-es2015-parameters" "^6.23.0"
-    "babel-plugin-transform-es2015-shorthand-properties" "^6.22.0"
-    "babel-plugin-transform-es2015-spread" "^6.22.0"
-    "babel-plugin-transform-es2015-sticky-regex" "^6.22.0"
-    "babel-plugin-transform-es2015-template-literals" "^6.22.0"
-    "babel-plugin-transform-es2015-typeof-symbol" "^6.23.0"
-    "babel-plugin-transform-es2015-unicode-regex" "^6.22.0"
-    "babel-plugin-transform-exponentiation-operator" "^6.22.0"
-    "babel-plugin-transform-regenerator" "^6.22.0"
-    "browserslist" "^3.2.6"
-    "invariant" "^2.2.2"
-    "semver" "^5.3.0"
-
-"babel-runtime@^6.18.0", "babel-runtime@^6.22.0", "babel-runtime@^6.26.0":
-  "integrity" "sha1-llxwWGaOgrVde/4E/yM3vItWR/4="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-runtime/-/babel-runtime-6.26.0.tgz"
-  "version" "6.26.0"
-  dependencies:
-    "core-js" "^2.4.0"
-    "regenerator-runtime" "^0.11.0"
-
-"babel-template@^6.24.1", "babel-template@^6.26.0":
-  "integrity" "sha1-3gPi0WOWsGn0bdn/+FIfsaDjXgI="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-template/-/babel-template-6.26.0.tgz"
-  "version" "6.26.0"
-  dependencies:
-    "babel-runtime" "^6.26.0"
-    "babel-traverse" "^6.26.0"
-    "babel-types" "^6.26.0"
-    "babylon" "^6.18.0"
-    "lodash" "^4.17.4"
-
-"babel-traverse@^6.24.1", "babel-traverse@^6.26.0":
-  "integrity" "sha1-RqnL1+3MYsjlwGTi0tjQ9ANXZu4="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-traverse/-/babel-traverse-6.26.0.tgz"
-  "version" "6.26.0"
-  dependencies:
-    "babel-code-frame" "^6.26.0"
-    "babel-messages" "^6.23.0"
-    "babel-runtime" "^6.26.0"
-    "babel-types" "^6.26.0"
-    "babylon" "^6.18.0"
-    "debug" "^2.6.8"
-    "globals" "^9.18.0"
-    "invariant" "^2.2.2"
-    "lodash" "^4.17.4"
-
-"babel-types@^6.19.0", "babel-types@^6.24.1", "babel-types@^6.26.0":
-  "integrity" "sha1-o7Bz+Uq0nrb6Vc1lInozQ4BjJJc="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babel-types/-/babel-types-6.26.0.tgz"
-  "version" "6.26.0"
-  dependencies:
-    "babel-runtime" "^6.26.0"
-    "esutils" "^2.0.2"
-    "lodash" "^4.17.4"
-    "to-fast-properties" "^1.0.3"
-
-"babylon@^6.18.0":
-  "integrity" "sha512-q/UEjfGJ2Cm3oKV71DJz9d25TPnq5rhBVL2Q4fA5wcC3jcrdn7+SssEybFIxwAvvP+YCsCYNKughoF33GxgycQ=="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/babylon/-/babylon-6.18.0.tgz"
-  "version" "6.18.0"
 
 "balanced-match@^1.0.0":
   "integrity" "sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw=="
@@ -2826,14 +2355,6 @@
   dependencies:
     "pako" "~1.0.5"
 
-"browserslist@^3.2.6":
-  "integrity" "sha512-WHVocJYavUwVgVViC0ORikPHQquXwVh939TaelZ4WDqpWgTX/FsGhl/+P4qBUAGcRvtOgDgC+xftNWWp2RUTAQ=="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/browserslist/-/browserslist-3.2.8.tgz"
-  "version" "3.2.8"
-  dependencies:
-    "caniuse-lite" "^1.0.30000844"
-    "electron-to-chromium" "^1.3.47"
-
 "browserslist@^4.0.0", "browserslist@^4.12.0", "browserslist@^4.16.6", "browserslist@^4.16.7":
   "integrity" "sha512-7I4qVwqZltJ7j37wObBe3SoTz+nS8APaNcrBOlgoirb6/HbEU2XxW/LpUDTCngM6iauwFqmRTuOMfyKnFGY5JA=="
   "resolved" "https://repo.huaweicloud.com/repository/npm/browserslist/-/browserslist-4.16.7.tgz"
@@ -3017,7 +2538,7 @@
     "lodash.memoize" "^4.1.2"
     "lodash.uniq" "^4.5.0"
 
-"caniuse-lite@^1.0.0", "caniuse-lite@^1.0.30000844", "caniuse-lite@^1.0.30001109", "caniuse-lite@^1.0.30001248":
+"caniuse-lite@^1.0.0", "caniuse-lite@^1.0.30001109", "caniuse-lite@^1.0.30001248":
   "integrity" "sha512-vcX4U8lwVXPdqzPWi6cAJ3FnQaqXbBqy/GZseKNQzRj37J7qZdGcBtxq/QLFNLLlfsoXLUdHw8Iwenri86Tagw=="
   "resolved" "https://repo.huaweicloud.com/repository/npm/caniuse-lite/-/caniuse-lite-1.0.30001249.tgz"
   "version" "1.0.30001249"
@@ -3459,11 +2980,6 @@
     "browserslist" "^4.16.7"
     "semver" "7.0.0"
 
-"core-js@^2.4.0":
-  "integrity" "sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ=="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/core-js/-/core-js-2.6.12.tgz"
-  "version" "2.6.12"
-
 "core-js@^3.16.0", "core-js@^3.6.5":
   "integrity" "sha512-Tq4GVE6XCjE+hcyW6hPy0ofN3hwtLudz5ZRdrlCnsnD/xkm/PWQRudzYHiKgZKUcefV6Q57fhDHjZHJP5dpfSg=="
   "resolved" "https://repo.huaweicloud.com/repository/npm/core-js/-/core-js-3.16.4.tgz"
@@ -3750,13 +3266,6 @@
     "ms" "2.0.0"
 
 "debug@^2.3.3":
-  "integrity" "sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA=="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/debug/-/debug-2.6.9.tgz"
-  "version" "2.6.9"
-  dependencies:
-    "ms" "2.0.0"
-
-"debug@^2.6.8":
   "integrity" "sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA=="
   "resolved" "https://repo.huaweicloud.com/repository/npm/debug/-/debug-2.6.9.tgz"
   "version" "2.6.9"
@@ -4104,7 +3613,7 @@
   "resolved" "https://repo.huaweicloud.com/repository/npm/ejs/-/ejs-2.7.4.tgz"
   "version" "2.7.4"
 
-"electron-to-chromium@^1.3.47", "electron-to-chromium@^1.3.793":
+"electron-to-chromium@^1.3.793":
   "integrity" "sha512-V2rbYWdGvSqrg+95KjkVuSi41bGfrhrOzjl1tSi2VLnm0mRe3FsSvhiqidSiSll9WiMhrQAhpDcW/wcqK3c+Yw=="
   "resolved" "https://repo.huaweicloud.com/repository/npm/electron-to-chromium/-/electron-to-chromium-1.3.799.tgz"
   "version" "1.3.799"
@@ -4387,7 +3896,7 @@
   "resolved" "https://repo.huaweicloud.com/repository/npm/estraverse/-/estraverse-5.2.0.tgz"
   "version" "5.2.0"
 
-"estree-walker@^2.0.1", "estree-walker@^2.0.2":
+"estree-walker@^2.0.2":
   "integrity" "sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w=="
   "resolved" "https://repo.huaweicloud.com/repository/npm/estree-walker/-/estree-walker-2.0.2.tgz"
   "version" "2.0.2"
@@ -4846,16 +4355,6 @@
     "jsonfile" "^4.0.0"
     "universalify" "^0.1.0"
 
-"fs-extra@^9.0.1":
-  "integrity" "sha512-hcg3ZmepS30/7BSFqRvoo3DOMQu7IjqxO5nCDt+zM9XWjb33Wg7ziNT+Qvqbuc3+gWpzO02JubVyk2G4Zvo1OQ=="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/fs-extra/-/fs-extra-9.1.0.tgz"
-  "version" "9.1.0"
-  dependencies:
-    "at-least-node" "^1.0.0"
-    "graceful-fs" "^4.2.0"
-    "jsonfile" "^6.0.1"
-    "universalify" "^2.0.0"
-
 "fs-write-stream-atomic@^1.0.8":
   "integrity" "sha1-tH31NJPvkR33VzHnCp3tAYnbQMk="
   "resolved" "https://repo.huaweicloud.com/repository/npm/fs-write-stream-atomic/-/fs-write-stream-atomic-1.0.10.tgz"
@@ -4996,11 +4495,6 @@
   dependencies:
     "type-fest" "^0.8.1"
 
-"globals@^9.18.0":
-  "integrity" "sha512-S0nG3CLEQiY/ILxqtztTWH/3iRRdyBLw6KMDxnKMchrtbj2OFmehVh0WUCfW3DUrIgx/qFrJPICrq4Z4sTR9UQ=="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/globals/-/globals-9.18.0.tgz"
-  "version" "9.18.0"
-
 "globby@^11.0.3":
   "integrity" "sha512-9O4MVG9ioZJ08ffbcyVYyLOJLk5JQ688pJ4eMGLpdWLHq/Wr1D9BlriLQyL0E+jbkuePVZXYFj47QM/v093wHg=="
   "resolved" "https://repo.huaweicloud.com/repository/npm/globby/-/globby-11.0.4.tgz"
@@ -5050,7 +4544,7 @@
     "pify" "^4.0.1"
     "slash" "^2.0.0"
 
-"graceful-fs@^4.1.11", "graceful-fs@^4.1.15", "graceful-fs@^4.1.2", "graceful-fs@^4.1.6", "graceful-fs@^4.2.0":
+"graceful-fs@^4.1.11", "graceful-fs@^4.1.15", "graceful-fs@^4.1.2", "graceful-fs@^4.1.6":
   "integrity" "sha512-qkIilPUYcNhJpd33n0GBXTB1MMPp14TxEsEs0pTrsSVucApsYzW5V+Q8Qxhik6KU3evy+qkAAowTByymK0avdg=="
   "resolved" "https://repo.huaweicloud.com/repository/npm/graceful-fs/-/graceful-fs-4.2.8.tgz"
   "version" "4.2.8"
@@ -5531,13 +5025,6 @@
   "resolved" "https://repo.huaweicloud.com/repository/npm/interpret/-/interpret-1.4.0.tgz"
   "version" "1.4.0"
 
-"invariant@^2.2.2":
-  "integrity" "sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA=="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/invariant/-/invariant-2.2.4.tgz"
-  "version" "2.2.4"
-  dependencies:
-    "loose-envify" "^1.0.0"
-
 "ip-regex@^2.1.0":
   "integrity" "sha1-+ni/XS5pE8kRzp+BnuUUa7bYROk="
   "resolved" "https://repo.huaweicloud.com/repository/npm/ip-regex/-/ip-regex-2.1.0.tgz"
@@ -5925,7 +5412,7 @@
   dependencies:
     "easy-stack" "^1.0.1"
 
-"js-tokens@^3.0.0 || ^4.0.0", "js-tokens@^3.0.2":
+"js-tokens@^3.0.2":
   "integrity" "sha1-mGbfOVECEw449/mWvOtlRDIJwls="
   "resolved" "https://repo.huaweicloud.com/repository/npm/js-tokens/-/js-tokens-3.0.2.tgz"
   "version" "3.0.2"
@@ -6016,15 +5503,6 @@
   "integrity" "sha1-h3Gq4HmbZAdrdmQPygWPnBDjPss="
   "resolved" "https://repo.huaweicloud.com/repository/npm/jsonfile/-/jsonfile-4.0.0.tgz"
   "version" "4.0.0"
-  optionalDependencies:
-    "graceful-fs" "^4.1.6"
-
-"jsonfile@^6.0.1":
-  "integrity" "sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ=="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/jsonfile/-/jsonfile-6.1.0.tgz"
-  "version" "6.1.0"
-  dependencies:
-    "universalify" "^2.0.0"
   optionalDependencies:
     "graceful-fs" "^4.1.6"
 
@@ -6210,7 +5688,7 @@
   "resolved" "https://repo.huaweicloud.com/repository/npm/lodash.uniq/-/lodash.uniq-4.5.0.tgz"
   "version" "4.5.0"
 
-"lodash@^4.17.11", "lodash@^4.17.14", "lodash@^4.17.15", "lodash@^4.17.19", "lodash@^4.17.20", "lodash@^4.17.21", "lodash@^4.17.3", "lodash@^4.17.4":
+"lodash@^4.17.11", "lodash@^4.17.14", "lodash@^4.17.15", "lodash@^4.17.19", "lodash@^4.17.20", "lodash@^4.17.21", "lodash@^4.17.3":
   "integrity" "sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg=="
   "resolved" "https://repo.huaweicloud.com/repository/npm/lodash/-/lodash-4.17.21.tgz"
   "version" "4.17.21"
@@ -6226,13 +5704,6 @@
   "integrity" "sha512-Hesni4s5UkWkwCGJMQGAh71PaLUmKFM60dHvq0zi/vDhhrzuk+4GgNbTXJ12YYQJn6ZKBDNIjYcuQGKudvqrIw=="
   "resolved" "https://repo.huaweicloud.com/repository/npm/loglevel/-/loglevel-1.7.1.tgz"
   "version" "1.7.1"
-
-"loose-envify@^1.0.0":
-  "integrity" "sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q=="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/loose-envify/-/loose-envify-1.4.0.tgz"
-  "version" "1.4.0"
-  dependencies:
-    "js-tokens" "^3.0.0 || ^4.0.0"
 
 "lower-case@^1.1.1":
   "integrity" "sha1-miyr0bno4K6ZOkv31YdcOcQujqw="
@@ -7173,7 +6644,7 @@
   "resolved" "https://repo.huaweicloud.com/repository/npm/performance-now/-/performance-now-2.1.0.tgz"
   "version" "2.1.0"
 
-"picomatch@^2.0.4", "picomatch@^2.2.1", "picomatch@^2.2.2", "picomatch@^2.2.3":
+"picomatch@^2.0.4", "picomatch@^2.2.1", "picomatch@^2.2.3":
   "integrity" "sha512-lY1Q/PiJGC2zOv/z391WOTD+Z02bCgsFfvxoXXf6h7kv9o+WmsmzYqrAwY63sNgOxE4xEdq0WyUnXfKeBrSvYw=="
   "resolved" "https://repo.huaweicloud.com/repository/npm/picomatch/-/picomatch-2.3.0.tgz"
   "version" "2.3.0"
@@ -7655,11 +7126,6 @@
   "resolved" "https://repo.huaweicloud.com/repository/npm/prettier/-/prettier-1.19.1.tgz"
   "version" "1.19.1"
 
-"prettier@^2.0.5":
-  "integrity" "sha512-DsEPLY1dE5HF3BxCRBmD4uYZ+5DCbvatnolqTqcxEgKVZnL2kUfyu7b8pPQ5+hTBkdhU9SLUmK0/pHb07RE4WQ=="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/prettier/-/prettier-2.4.0.tgz"
-  "version" "2.4.0"
-
 "pretty-error@^2.0.2":
   "integrity" "sha512-EY5oDzmsX5wvuynAByrmY0P0hcp+QpnAKbJng2A2MPjVKXCxrDSUkzghVJ4ZGPIv+JC4gX8fPUWscC0RtjsWGw=="
   "resolved" "https://repo.huaweicloud.com/repository/npm/pretty-error/-/pretty-error-2.1.2.tgz"
@@ -7667,11 +7133,6 @@
   dependencies:
     "lodash" "^4.17.20"
     "renderkid" "^2.0.4"
-
-"private@^0.1.6":
-  "integrity" "sha512-VvivMrbvd2nKkiG38qjULzlc+4Vx4wm/whI9pQD35YrARNnhxeiRktSOhSukRLFNlzg6Br/cJPet5J/u19r/mg=="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/private/-/private-0.1.8.tgz"
-  "version" "0.1.8"
 
 "process-nextick-args@~2.0.0":
   "integrity" "sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag=="
@@ -7796,7 +7257,7 @@
   "resolved" "https://repo.huaweicloud.com/repository/npm/querystring-es3/-/querystring-es3-0.2.1.tgz"
   "version" "0.2.1"
 
-"querystring@^0.2.0", "querystring@0.2.0":
+"querystring@0.2.0":
   "integrity" "sha1-sgmEkgO7Jd+CDadW50cAWHhSFiA="
   "resolved" "https://repo.huaweicloud.com/repository/npm/querystring/-/querystring-0.2.0.tgz"
   "version" "0.2.0"
@@ -7912,29 +7373,15 @@
   dependencies:
     "regenerate" "^1.4.0"
 
-"regenerate@^1.2.1", "regenerate@^1.4.0":
+"regenerate@^1.4.0":
   "integrity" "sha512-zrceR/XhGYU/d/opr2EKO7aRHUeiBI8qjtfHqADTwZd6Szfy16la6kqD0MIUs5z5hx6AaKa+PixpPrR289+I0A=="
   "resolved" "https://repo.huaweicloud.com/repository/npm/regenerate/-/regenerate-1.4.2.tgz"
   "version" "1.4.2"
-
-"regenerator-runtime@^0.11.0":
-  "integrity" "sha512-MguG95oij0fC3QV3URf4V2SDYGJhJnJGqvIIgdECeODCT98wSWDAJ94SSuVpYQUoTcGUIL6L4yNB7j1DFFHSBg=="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz"
-  "version" "0.11.1"
 
 "regenerator-runtime@^0.13.4", "regenerator-runtime@^0.13.9":
   "integrity" "sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA=="
   "resolved" "https://repo.huaweicloud.com/repository/npm/regenerator-runtime/-/regenerator-runtime-0.13.9.tgz"
   "version" "0.13.9"
-
-"regenerator-transform@^0.10.0":
-  "integrity" "sha512-PJepbvDbuK1xgIgnau7Y90cwaAmO/LCLMI2mPvaXq2heGMR3aWW5/BQvYrhJ8jgmQjXewXvBjzfqKcVOmhjZ6Q=="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/regenerator-transform/-/regenerator-transform-0.10.1.tgz"
-  "version" "0.10.1"
-  dependencies:
-    "babel-runtime" "^6.18.0"
-    "babel-types" "^6.19.0"
-    "private" "^0.1.6"
 
 "regenerator-transform@^0.14.2":
   "integrity" "sha512-eOf6vka5IO151Jfsw2NO9WpGX58W6wWmefK3I1zEGr0lOD0u8rwPaNqQL1aRxUaxLeKO3ArNh3VYg1KbaD+FFw=="
@@ -7969,15 +7416,6 @@
   "resolved" "https://repo.huaweicloud.com/repository/npm/regexpp/-/regexpp-3.2.0.tgz"
   "version" "3.2.0"
 
-"regexpu-core@^2.0.0":
-  "integrity" "sha1-SdA4g3uNz4v6W5pCE5k45uoq4kA="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/regexpu-core/-/regexpu-core-2.0.0.tgz"
-  "version" "2.0.0"
-  dependencies:
-    "regenerate" "^1.2.1"
-    "regjsgen" "^0.2.0"
-    "regjsparser" "^0.1.4"
-
 "regexpu-core@^4.7.1":
   "integrity" "sha512-ywH2VUraA44DZQuRKzARmw6S66mr48pQVva4LBeRhcOltJ6hExvWly5ZjFLYo67xbIxb6W1q4bAGtgfEl20zfQ=="
   "resolved" "https://repo.huaweicloud.com/repository/npm/regexpu-core/-/regexpu-core-4.7.1.tgz"
@@ -7990,22 +7428,10 @@
     "unicode-match-property-ecmascript" "^1.0.4"
     "unicode-match-property-value-ecmascript" "^1.2.0"
 
-"regjsgen@^0.2.0":
-  "integrity" "sha1-bAFq3qxVT3WCP+N6wFuS1aTtsfc="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/regjsgen/-/regjsgen-0.2.0.tgz"
-  "version" "0.2.0"
-
 "regjsgen@^0.5.1":
   "integrity" "sha512-OFFT3MfrH90xIW8OOSyUrk6QHD5E9JOTeGodiJeBS3J6IwlgzJMNE/1bZklWz5oTg+9dCMyEetclvCVXOPoN3A=="
   "resolved" "https://repo.huaweicloud.com/repository/npm/regjsgen/-/regjsgen-0.5.2.tgz"
   "version" "0.5.2"
-
-"regjsparser@^0.1.4":
-  "integrity" "sha1-fuj4Tcb6eS0/0K4ijSS9lJ6tIFw="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/regjsparser/-/regjsparser-0.1.5.tgz"
-  "version" "0.1.5"
-  dependencies:
-    "jsesc" "~0.5.0"
 
 "regjsparser@^0.6.4":
   "integrity" "sha512-ZqbNRz1SNjLAiYuwY0zoXW8Ne675IX5q+YHioAGbCw4X96Mjl2+dcX9B2ciaeyYjViDAfvIjFpQjJgLttTEERQ=="
@@ -8179,7 +7605,7 @@
     "hash-base" "^3.0.0"
     "inherits" "^2.0.1"
 
-"rollup@^2.35.1", "rollup@^2.38.5":
+"rollup@^2.38.5":
   "integrity" "sha512-Au92NuznFklgQCUcV96iXlxUbHuB1vQMaH76DHl5M11TotjOHwqk9CwcrT78+Tnv4FN9uTBxq6p4EJoYkpyekg=="
   "resolved" "https://repo.huaweicloud.com/repository/npm/rollup/-/rollup-2.56.3.tgz"
   "version" "2.56.3"
@@ -9144,11 +8570,6 @@
   "resolved" "https://repo.huaweicloud.com/repository/npm/to-arraybuffer/-/to-arraybuffer-1.0.1.tgz"
   "version" "1.0.1"
 
-"to-fast-properties@^1.0.3":
-  "integrity" "sha1-uDVx+k2MJbguIxsG46MFXeTKGkc="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/to-fast-properties/-/to-fast-properties-1.0.3.tgz"
-  "version" "1.0.3"
-
 "to-fast-properties@^2.0.0":
   "integrity" "sha1-3F5pjL0HkmW8c+A3doGk5Og/YW4="
   "resolved" "https://repo.huaweicloud.com/repository/npm/to-fast-properties/-/to-fast-properties-2.0.0.tgz"
@@ -9400,11 +8821,6 @@
   "resolved" "https://repo.huaweicloud.com/repository/npm/universalify/-/universalify-0.1.2.tgz"
   "version" "0.1.2"
 
-"universalify@^2.0.0":
-  "integrity" "sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ=="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/universalify/-/universalify-2.0.0.tgz"
-  "version" "2.0.0"
-
 "unpipe@~1.0.0", "unpipe@1.0.0":
   "integrity" "sha1-sr9O6FFKrmFltIF4KdIbLvSZBOw="
   "resolved" "https://repo.huaweicloud.com/repository/npm/unpipe/-/unpipe-1.0.0.tgz"
@@ -9559,34 +8975,7 @@
     "core-util-is" "1.0.2"
     "extsprintf" "^1.2.0"
 
-"vite-plugin-vue2@latest":
-  "integrity" "sha512-qQXLH+yVn5o7cq+KJULyty4OxWKQ3lsvrYx8QkLO78LsM+/r1gEytfcXiqewnvgP7eTkJ5Pd/kHbfDce1Pim/w=="
-  "resolved" "https://repo.huaweicloud.com/repository/npm/vite-plugin-vue2/-/vite-plugin-vue2-1.8.2.tgz"
-  "version" "1.8.2"
-  dependencies:
-    "@babel/core" "^7.11.6"
-    "@babel/parser" "^7.13.10"
-    "@babel/plugin-proposal-class-properties" "^7.14.5"
-    "@babel/plugin-proposal-decorators" "^7.14.5"
-    "@babel/plugin-transform-typescript" "^7.13.0"
-    "@rollup/pluginutils" "^4.1.0"
-    "@vue/babel-helper-vue-jsx-merge-props" "^1.2.1"
-    "@vue/babel-preset-jsx" "^1.2.4"
-    "@vue/component-compiler-utils" "^3.2.0"
-    "babel-preset-env" "^1.7.0"
-    "consolidate" "^0.16.0"
-    "debug" "^4.3.1"
-    "fs-extra" "^9.0.1"
-    "hash-sum" "^2.0.0"
-    "magic-string" "^0.25.7"
-    "prettier" "^2.0.5"
-    "querystring" "^0.2.0"
-    "rollup" "^2.35.1"
-    "slash" "^3.0.0"
-    "source-map" "^0.7.3"
-    "vue-template-es2015-compiler" "^1.9.1"
-
-"vite@^2.0.0", "vite@^2.0.0-beta.23", "vite@2":
+"vite@^2.0.0":
   "integrity" "sha512-0ObiHTi5AHyXdJcvZ67HMsDgVpjT5RehvVKv6+Q0jFZ7zDI28PF5zK9mYz2avxdA+4iJMdwCz6wnGNnn4WX5Gg=="
   "resolved" "https://repo.huaweicloud.com/repository/npm/vite/-/vite-2.5.10.tgz"
   "version" "2.5.10"
@@ -9661,7 +9050,7 @@
     "hash-sum" "^1.0.2"
     "loader-utils" "^1.0.2"
 
-"vue-template-compiler@^2.0.0", "vue-template-compiler@^2.2.0", "vue-template-compiler@^2.6.10", "vue-template-compiler@^2.6.11":
+"vue-template-compiler@^2.0.0", "vue-template-compiler@^2.6.10", "vue-template-compiler@^2.6.11":
   "integrity" "sha1-ovDn2YVnDULJye4NBE/tdpD092M="
   "resolved" "https://registry.nlark.com/vue-template-compiler/download/vue-template-compiler-2.6.14.tgz?cache=0&sync_timestamp=1623059640396&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fvue-template-compiler%2Fdownload%2Fvue-template-compiler-2.6.14.tgz"
   "version" "2.6.14"
@@ -9669,7 +9058,7 @@
     "de-indent" "^1.0.2"
     "he" "^1.1.0"
 
-"vue-template-es2015-compiler@^1.9.0", "vue-template-es2015-compiler@^1.9.1":
+"vue-template-es2015-compiler@^1.9.0":
   "integrity" "sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw=="
   "resolved" "https://repo.huaweicloud.com/repository/npm/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz"
   "version" "1.9.1"

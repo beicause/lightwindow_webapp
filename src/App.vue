@@ -16,6 +16,7 @@
 import Vue from 'vue'
 import {closePop} from "@/common/util";
 import {vm} from "@/main";
+import {VERSION} from "@/common/const";
 
 export default Vue.extend({
   name: "App",
@@ -25,6 +26,10 @@ export default Vue.extend({
       type: 'info' as 'info' | 'error' | 'success' | 'warning',
       text: ''
     }
+  },
+  created() {
+    (window as any)['getVersion'] = () => VERSION
+    console.log((window as any).getVersion());
   },
   mounted() {
     vm.$on('close-pop', () => this.show = false)

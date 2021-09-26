@@ -8,7 +8,9 @@ const Android = (window as any).Android as {
     checkVersion: () => string,
     showVersionUpdate: () => void,
     redirectToMain: () => void,
-    redirectToCalendar: () => void
+    redirectToCalendar: () => void,
+    getPolicy: () => string,
+    setPolicy: (value: string) => void
 } | undefined
 
 interface AppVersionInfo {

@@ -1,1 +1,22 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 87.5 100"><defs><style>.cls-1{fill:#1697f6;}.cls-2{fill:#7bc6ff;}.cls-3{fill:#1867c0;}.cls-4{fill:#aeddff;}</style></defs><title>Artboard 46</title><polyline class="cls-1" points="43.75 0 23.31 0 43.75 48.32"/><polygon class="cls-2" points="43.75 62.5 43.75 100 0 14.58 22.92 14.58 43.75 62.5"/><polyline class="cls-3" points="43.75 0 64.19 0 43.75 48.32"/><polygon class="cls-4" points="64.58 14.58 87.5 14.58 43.75 100 43.75 62.5 64.58 14.58"/></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+        width="200mm"
+        height="200mm"
+        viewBox="0 0 200 200"
+        version="1.1"
+        id="svg5"
+        xmlns="http://www.w3.org/2000/svg"
+>
+  <defs
+          id="defs2"/>
+  <path
+          id="rect1295"
+          style="display:inline;fill:#2196f3;fill-opacity:1;stroke:none;stroke-width:2.9647;stroke-miterlimit:4;stroke-dasharray:none"
+          d="M 148.47958,169.2246 196.5079,43.461093 47.503361,0 179.16657,53.871878 139.58153,166.80436 M 33.075925,144.29168 31.37332,148.90165 157.12104,194.94839 200,45.432954 151.77295,175.64204 Z M 43.50322,3.779931 0,154.26064 49.587777,23.580198 168.91084,64.479846 171.75258,56.923611 Z M 52.447306,30.105065 4.2835158,155.95892 155.32117,200 22.075591,150.13892 62.193086,33.915796 Z"/>
+  <path
+          id="path1086"
+          style="display:inline;opacity:1;fill:#2196f3;fill-opacity:1;stroke:none;stroke-width:3.359;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.0580475"
+          d="m 90.085627,38.072468 34.750903,92.386362 -58.76292,-5.19094 -5.614126,6.90847 89.972716,9.46355 z m -2.966017,1.671176 -65.044019,110.395276 61.39866,-87.173659 22.453379,61.569399 11.52004,1.39935 z M 81.751366,75.3717 33.075925,144.29168 150.13032,145.77887 50.213666,136.5192 85.47489,85.927518 Z"/>
+</svg>
