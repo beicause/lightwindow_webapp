@@ -7,7 +7,7 @@
           mdi mdi-arrow-top-left-bottom-right border
         </v-icon>
         <div style="margin: 0 auto;display: flex;justify-content: center;align-items: center">
-          <img height="20" width="20" src="@/main/assets/logo.svg" alt="error"/>
+          <img height="20" width="20" src="/logo.svg" alt="error"/>
           <span class="blue--text">窗隙流光</span>
         </div>
         <v-icon dense @click="()=>{if (Android)Android.close()}" color="blue">

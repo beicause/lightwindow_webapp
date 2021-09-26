@@ -9,9 +9,9 @@
           <v-list-item>
             <v-icon>fal fa-calendar-week</v-icon>
           </v-list-item>
-          <v-list-item>
-            <v-icon>far fa-paw</v-icon>
-          </v-list-item>
+          <!--          <v-list-item>-->
+          <!--            <v-icon>far fa-paw</v-icon>-->
+          <!--          </v-list-item>-->
           <v-list-item>
             <v-icon>fal fa-music</v-icon>
           </v-list-item>
@@ -49,11 +49,11 @@
       <div class="body-2 indent-2">闹钟提醒仅作为标记，若要生效，请导出至系统闹钟。</div>
     </div>
 
-    <div v-show="selectItem===1">
-      <p>小宠物</p>
-    </div>
+    <!--    <div v-show="selectItem===1">-->
+    <!--      <p>小宠物</p>-->
+    <!--    </div>-->
 
-    <div v-show="selectItem===2">
+    <div v-show="selectItem===1">
       <p class="blue--text">使用说明</p>
       <music-guide class="pt-0"></music-guide>
     </div>

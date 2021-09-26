@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <h2>隐私政策</h2>
-    <div style="text-align: center">发布日期：2021年9月24日</div>
-    <p style="text-indent: 0;text-align: center">生效日期：2021年9月24日</p>
+    <h2 style="padding-bottom: 8px">隐私政策</h2>
+    <div style="text-align: end;font-size: 12px">发布日期：2021年9月24日</div>
+    <p style="text-indent: 0;text-align: end;font-size: 12px">生效日期：2021年9月24日</p>
     <p>
       《窗隙流光》是由合工大学生独立开发的开源、免费的工具软件，出于学习交流、兴趣爱好和提供使用而开发维护，
       也欢迎您提供任何想法建议，反馈问题和提交贡献。
@@ -124,7 +124,7 @@
     <div>
       <button></button>
     </div>
-    <div class="btn-container">
+    <div style="font-size: 16px" class="btn-container">
       <button class="red--text" @click="refuse">拒绝</button>
       <button class="blue--text" @click="accept">接受</button>
     </div>
@@ -150,7 +150,6 @@ export default Vue.extend({
     },
     refuse() {
       Android?.setPolicy('null')
-      Android?.close()
     }
   }
 })
