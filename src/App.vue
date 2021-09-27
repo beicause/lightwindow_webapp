@@ -10,7 +10,7 @@ export default Vue.extend({
     store.commit('initAll');
 
     // #ifdef H5
-    (window as any)['getVersion'] = () => 100
+    (window as any)['getVersion'] = () => '100'
     console.log((window as any).getVersion());
     // #endif
 

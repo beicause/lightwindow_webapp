@@ -82,6 +82,10 @@ export default Vue.extend({
     },
 
     submit(): void {
+      if (this.mSchool === '请选择') {
+        showPopMsg({msg: '请选择学校', type: 'error', duration: 800})
+        return
+      }
       if (this.isImported) {
         this.mSchool = this.school
         this.formData.username = this.eduUserInfo.username
@@ -95,6 +99,7 @@ export default Vue.extend({
             this.btnSubExtra = false
             showPopMsg({msg: '正在导入', type: 'info'})
             this.getEduEvents(this.mSchool, r.username, r.password).then(events => {
+              if (events.length === 0) throw new Error('null')
               this.removeEdu()
               this.addSchedule(events)
               store.commit('cacheMarks')
