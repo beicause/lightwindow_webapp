@@ -72,6 +72,7 @@ export default Vue.extend({
       //每拍0.5秒
       BEAT_DURATION: 0.50,
       STEP: 0.0125,
+      SECTION_BEATS: 4,
       firstScore: {inputValue: '', level: 1, gain: 5} as ScoreInfo,
       secondScore: {inputValue: '', level: -1, gain: 5} as ScoreInfo,
       player: {} as SoundFont.Player,
@@ -98,19 +99,20 @@ export default Vue.extend({
     },
     rules(): ((value: string) => boolean | string)[] {
       return [
-        (value: string) => !(/uuuu/.test(value) && value[value.length - 1] !== '1') || 'uuuu后只能为1',
+        // (value: string) => !(/uuuu/.test(value) && value[value.length - 1] !== '1') || 'uuuu后只能为1',
         // (value: string) => !(/[ud#]/.test(value) && !/\d/.test(value[value.length - 1])) || '变音记号后请接音符',
         (value: string) => (/^[0-7\r\n/_~ud#]*$/.test(value) || !value) || '出现非法字符',
         (value: string) => !/_{3,}/.test(value) || '不能小于十六分音符',
+        (value: string) => (!/^[~_]/.test(value) && /([\d~]~|[\d_]_)*/.test(value)) || '增时线和减时线前接数字',
         // (value: string) => !/_#*\.*[0-7]?\.*\-/.test(value) || '增时线和减时线不可共用',
-        // (value: string) => {
-        //   let error = false
-        //   const sections = value.split('/')
-        //   sections.forEach(r => {
-        //     if (this.sectionBeat(r) > 4) error = true
-        //   })
-        //   return (!error) || '每小节不超过四拍'
-        // }
+        (value: string) => {
+          let error = false
+          const sections = value.split('/')
+          sections.forEach(r => {
+            if (this.sectionBeat(r) > this.SECTION_BEATS) error = true
+          })
+          return (!error) || '每小节不超过四拍'
+        }
       ]
     }
   },
@@ -121,7 +123,6 @@ export default Vue.extend({
     },
     onInput(score: ScoreInfo) {
       return (value: string) => {
-        console.log(value)
         this.isPlaying = false
         this.player.stop()
         //如果长度增加
@@ -130,7 +131,7 @@ export default Vue.extend({
           if (info) this.player.play(info.note, 0, {duration: info.duration, gain: score.gain})
         }
         const sections = value.split('/')
-        if (this.sectionBeat(sections[sections.length - 1]) === 4) value += '/'
+        if (this.sectionBeat(sections[sections.length - 1]) === this.SECTION_BEATS) value += '/'
         let musicLength = 0
         sections.forEach(s => musicLength += this.sectionBeat(s) * this.BEAT_DURATION)
         this.maxTime = musicLength
@@ -141,6 +142,8 @@ export default Vue.extend({
     },
 
     onPlay() {
+      this.firstScore.inputValue = this.formatSection(this.firstScore.inputValue)
+      this.secondScore.inputValue = this.formatSection(this.secondScore.inputValue)
       if (this.isPlaying) {
         this.player.stop()
         this.isPlaying = false
@@ -155,6 +158,7 @@ export default Vue.extend({
         if (!input) return schedule
         for (let i = 0; i <= input.length; i++) {
           const noteString = input.substring(0, i)
+          if (input[i] === '~') continue
           const info = this.lastNoteInfo(noteString, score.level)
           if (!info) continue
           schedule.push({time: maxTime, note: info.note, duration: info.duration, gain: score.gain})
@@ -171,9 +175,9 @@ export default Vue.extend({
         if (maxTime > this.maxTime) this.maxTime = maxTime
         return schedule
       }
-      console.log(this.maxTime)
       const schedule = [...getSchedule(this.firstScore), ...getSchedule(this.secondScore)]
       if (schedule.length === 0) return;
+      console.log(schedule)
       this.player.schedule(0, schedule)
       this.isPlaying = true
 
@@ -198,7 +202,7 @@ export default Vue.extend({
     lastNoteInfo(s: string, level: 1 | 0 | -1): { note: string, duration: number } | null {
       const lastChar = s[s.length - 1]
       //不是音符直接返回
-      if (!['0', '1', '2', '3', '4', '5', '6', '7', '-'].includes(lastChar)) return null
+      if (!['0', '1', '2', '3', '4', '5', '6', '7', '~'].includes(lastChar)) return null
       const noteIndexReversed = [] as number[]
       for (let i = s.length - 1; i >= 0; i--) {
         if (/\d/.test(s[i])) noteIndexReversed.push(i)
@@ -223,9 +227,8 @@ export default Vue.extend({
       if (lastChar === '~') duration += (s.length - 1 - lastNoteIndex) * this.BEAT_DURATION
       if (duration > 2) duration = 2
 
-      const note = (lastNote as unknown as number << 0) + 59 + level1 * 12 + isSharpe + 12 * level
-      // console.log(note, duration)
       if (lastChar === '0') return {note: '0', duration}
+      const note = (lastNote as unknown as number << 0) + 59 + level1 * 12 + isSharpe + 12 * level
       return {note: '' + note, duration}
     },
     sectionBeat(r: string): number {
@@ -241,6 +244,33 @@ export default Vue.extend({
         if (/\d/.test(r[i])) num++
       }
       return num
+    },
+    formatSection(s: string): string {
+      if (!s) return ''
+      if (s[0] !== '/') s = '/' + s
+      if (s[s.length - 1] !== '/') s += '/'
+      const sections = s.substring(1, s.length - 1)
+          .replaceAll(/[^0-7\r\n/_~ud#]/g, '')
+          .split('/')
+      for (let i = 0; i < sections.length; i++) {
+        const beats = this.sectionBeat(sections[i])
+        if (beats === this.SECTION_BEATS) continue
+        if (beats < this.SECTION_BEATS) {
+          sections[i] += '0'
+          i--
+        }
+        if (beats > this.SECTION_BEATS) {
+          for (let j = 1; j <= sections[i].length; j++) {
+            const mutableStr = sections[i].substring(0, j)
+            if (this.sectionBeat(mutableStr) === this.SECTION_BEATS) {
+              sections[i] = mutableStr + '/' + sections[i].substring(j)
+              break
+            }
+          }
+          sections[i] = this.formatSection(sections[i])
+        }
+      }
+      return '/' + sections.join('/') + '/'
     },
     onCopied(isSuccess: boolean) {
       if (isSuccess) showPop('内容复制成功', 'success')

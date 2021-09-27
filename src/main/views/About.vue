@@ -41,7 +41,7 @@
     </div>
 
     <v-row no-gutters align="center">
-      <v-col cols="3">问题反馈：</v-col>
+      <v-col cols="3">建议反馈：</v-col>
       <v-col style="overflow: auto">{{ EMAIL }}</v-col>
       <v-col cols="1">
         <v-btn @click="copy(EMAIL)" icon color="blue">
