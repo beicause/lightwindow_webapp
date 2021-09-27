@@ -10,7 +10,7 @@
           <img height="20" width="20" src="/logo.svg" alt="error"/>
           <span class="blue--text">窗隙流光</span>
         </div>
-        <v-icon dense @click="()=>{if (Android)Android.close()}" color="blue">
+        <v-icon id="icon-close" dense @click="()=>{if (Android)Android.close()}" color="blue">
           fal fa-times-circle
         </v-icon>
       </template>

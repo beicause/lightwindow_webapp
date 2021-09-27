@@ -1,4 +1,5 @@
 const Android = (window as any).Android as {
+    exception: (value: string) => void,
     isNoticeRunning: () => boolean,
     startNoticeService: () => void,
     stopNoticeService: () => void,
