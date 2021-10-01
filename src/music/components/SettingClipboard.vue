@@ -35,11 +35,11 @@ export default Vue.extend({
         this.$emit('pasted', Android.getClipboardText())
       } else {
         navigator.clipboard.readText()
-            .then(text => this.$emit('pasted', text))
-            .catch(err => {
-              console.log(err)
-              this.$emit('pasted', '')
-            })
+          .then(text => this.$emit('pasted', text))
+          .catch(() => {
+            // console.log(err)
+            this.$emit('pasted', '')
+          })
       }
     }
   }

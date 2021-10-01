@@ -74,8 +74,8 @@ export default Vue.extend({
         height: 0
       },
       cards: [
-        new Card('日程表', '通知浮窗，便捷查看', 'fal fa-calendar-week'),
-        new Card('音乐谱', '字符谱写乐章', 'fal fa-music')
+        new Card('日程表', '通知浮窗，便捷查看，支持导入教务课表', 'fal fa-calendar-week'),
+        new Card('音乐谱', '以字符构建乐谱', 'fal fa-music')
       ]
     }
   },

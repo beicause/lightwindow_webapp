@@ -284,8 +284,8 @@ export default Vue.extend({
       if (s[0] !== '/') s = '/' + s
       if (s[s.length - 1] !== '/') s += '/'
       const sections = s.substring(1, s.length - 1)
-          .replaceAll(/[^0-7\r\n/_~ud#]/g, '')
-          .split('/')
+        .replaceAll(/[^0-7\r\n/_~ud#]/g, '')
+        .split('/')
       for (let i = 0; i < sections.length; i++) {
         const beats = this.sectionBeat(sections[i])
         if (beats === this.SECTION_BEATS) continue
@@ -330,9 +330,9 @@ export default Vue.extend({
   mounted () {
     this.audio = new AudioContext()
     SoundFont.instrument(this.audio, './acoustic_grand_piano.js' as InstrumentName)
-        .then(player => {
-          this.player = player
-        })
+      .then(player => {
+        this.player = player
+      })
     // .catch((err) => console.log(err))
     // console.log('soundfont loaded')
   }
