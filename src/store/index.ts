@@ -69,21 +69,21 @@ const store = new Vuex.Store({
             state.marks = new Map<string, string>(state.marks)
         },
         cacheMarks(state) {
-            console.log('缓存marks')
+            // console.log('缓存marks')
             setStorage("marks", JSON.stringify(marksMapToArray(state.marks)))
         },
         cacheEvents(state) {
             const e = getStorage('events')
             const [a, b] = compareEvents(state.events, JSON.parse(e ? e : "[]"))
-            console.log(a, b)
+            // console.log(a, b)
             if (a.length === 0 && b.length === 0) {
-                console.log('无变化不缓存')
+                // console.log('无变化不缓存')
                 return
             }
             setStorage('events', JSON.stringify(state.events));
             androidSyncData(state.events);
             (this as any).commit('setAndCache', {updateTime: dateFormat(new Date())})
-            console.log('缓存更新', state.updateTime)
+            // console.log('缓存更新', state.updateTime)
         },
         addEvents(state, events: Event[]) {
             const b = getEventsDiff(events, state.events)

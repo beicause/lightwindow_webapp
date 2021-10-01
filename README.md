@@ -1,1 +1,1 @@
-详情见主项目https://gitee.com/beicause/lightwindow
+详情见主项目https://github.com/beicause/lightwindow
