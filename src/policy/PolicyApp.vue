@@ -1,8 +1,7 @@
 <template>
-  <div class="container">
+  <div class="container" v-once>
     <h2 style="padding-bottom: 8px">隐私政策</h2>
-    <div style="text-align: end;font-size: 12px">发布日期：2021年9月24日</div>
-    <p style="text-indent: 0;text-align: end;font-size: 12px">生效日期：2021年9月24日</p>
+
     <p>
       《窗隙流光》是由合工大学生独立开发的开源、免费的工具软件，出于学习交流、兴趣爱好和提供使用而开发维护，
       也欢迎您提供任何想法建议，反馈问题和提交贡献。
@@ -121,6 +120,8 @@
     <p>如您对本隐私政策或您个人信息的相关事宜有任何问题、意见或建议，请拨打电话19147019033，
       或发送邮件至1494181792@qq.com与我们进行联系。
       我们将在收到您反馈意见后的7个工作日内给予回复。</p>
+    <div style="text-align: end;font-size: 12px">发布日期：2021年9月24日</div>
+    <p style="text-indent: 0;text-align: end;font-size: 12px">生效日期：2021年9月24日</p>
     <div>
       <button></button>
     </div>
@@ -132,24 +133,24 @@
 </template>
 
 <script lang="ts">
-import {Android} from "@/common/android";
-import Vue from "vue";
-import {POLICY_VERSION} from "@/common/const";
+import { Android } from '@/common/js/android'
+import Vue from 'vue'
+import { POLICY_VERSION } from '@/common/js/const'
 
 export default Vue.extend({
-  name: "PolicyApp",
-  data() {
+  name: 'PolicyApp',
+  data () {
     return {
-      Android,
+      Android
     }
   },
   methods: {
-    accept() {
-      Android?.setPolicy(POLICY_VERSION)
+    accept () {
+      if (Android) Android.setPolicy(POLICY_VERSION)
       this.$router.push('/main')
     },
-    refuse() {
-      Android?.setPolicy('null')
+    refuse () {
+      if (Android) Android.setPolicy('null')
     }
   }
 })

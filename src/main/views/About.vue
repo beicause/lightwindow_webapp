@@ -26,7 +26,6 @@
       <v-divider></v-divider>
     </div>
 
-
     <v-row no-gutters align="center">
       <v-col cols="3">开源仓库：</v-col>
       <v-col style="overflow: auto">{{ GIT_URL }}</v-col>
@@ -69,13 +68,13 @@
 </template>
 <script lang="ts">
 import Vue from 'vue'
-import {showPop} from "@/common/util";
-import {Android, AppVersionInfo} from "@/common/android";
-import {EMAIL, GIT_URL, INDEX_URL} from "@/common/const";
+import { showPop } from '@/common/js/util'
+import { Android, AppVersionInfo } from '@/common/js/android'
+import { EMAIL, GIT_URL, INDEX_URL } from '@/common/js/const'
 
 export default Vue.extend({
   name: 'About',
-  data() {
+  data () {
     return {
       Android,
       GIT_URL,
@@ -84,36 +83,41 @@ export default Vue.extend({
       version: undefined as AppVersionInfo | undefined
     }
   },
-  mounted() {
+  mounted () {
     if (Android) {
       this.version = JSON.parse(Android.checkVersion()) as AppVersionInfo
     }
   },
   computed: {
-    appVersion(): string {
+    appVersion (): string {
       if (!this.version) return '---'
-      return '窗隙流光' + this.versionCodeToName(this.version.local_app_version)
-          + (this.version.is_app_update ? '（发现新版本）' : '')
+      return '窗隙流光' + this.versionCodeToName(this.version.local_app_version) +
+          (this.version.is_app_update ? '（发现新版本）' : '')
     }
   },
   methods: {
-    versionCodeToName(code: string): string {
-      return 'v' + code.split("").join('.')
+    versionCodeToName (code: string): string {
+      return 'v' + code.split('').join('.')
     },
-    copy(value: string) {
-      const text = document.createElement('textarea');
+    copy (value: string) {
+      const text = document.createElement('textarea')
       text.value = value
-      document.body.appendChild(text);
-      text.select();
-      const isSuccess = document.execCommand('Copy');
-      text.remove();
-      if (isSuccess) showPop("复制成功", 'success')
-      else showPop("复制失败", 'error')
+      document.body.appendChild(text)
+      text.select()
+      const isSuccess = document.execCommand('Copy')
+      text.remove()
+      if (isSuccess) {
+        showPop('复制成功', 'success')
+      } else {
+        showPop('复制失败', 'error')
+      }
     },
-    update() {
-      if (this.version?.is_app_update) {
-        Android?.showVersionUpdate()
-      } else showPop("目前已是最新版本", 'success')
+    update () {
+      if (Android && this.version?.is_app_update) {
+        Android.showVersionUpdate()
+      } else {
+        showPop('目前已是最新版本', 'success')
+      }
     }
   }
 })

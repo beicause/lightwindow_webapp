@@ -1,16 +1,16 @@
 <template>
-  <v-app>
-    <v-app-bar height="30" app extension-height="35" color="white">
+  <div>
+    <v-app-bar style="z-index: 6" height="30" app extension-height="35" color="white">
       <template v-slot:default>
-        <v-icon size="18" :style="{visibility:zoom?'visible':'hidden'}" @click="onClickZoom"
+        <v-icon id="icon-zoom" size="18" :style="{visibility:zoom?'visible':'hidden'}" @click="zoomClick"
                 color="blue" style="border: #2196f3 solid 1px;">
           mdi mdi-arrow-top-left-bottom-right border
         </v-icon>
         <div style="margin: 0 auto;display: flex;justify-content: center;align-items: center">
-          <img height="20" width="20" src="/logo.svg" alt="error"/>
-          <span class="blue--text">窗隙流光</span>
+          <img height="20" width="20" src="../../public/logo.svg" alt="logo"/>
+          <span class="blue--text" style="font-family: source-han, Roboto, sans-serif !important;">窗隙流光</span>
         </div>
-        <v-icon id="icon-close" dense @click="()=>{if (Android)Android.close()}" color="blue">
+        <v-icon id="icon-close" dense @click="closeClick" color="blue">
           fal fa-times-circle
         </v-icon>
       </template>
@@ -35,29 +35,42 @@
     <v-main>
       <router-view></router-view>
     </v-main>
-  </v-app>
+  </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import {Android} from "@/common/android";
+import Vue from 'vue'
+import { Android } from '@/common/js/android'
 
 export default Vue.extend({
-  name: 'GuideApp',
-  data() {
+  name: 'MainApp',
+  data () {
     return {
       zoom: true,
       Android
     }
   },
-  created() {
-    (window as any)['showZoom'] = () => this.zoom = true
+  created () {
+    window.showZoom = () => {
+      this.zoom = true
+    }
   },
   methods: {
-    onClickZoom() {
-      this.zoom = false
-      Android?.showZoom()
+    closeClick () {
+      if (Android) {
+        Android.close()
+      } else {
+        window.parent.postMessage('close', '*')
+      }
     },
+    zoomClick () {
+      if (Android) {
+        this.zoom = false
+        Android.showZoom()
+      } else {
+        window.parent.postMessage('zoom', '*')
+      }
+    }
   }
-});
+})
 </script>

@@ -3,7 +3,7 @@
     <v-icon v-show="!drawer" class="expand-arrow" color="blue"
             @click="()=>{this.drawer=true}">fal fa-chevron-circle-right
     </v-icon>
-    <v-navigation-drawer style="z-index: 6" absolute mini-variant v-model="drawer">
+    <v-navigation-drawer fixed style="top: 65px" mini-variant v-model="drawer">
       <v-list dense>
         <v-list-item-group color="blue" @change="onItemClick" :value="selectItem">
           <v-list-item>
@@ -62,19 +62,19 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import MusicGuide from "@/music/components/MusicGuide.vue";
+import MusicGuide from '@/music/components/MusicGuide.vue'
 
 export default Vue.extend({
-  name: "Guide",
-  components: {MusicGuide},
-  data() {
+  name: 'Guide',
+  components: { MusicGuide },
+  data () {
     return {
       drawer: false,
       selectItem: 0
     }
   },
   methods: {
-    onItemClick(e: any) {
+    onItemClick (e: number | undefined) {
       if (e !== undefined) this.selectItem = e
       this.drawer = false
     }

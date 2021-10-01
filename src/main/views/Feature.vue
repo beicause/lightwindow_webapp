@@ -9,31 +9,35 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import {Android} from "@/common/android";
-import FeatureItem from "@/main/components/FeatureItem.vue";
+import { Android } from '@/common/js/android'
+import FeatureItem from '@/main/components/FeatureItem.vue'
 
 export default Vue.extend({
   name: 'feature',
-  components: {FeatureItem},
-  data() {
+  components: { FeatureItem },
+  data () {
     return {
       isNoticeRunning: false,
       isPetRunning: false,
       Android
     }
   },
-  mounted() {
+  mounted () {
     this.isNoticeRunning = !!Android?.isNoticeRunning()
   },
   methods: {
-    clickCalendar() {
+    clickCalendar () {
       this.isNoticeRunning = !this.isNoticeRunning
       if (Android) {
         if (this.isNoticeRunning) {
           Android.startNoticeService()
           Android.redirectToCalendar()
-        } else Android.stopNoticeService()
-      } else window.location.href = 'https://qingcheng.asia/calendar/'
+        } else {
+          Android.stopNoticeService()
+        }
+      } else {
+        window.location.href = 'https://qingcheng.asia/calendar/'
+      }
     }
   }
 })

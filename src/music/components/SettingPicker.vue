@@ -10,25 +10,25 @@
 </template>
 
 <script>
-import Vue from "vue";
+import Vue from 'vue'
 
 export default Vue.extend({
-  name: "SettingPicker",
-  data() {
+  name: 'SettingPicker',
+  data () {
     return {
       mask: false,
       drawer: false
     }
   },
   methods: {
-    open() {
+    open () {
       this.mask = true
       this.drawer = true
     },
-    close() {
+    close () {
       this.drawer = false
     }
-  },
+  }
 })
 </script>
 

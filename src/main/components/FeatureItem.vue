@@ -20,10 +20,10 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue'
 
 export default Vue.extend({
-  name: "FeatureItem",
+  name: 'FeatureItem',
   props: {
     isRunning: {
       type: Boolean,
@@ -35,7 +35,7 @@ export default Vue.extend({
     },
     prependIcon: {
       type: String,
-      default: ""
+      default: ''
     }
   }
 })

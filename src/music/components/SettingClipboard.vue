@@ -6,38 +6,41 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import {Android} from "@/common/android";
+import Vue from 'vue'
+import { Android } from '@/common/js/android'
 
 export default Vue.extend({
-  name: "SettingClipboard",
+  name: 'SettingClipboard',
   props: {
     copyValue: {
       type: String,
       default: ''
     }
   },
-  data() {
+  data () {
     return {}
   },
   methods: {
-    copy() {
-      const text = document.createElement('textarea');
-      text.value = this.copyValue;
-      document.body.appendChild(text);
-      text.select();
-      const isSuccess = document.execCommand('Copy');
-      text.remove();
+    copy () {
+      const text = document.createElement('textarea')
+      text.value = this.copyValue
+      document.body.appendChild(text)
+      text.select()
+      const isSuccess = document.execCommand('Copy')
+      text.remove()
       this.$emit('copied', isSuccess && this.copyValue)
     },
-    paste() {
-      if (Android) this.$emit('pasted', Android.getClipboardText())
-      else navigator.clipboard.readText()
-          .then(text => this.$emit('pasted', text))
-          .catch(err => {
-            console.log(err)
-            this.$emit('pasted', '')
-          })
+    paste () {
+      if (Android) {
+        this.$emit('pasted', Android.getClipboardText())
+      } else {
+        navigator.clipboard.readText()
+            .then(text => this.$emit('pasted', text))
+            .catch(err => {
+              console.log(err)
+              this.$emit('pasted', '')
+            })
+      }
     }
   }
 })

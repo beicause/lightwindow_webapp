@@ -14,27 +14,32 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import {closePop} from "@/common/util";
-import {vm} from "@/main";
-import {VERSION} from "@/common/const";
+import { closePop } from '@/common/js/util'
+import { vm } from '@/main'
+import { VERSION } from '@/common/js/const'
 
 export default Vue.extend({
-  name: "App",
-  data() {
+  name: 'App',
+  data () {
     return {
       show: false,
       type: 'info' as 'info' | 'error' | 'success' | 'warning',
       text: ''
     }
   },
-  created() {
-    (window as any)['getVersion'] = () => VERSION
-    console.log((window as any).getVersion());
+  created () {
+    window.getVersion = () => VERSION
+    console.log(window.getVersion())
   },
-  mounted() {
-    vm.$on('close-pop', () => this.show = false)
-    vm.$on('show-pop', ({text, type, duration}:
-                            { text: string, type: 'info' | 'error' | 'success' | 'warning', duration: number }) => {
+  mounted () {
+    vm.$on('close-pop', () => {
+      this.show = false
+    })
+    vm.$on('show-pop', ({
+      text,
+      type,
+      duration
+    }: { text: string, type: 'info' | 'error' | 'success' | 'warning', duration: number }) => {
       this.text = text
       this.type = type
       this.show = true
