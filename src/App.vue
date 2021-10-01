@@ -1,5 +1,6 @@
 <script lang="ts">
 import Vue from 'vue'
+import store from './store';
 
 export default Vue.extend({
   mpType: 'app',
@@ -7,7 +8,7 @@ export default Vue.extend({
     // #ifdef H5
     (window as any)['getVersion'] = () => '100'
     // #endif
-
+    store.commit('initAll');
     uni.preloadPage({url: "/pages/day/day"})
     uni.preloadPage({url: "/pages/week/week"})
     uni.preloadPage({url: "/pages/mon/mon"})

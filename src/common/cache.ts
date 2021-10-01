@@ -1,9 +1,9 @@
 function setStorage(k: 'updateTime' | 'events' | 'marks' | 'eduUserInfo' | 'eduEvents', v: string) {
-    uni.setStorageSync(k, v)
+    localStorage.setItem(k, v)
 }
 
 function getStorage(k: 'updateTime' | 'events' | 'marks' | 'eduUserInfo' | 'eduEvents'): string {
-    const s = uni.getStorageSync(k)
+    const s = localStorage.getItem(k)
     if (!s) {
         if (k === 'events' || k === 'marks' || k === 'eduEvents') return "[]"
         if (k === 'eduUserInfo') return "{}"
@@ -14,7 +14,7 @@ function getStorage(k: 'updateTime' | 'events' | 'marks' | 'eduUserInfo' | 'eduE
 
 function removeStorage(ks: ('updateTime' | 'events' | 'marks' | 'eduUserInfo' | 'eduEvents')[]) {
     ks.forEach(k => {
-        uni.removeStorageSync(k)
+        localStorage.removeItem(k)
     })
 }
 
