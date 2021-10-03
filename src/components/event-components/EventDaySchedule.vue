@@ -84,7 +84,7 @@ export default Vue.extend({
       const [me,e]=compareEvents(this.mDayEvents,dayEvents)
       e.forEach(event=>this.mDayEvents.push(event))
       me.forEach(e=>this.mDayEvents.splice(this.mDayEvents.indexOf(e),1))
-      console.log(this.mDayEvents)
+      // console.log(this.mDayEvents)
     })
   },
   beforeDestroy() {

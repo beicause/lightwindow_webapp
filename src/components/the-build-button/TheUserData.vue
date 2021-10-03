@@ -1,5 +1,5 @@
 <template>
-  <view class="container-data">
+  <view class="content">
 
     <view class="container-head">
       <view class="line"></view>
@@ -70,10 +70,10 @@ export default Vue.extend({
 </script>
 
 <style scoped>
-.container-data {
+.content {
   display: flex;
   flex-direction: column;
-  background-color: #FFFFFF;
+  background-color: white;
   width: 310px;
   border-radius: 5px;
   padding: 5px;

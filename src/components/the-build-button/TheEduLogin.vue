@@ -1,5 +1,5 @@
 <template>
-  <view class="container">
+  <view class="content">
     <view class="container-school">
       <text style="padding-right: 40px;">学校</text>
       <picker @change="selectSchool" :range="schools">{{ mSchool }}
@@ -77,7 +77,7 @@ export default Vue.extend({
   },
   methods: {
     selectSchool(e: any): void {
-      console.log(e)
+      // console.log(e)
       this.mSchool = this.schools[e.detail.value]
     },
 
@@ -121,24 +121,24 @@ export default Vue.extend({
             })
 
           })
-          .catch((err: any) => console.log('表单错误:', err))
+          // .catch((err: any) => console.log('表单错误:', err))
     },
     getEduEvents: async function (school: string, username: string, password: string) {
       switch (school) {
         case '合肥工业大学':
           return (await getHfutEvents(username, password))[1]
         case '长沙理工大学':
-          if (!Android) throw Error("android only")
+          if (!Android) throw Error("请下载Android版")
           return JSON.parse(Android.requestCsustEvents(username, password)) as Event[]
         case '赣南师范大学':
-          if (!Android) throw Error("android only")
+          if (!Android) throw Error("请下载Android版")
           return JSON.parse(Android.requestGnnuEvents(username, password)) as Event[]
         default:
           return [] as Event[]
       }
     },
     addSchedule(newEvents: Event[]) {
-      console.log(newEvents)
+      // console.log(newEvents)
       const newMarks = [] as Mark[]
       newEvents.forEach(e => {
         if (!store.state.marks.has(e.day)) newMarks.push({date: e.day, info: '有课'})
@@ -175,12 +175,12 @@ export default Vue.extend({
 </script>
 
 <style scoped>
-.container {
+.content {
   width: 300px;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background-color: #ffffff;
+  background-color: white;
   border-radius: 5px;
   padding: 10px;
 }

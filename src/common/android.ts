@@ -4,7 +4,7 @@ import {compareEvents} from "@/common/util";
 /**
  * 由Android webview提供
  * */
-const Android = (window as any).Android as {
+export interface Android {
     setSystemAlarm: () => void,
     addEvents: (events: string) => void,
     removeEvents: (events: string) => void,
@@ -14,16 +14,19 @@ const Android = (window as any).Android as {
     requestCsustEvents: (username: string, password: string) => string,
     requestGnnuEvents: (username: string, password: string) => string,
     redirectToMain: () => void,
-    redirectToCalendar: () => void
-} | undefined
+    redirectToCalendar: () => void,
+    setEnableSensor: (value: string) => void,
+    getEnableSensor: () => string
+}
+export const Android=window.Android
 
 function androidAddEvents(events: Event[]) {
-    if (Android) console.log("android add", JSON.stringify(events))
+    // if (Android) console.log("android add", JSON.stringify(events))
     Android?.addEvents(JSON.stringify(events))
 }
 
 function androidRemoveEvents(events: Event[]) {
-    if (Android) console.log("android remove", JSON.stringify(events))
+    // if (Android) console.log("android remove", JSON.stringify(events))
     Android?.removeEvents(JSON.stringify(events))
 }
 
@@ -44,4 +47,4 @@ function androidSetAlarm() {
     Android?.setSystemAlarm()
 }
 
-export {Android, androidSetAlarm, androidSyncData};
+export { androidSetAlarm, androidSyncData};

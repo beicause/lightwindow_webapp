@@ -1,3 +1,5 @@
+export const VERSION='101'
+
 interface Event {
     title: string,
     detail: string,

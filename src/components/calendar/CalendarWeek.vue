@@ -109,7 +109,7 @@ export default Vue.extend({
     dayEventsClick(index: number): () => void {
       return () => {
         store.commit("setActiveDay", dayFormat(this.weekDate[index]))
-        console.log(store.state.activeDay)
+        // console.log(store.state.activeDay)
       }
     },
     /**
