@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar style="z-index: 6" height="30" app extension-height="35" color="white">
+    <v-app-bar style="z-index: 7" height="30" app extension-height="35" color="white">
       <template v-slot:default>
         <v-icon id="icon-zoom" size="18" :style="{visibility:zoom?'visible':'hidden'}" @click="zoomClick"
                 color="blue" style="border: #2196f3 solid 1px;">

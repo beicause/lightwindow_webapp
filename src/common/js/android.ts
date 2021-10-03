@@ -1,4 +1,4 @@
-interface Android {
+export interface Android {
   exception: (value: string) => void,
   isNoticeRunning: () => boolean,
   startNoticeService: () => void,
@@ -14,9 +14,9 @@ interface Android {
   setPolicy: (value: string) => void
 }
 
-const Android = window.Android
+export const Android = window.Android
 
-interface AppVersionInfo {
+export interface AppVersionInfo {
   /* eslint-disable camelcase */
   is_app_update: boolean,
   is_web_update: boolean,
@@ -28,5 +28,3 @@ interface AppVersionInfo {
   version_info: string
   /* eslint-enable camelcase */
 }
-
-export { Android, AppVersionInfo }

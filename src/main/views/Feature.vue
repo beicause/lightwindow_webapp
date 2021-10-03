@@ -1,15 +1,15 @@
 <template>
   <v-container>
-    <feature-item name="日程表" :is-running="isNoticeRunning" prepend-icon="fal fa-calendar-week"
-                  @prepend-click="clickCalendar"></feature-item>
+    <feature-item :show-run="Android" name="日程表" :is-running="isNoticeRunning" prepend-icon="fal fa-calendar-week"
+                  @run-click="runCalendar" @nav-click="navCalendar"></feature-item>
     <feature-item name="音乐谱" :is-running="false" prepend-icon="fal fa-music"
-                  @prepend-click="$router.push('/music')"></feature-item>
+                  @nav-click="$router.push('/music')"></feature-item>
   </v-container>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import { Android } from '@/common/js/android'
+import { Android } from '../../common/js/android'
 import FeatureItem from '@/main/components/FeatureItem.vue'
 
 export default Vue.extend({
@@ -18,7 +18,7 @@ export default Vue.extend({
   data () {
     return {
       isNoticeRunning: false,
-      isPetRunning: false,
+      // isPetRunning: false,
       Android
     }
   },
@@ -26,15 +26,20 @@ export default Vue.extend({
     this.isNoticeRunning = !!Android?.isNoticeRunning()
   },
   methods: {
-    clickCalendar () {
+    runCalendar () {
       this.isNoticeRunning = !this.isNoticeRunning
       if (Android) {
         if (this.isNoticeRunning) {
           Android.startNoticeService()
-          Android.redirectToCalendar()
+          // Android.redirectToCalendar()
         } else {
           Android.stopNoticeService()
         }
+      }
+    },
+    navCalendar () {
+      if (Android) {
+        Android.redirectToCalendar()
       } else {
         window.location.href = 'https://qingcheng.asia/calendar/'
       }

@@ -17,8 +17,8 @@
       <v-col cols="3">网页地址：</v-col>
       <v-col style="overflow: auto">{{ INDEX_URL }}</v-col>
       <v-col cols="1">
-        <v-btn @click="copy(INDEX_URL)" icon color="blue">
-          <v-icon dense>fal fa-copy</v-icon>
+        <v-btn @click="copyOrNavigate(INDEX_URL)" icon color="blue">
+          <v-icon dense>{{ Android ? 'fal fa-copy' : 'fal fa-location-arrow' }}</v-icon>
         </v-btn>
       </v-col>
     </v-row>
@@ -30,8 +30,8 @@
       <v-col cols="3">开源仓库：</v-col>
       <v-col style="overflow: auto">{{ GIT_URL }}</v-col>
       <v-col cols="1">
-        <v-btn @click="copy(GIT_URL)" icon color="blue">
-          <v-icon dense>fal fa-copy</v-icon>
+        <v-btn @click="copyOrNavigate(GIT_URL)" icon color="blue">
+          <v-icon dense>{{ Android ? 'fal fa-copy' : 'fal fa-location-arrow' }}</v-icon>
         </v-btn>
       </v-col>
     </v-row>
@@ -57,7 +57,7 @@
       <v-col style="overflow: auto">{{ INDEX_URL + '/policy' }}</v-col>
       <v-col cols="1">
         <v-btn @click="$router.push('/policy')" icon color="blue">
-          <v-icon dense color="blue">mdi-play-speed</v-icon>
+          <v-icon dense color="blue">fal fa-location-arrow</v-icon>
         </v-btn>
       </v-col>
     </v-row>
@@ -69,7 +69,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { showPop } from '@/common/js/util'
-import { Android, AppVersionInfo } from '@/common/js/android'
+import { Android, AppVersionInfo } from '../../common/js/android'
 import { EMAIL, GIT_URL, INDEX_URL } from '@/common/js/const'
 
 export default Vue.extend({
@@ -92,14 +92,21 @@ export default Vue.extend({
     appVersion (): string {
       if (!this.version) return '---'
       return '窗隙流光' + this.versionCodeToName(this.version.local_app_version) +
-          (this.version.is_app_update ? '（发现新版本）' : '')
+          (this.version.is_app_update ? '（新' + this.versionCodeToName(this.version.app_version) + '）' : '')
     }
   },
   methods: {
     versionCodeToName (code: string): string {
       return 'v' + code.split('').join('.')
     },
-    copy (value: string) {
+    copyOrNavigate (s: string, url?: string) {
+      if (Android) {
+        this.copy(s)
+      } else {
+        window.open(url || s)
+      }
+    },
+    copy (value: string): void {
       const text = document.createElement('textarea')
       text.value = value
       document.body.appendChild(text)

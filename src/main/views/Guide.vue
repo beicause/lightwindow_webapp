@@ -3,7 +3,7 @@
     <v-icon v-show="!drawer" class="expand-arrow" color="blue"
             @click="()=>{this.drawer=true}">fal fa-chevron-circle-right
     </v-icon>
-    <v-navigation-drawer fixed style="top: 65px" mini-variant v-model="drawer">
+    <v-navigation-drawer temporary fixed style="top: 65px" mini-variant v-model="drawer">
       <v-list dense>
         <v-list-item-group color="blue" @change="onItemClick" :value="selectItem">
           <v-list-item>
@@ -20,33 +20,29 @@
     </v-navigation-drawer>
 
     <div v-show="selectItem===0">
-      <p class="blue--text">权限要求</p>
+      <p class="blue--text mt-2">编辑事件</p>
+      <v-img height="100" contain src="@/main/assets/calendar_guide.svg"></v-img>
+
+      <p class="blue--text mt-2">重力打开</p>
+      <div class="body-2 indent-2 ">开启重力感应后，运行日程表服务时，将手机正面朝下后快速朝上，即可随时打开日程表</div>
+      <div class="body-2 indent-2">为防止偶然打开造成不便，倒置超过0.5秒或手机熄屏，窗口自动关闭</div>
+      <div class="body-2 indent-2 mt-1">进行以下配置以确保稳定运行，否则容易无响应</div>
       <v-expansion-panels accordion>
         <v-expansion-panel>
-          <v-expansion-panel-header expand-icon="mdi-menu-down">
-            1. 设置应用启动管理，关闭省电模式</v-expansion-panel-header>
-          <v-expansion-panel-content class="body-2">为了稳定运行服务，请在手机管家中设置为手动管理，运行应用自启动，关联启动和后台活动，
-            并且关闭省电模式，否则本应用可能会在数分钟内停止运行。
-          </v-expansion-panel-content>
-        </v-expansion-panel>
-        <v-expansion-panel>
-          <v-expansion-panel-header expand-icon="mdi-menu-down">
-            2. 关闭智能省流量或加入流量限制白名单
+          <v-expansion-panel-header class="font-weight-bold" expand-icon="mdi-menu-down">
+            设置应用启动管理，关闭省电模式
           </v-expansion-panel-header>
-          <v-expansion-panel-content class="body-2">由于本应用为后台运行，省流量模式会阻止本应用联网，导致无法获取网络数据。
+          <v-expansion-panel-content class="body-2">
+            在手机管家中设置为手动管理，运行应用自启动，关联启动和后台活动，
+            并且关闭省电模式
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>
-      <p class="blue--text mt-2">开始使用</p>
-      <div class="body-2 indent-2 text-decoration-underline">运行日程表服务后，将手机正面朝下，即可随时通过重力感应打开日程表</div>
-      <div class="body-2 indent-2">
-        你可以轻松编辑每个事件：
-      </div>
-      <v-img height="140" contain src="@/main/assets/cld_guide.jpg"></v-img>
-      <div class="body-2">注：</div>
-      <div class="body-2 indent-2">数据存储于本地，清除缓存后无法恢复。</div>
+
+      <div class="body-2 mt-2">注：</div>
+      <div class="body-2 indent-2">事件数据存储于本地，清除缓存后无法恢复。</div>
       <div class="body-2 indent-2">通知提醒的实际效果（振动，横幅，铃声等）取决于您的通知管理设置。</div>
-      <div class="body-2 indent-2">闹钟提醒仅作为标记，若要生效，请导出至系统闹钟。</div>
+      <div class="body-2 indent-2">闹钟提醒仅作为标记，[ 导出至系统闹钟 ] 会根据此标记自动设置您的闹钟。</div>
     </div>
 
     <!--    <div v-show="selectItem===1">-->
@@ -84,13 +80,18 @@ export default Vue.extend({
 
 <style scoped>
 .expand-arrow {
+  background-color: white;
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   top: 60%;
   left: 0
 }
 
 .indent-2 {
   text-indent: 2em;
+}
+
+p {
+  margin-bottom: 12px;
 }
 </style>

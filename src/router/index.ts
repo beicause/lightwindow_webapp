@@ -53,6 +53,7 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: '/calendar',
+    component: () => import('@/policy/Blank.vue'),
     beforeEnter (to, from, next) {
       if (!Android) {
         window.location.href = 'https://qingcheng.asia/calendar/'
