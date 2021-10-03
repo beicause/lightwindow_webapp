@@ -39,7 +39,9 @@
         <a style="color: #bbb" href="https://beian.miit.gov.cn/">赣ICP备2021005447号</a>
         <div>
           <img src="./assets/gov.png" alt="gov">
-          <a style="color: #bbb" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=36070302360949">赣公网安备36070302360949号</a>
+          <a style="color: #bbb"
+             href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=36070302360949">
+            赣公网安备36070302360949号</a>
         </div>
       </div>
     </div>
@@ -49,7 +51,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import '@/common/css/font.css'
-import { DOWNLOAD_URL, GITHUB_URL } from '@/common/js/const'
+import { GITHUB_URL, INDEX_URL } from '@/common/js/const'
+import { getVersion } from '@/common/js/util'
 
 class Card {
   title: string
@@ -69,6 +72,7 @@ export default Vue.extend({
     return {
       isZoom: false,
       isClose: true,
+      downloadUrl: '',
       windowSize: {
         width: 0,
         height: 0
@@ -93,10 +97,14 @@ export default Vue.extend({
       if (e.data === 'zoom') this.isZoom = !this.isZoom
       if (e.data === 'close') this.isClose = !this.isClose
     })
+    getVersion().then(res => {
+      this.downloadUrl = INDEX_URL + '/lightwindow-v' + res.data.app_version.split('').join('.') + '.apk'
+      console.log(this.downloadUrl)
+    })
   },
   methods: {
     download () {
-      window.open(DOWNLOAD_URL)
+      window.open(this.downloadUrl)
     },
     onResize () {
       this.windowSize = {

@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Android } from '../../common/js/android'
+import { Android } from '@/common/js/android'
 import FeatureItem from '@/main/components/FeatureItem.vue'
 
 export default Vue.extend({

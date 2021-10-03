@@ -2,9 +2,9 @@
   <v-container>
     <v-row no-gutters align="center">
       <v-col cols="3">App版本：</v-col>
-      <v-col>{{ appVersion }}</v-col>
+      <v-col>{{ appVersionName }}</v-col>
       <v-col cols="1">
-        <v-btn @click="update" :disabled="!(version&&version.app_version)" icon color="blue">
+        <v-btn @click="update" :disabled="!Android" icon color="blue">
           <v-icon dense>fal fa-arrow-alt-circle-up</v-icon>
         </v-btn>
       </v-col>
@@ -68,8 +68,8 @@
 </template>
 <script lang="ts">
 import Vue from 'vue'
-import { showPop } from '@/common/js/util'
-import { Android, AppVersionInfo } from '../../common/js/android'
+import { getVersion, showPop } from '@/common/js/util'
+import { Android } from '@/common/js/android'
 import { EMAIL, GIT_URL, INDEX_URL } from '@/common/js/const'
 
 export default Vue.extend({
@@ -80,19 +80,25 @@ export default Vue.extend({
       GIT_URL,
       EMAIL,
       INDEX_URL,
-      version: undefined as AppVersionInfo | undefined
+      localAppVersion: '',
+      appVersion: '',
+      isAppUpdate: false
     }
   },
   mounted () {
     if (Android) {
-      this.version = JSON.parse(Android.checkVersion()) as AppVersionInfo
+      this.localAppVersion = Android.getAppVersion()
     }
+    getVersion().then(res => {
+      this.appVersion = res.data.app_version
+      if (this.appVersion !== this.localAppVersion) this.isAppUpdate = true
+    })
   },
   computed: {
-    appVersion (): string {
-      if (!this.version) return '---'
-      return '窗隙流光' + this.versionCodeToName(this.version.local_app_version) +
-          (this.version.is_app_update ? '（新' + this.versionCodeToName(this.version.app_version) + '）' : '')
+    appVersionName (): string {
+      if (!Android) return '---'
+      return '窗隙流光' + this.versionCodeToName(this.localAppVersion) +
+          (this.isAppUpdate ? '（新' + this.versionCodeToName(this.appVersion) + '）' : '')
     }
   },
   methods: {
@@ -120,7 +126,7 @@ export default Vue.extend({
       }
     },
     update () {
-      if (Android && this.version?.is_app_update) {
+      if (Android && this.isAppUpdate) {
         Android.showVersionUpdate()
       } else {
         showPop('目前已是最新版本', 'success')

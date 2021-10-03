@@ -1,4 +1,4 @@
-import { Android } from '@/common/js/android'
+import { Android } from '@/common/js/types'
 
 declare global {
   interface Window {
