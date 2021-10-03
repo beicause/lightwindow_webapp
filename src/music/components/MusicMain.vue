@@ -74,6 +74,8 @@ export default Vue.extend({
   },
   data () {
     return {
+      FIRST_SCORE_VALUE: 'FIRST_SCORE_VALUE',
+      SECOND_SCORE_VALUE: 'SECOND_SCORE_VALUE',
       // 每拍0.5秒
       BEAT_DURATION: 0.50,
       STEP: 0.0125,
@@ -328,6 +330,10 @@ export default Vue.extend({
     }
   },
   mounted () {
+    const s1 = localStorage.getItem(this.FIRST_SCORE_VALUE)
+    const s2 = localStorage.getItem(this.SECOND_SCORE_VALUE)
+    this.firstScore.inputValue = s1 || ''
+    this.secondScore.inputValue = s2 || ''
     this.audio = new AudioContext()
     SoundFont.instrument(this.audio, './acoustic_grand_piano.js' as InstrumentName)
       .then(player => {
@@ -335,6 +341,16 @@ export default Vue.extend({
       })
     // .catch((err) => console.log(err))
     // console.log('soundfont loaded')
+  },
+  watch: {
+    'firstScore.inputValue' (val: string): void {
+      console.log(val)
+      if (val)localStorage.setItem(this.FIRST_SCORE_VALUE, val)
+    },
+    'secondScore.inputValue' (val: string): void {
+      console.log(val)
+      if (val)localStorage.setItem(this.SECOND_SCORE_VALUE, val)
+    }
   }
 })
 </script>
