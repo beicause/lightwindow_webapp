@@ -35,6 +35,9 @@
           </v-card>
         </v-col>
       </v-row>
+      <div class="mx-4 my-2">
+        遇到问题？请联系：<br/>QQ群：852708330<br/>email：1494181792@qq.com
+      </div>
       <div style="font-size: 12px;" class="d-flex align-center justify-center flex-column">
         <a style="color: #bbb" href="https://beian.miit.gov.cn/">赣ICP备2021005447号</a>
         <div>
@@ -99,7 +102,7 @@ export default Vue.extend({
     })
     getVersion().then(res => {
       this.downloadUrl = INDEX_URL + '/lightwindow-v' + res.data.app_version.split('').join('.') + '.apk'
-      console.log(this.downloadUrl)
+      // console.log(this.downloadUrl)
     })
   },
   methods: {

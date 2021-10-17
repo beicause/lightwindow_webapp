@@ -40,7 +40,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Android } from '@/common/js/android'
+import { Android } from '@/common/js/const'
 
 export default Vue.extend({
   name: 'MainApp',

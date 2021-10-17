@@ -20,8 +20,8 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Android } from '@/common/js/android'
 import MusicMain from '@/music/components/MusicMain.vue'
+import { Android } from '@/common/js/const'
 
 export default Vue.extend({
   name: 'MusicApp',
@@ -34,7 +34,7 @@ export default Vue.extend({
   methods: {
     closeClick () {
       if (Android) Android.close()
-      window.parent.postMessage('close', '*')
+      else window.parent.postMessage('close', '*')
     }
   }
 })

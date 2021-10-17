@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const PrerenderSPAPlugin = require('prerender-spa-plugin')
 const Renderer = PrerenderSPAPlugin.PuppeteerRenderer
-// const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const path = require('path')
 /* eslint-enable @typescript-eslint/no-var-requires */
 

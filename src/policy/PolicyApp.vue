@@ -133,15 +133,14 @@
 </template>
 
 <script lang="ts">
-import { Android } from '@/common/js/android'
 import Vue from 'vue'
-import { POLICY_VERSION } from '@/common/js/const'
+import { Android, POLICY_VERSION } from '@/common/js/const'
 
 export default Vue.extend({
   name: 'PolicyApp',
   data () {
     return {
-      Android
+      Android: Android
     }
   },
   methods: {

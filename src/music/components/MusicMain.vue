@@ -38,11 +38,11 @@
 
         <setting-item
             @down-click="()=>{
-        this.BEAT_DURATION=60/(60/BEAT_DURATION-10)
+        this.beatDuration=60/(60/beatDuration-10)
         this.initMusic()}"
             @up-click="()=>{
-        this.BEAT_DURATION=60/(60/BEAT_DURATION+10)
-        this.initMusic()}">速度：{{ Math.floor(60 / BEAT_DURATION) }}
+        this.beatDuration=60/(60/beatDuration+10)
+        this.initMusic()}">速度：{{ Math.floor(60 / beatDuration) }}
         </setting-item>
       </v-container>
     </setting-picker>
@@ -74,10 +74,11 @@ export default Vue.extend({
   },
   data () {
     return {
-      FIRST_SCORE_VALUE: 'FIRST_SCORE_VALUE',
-      SECOND_SCORE_VALUE: 'SECOND_SCORE_VALUE',
+      FIRST_SCORE: 'FIRST_SCORE',
+      SECOND_SCORE: 'SECOND_SCORE',
+      BEAT_DURATION: 'BEAT_DURATION',
       // 每拍0.5秒
-      BEAT_DURATION: 0.50,
+      beatDuration: 0.50,
       STEP: 0.0125,
       SECTION_BEATS: 4,
       firstScore: {
@@ -118,7 +119,7 @@ export default Vue.extend({
         // (value: string) => !(/[ud#]/.test(value) && !/\d/.test(value[value.length - 1])) || '变音记号后请接音符',
         (value: string) => (/^[0-7\r\n/_~ud#]*$/.test(value) || !value) || '出现非法字符',
         (value: string) => !/_{3,}/.test(value) || '不能小于十六分音符',
-        (value: string) => (!/^[~_]/.test(value) && /([\d~]~|[\d_]_)*/.test(value)) || '增时线和减时线前接数字',
+        (value: string) => (!/^~/.test(value) && /([\d~]~)*/.test(value)) || '增时线前接数字',
         // (value: string) => !/_#*\.*[0-7]?\.*\-/.test(value) || '增时线和减时线不可共用',
         (value: string) => {
           let error = false
@@ -154,7 +155,7 @@ export default Vue.extend({
         if (this.sectionBeat(sections[sections.length - 1]) === this.SECTION_BEATS) value += '/'
         let musicLength = 0
         sections.forEach(s => {
-          musicLength += this.sectionBeat(s) * this.BEAT_DURATION
+          musicLength += this.sectionBeat(s) * this.beatDuration
         })
         this.maxTime = musicLength
         this.sliderValue = 0
@@ -239,7 +240,7 @@ export default Vue.extend({
       const lastSecondNoteIndex = noteIndexReversed[1]
       const lastNote = s[lastNoteIndex]
       let level1 = 0
-      let duration = this.BEAT_DURATION
+      let duration = this.beatDuration
       let isSharpe = 0
 
       // 解析前置符号
@@ -251,7 +252,7 @@ export default Vue.extend({
         if (sign[i] === '_') duration /= 2
       }
       // 解析增时线
-      if (lastChar === '~') duration += (s.length - 1 - lastNoteIndex) * this.BEAT_DURATION
+      if (lastChar === '~') duration += (s.length - 1 - lastNoteIndex) * this.beatDuration
       if (duration > 2) duration = 2
 
       if (lastChar === '0') {
@@ -286,7 +287,7 @@ export default Vue.extend({
       if (s[0] !== '/') s = '/' + s
       if (s[s.length - 1] !== '/') s += '/'
       const sections = s.substring(1, s.length - 1)
-        .replaceAll(/[^0-7\r\n/_~ud#]/g, '')
+        .replaceAll(/[^0-7/_~ud#]/g, '')
         .split('/')
       for (let i = 0; i < sections.length; i++) {
         const beats = this.sectionBeat(sections[i])
@@ -306,7 +307,7 @@ export default Vue.extend({
           sections[i] = this.formatSection(sections[i])
         }
       }
-      return '/' + sections.join('/') + '/'
+      return sections.join('/')
     },
     onCopied (isSuccess: boolean) {
       if (isSuccess) {
@@ -330,10 +331,21 @@ export default Vue.extend({
     }
   },
   mounted () {
-    const s1 = localStorage.getItem(this.FIRST_SCORE_VALUE)
-    const s2 = localStorage.getItem(this.SECOND_SCORE_VALUE)
-    this.firstScore.inputValue = s1 || ''
-    this.secondScore.inputValue = s2 || ''
+    const duration = Number.parseFloat(localStorage.getItem(this.BEAT_DURATION) || '0.50')
+    const s1 = localStorage.getItem(this.FIRST_SCORE)
+    const s2 = localStorage.getItem(this.SECOND_SCORE)
+    if (duration) this.beatDuration = duration
+    this.firstScore = (s1 ? JSON.parse(s1) : {
+      inputValue: '',
+      level: 1,
+      gain: 5
+    }) as ScoreInfo
+    this.secondScore = (s2 ? JSON.parse(s2) : {
+      inputValue: '',
+      level: -1,
+      gain: 5
+    }) as ScoreInfo
+    // console.log(this.firstScore, this.secondScore)
     this.audio = new AudioContext()
     SoundFont.instrument(this.audio, './acoustic_grand_piano.js' as InstrumentName)
       .then(player => {
@@ -342,14 +354,27 @@ export default Vue.extend({
     // .catch((err) => console.log(err))
     // console.log('soundfont loaded')
   },
+  beforeDestroy () {
+    this.player.stop()
+    this.audio.close()
+  },
   watch: {
-    'firstScore.inputValue' (val: string): void {
-      console.log(val)
-      if (val)localStorage.setItem(this.FIRST_SCORE_VALUE, val)
+    beatDuration (val: number) {
+      localStorage.setItem(this.BEAT_DURATION, '' + val)
     },
-    'secondScore.inputValue' (val: string): void {
-      console.log(val)
-      if (val)localStorage.setItem(this.SECOND_SCORE_VALUE, val)
+    firstScore: {
+      deep: true,
+      handler (val: ScoreInfo) {
+        // console.log(val)
+        localStorage.setItem(this.FIRST_SCORE, JSON.stringify(val))
+      }
+    },
+    secondScore: {
+      deep: true,
+      handler (val: ScoreInfo) {
+        // console.log(val)
+        localStorage.setItem(this.SECOND_SCORE, JSON.stringify(val))
+      }
     }
   }
 })

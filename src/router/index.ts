@@ -1,14 +1,18 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
-import { Android } from '@/common/js/android'
-import { POLICY_VERSION } from '@/common/js/const'
+import { Android, POLICY_VERSION } from '@/common/js/const'
+import { sendPV } from '@/common/js/util'
 
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
   {
     path: '/',
-    component: () => import('@/index/IndexApp.vue')
+    component: () => import('@/index/IndexApp.vue'),
+    beforeEnter (to, from, next) {
+      sendPV({ to: '/' })
+      next()
+    }
   },
   {
     path: '/policy',
@@ -19,10 +23,16 @@ const routes: Array<RouteConfig> = [
     component: () => import('@/main/MainApp.vue'),
     beforeEnter (to, from, next) {
       if (!Android) {
+        sendPV({
+          to: 'main',
+          isAndroid: 'false'
+        })
         next()
       } else if (Android.getPolicy() !== POLICY_VERSION) {
+        sendPV({ to: 'policy' })
         next('/policy')
       } else {
+        sendPV({ to: 'main' })
         next()
       }
     },
@@ -53,13 +63,18 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: '/calendar',
-    component: () => import('@/policy/Blank.vue'),
     beforeEnter (to, from, next) {
       if (!Android) {
+        sendPV({
+          to: 'calendar',
+          isAndroid: 'false'
+        })
         window.location.href = 'https://qingcheng.asia/calendar/'
       } else if (Android.getPolicy() !== POLICY_VERSION) {
+        sendPV({ to: 'policy' })
         next('/policy')
       } else {
+        sendPV({ to: 'calendar' })
         window.location.href = 'https://qingcheng.asia/calendar/'
       }
     }

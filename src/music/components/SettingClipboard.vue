@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Android } from '@/common/js/android'
+import { Android } from '@/common/js/const'
 
 export default Vue.extend({
   name: 'SettingClipboard',
@@ -16,9 +16,6 @@ export default Vue.extend({
       type: String,
       default: ''
     }
-  },
-  data () {
-    return {}
   },
   methods: {
     copy () {

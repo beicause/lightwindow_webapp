@@ -14,6 +14,18 @@ function closePop (): void {
   vm.$emit('close-pop')
 }
 
+function sendPV (args: Record<string, string>):void {
+  if (window.aplus_queue) {
+    window.aplus_queue.push({
+      action: 'aplus.sendPV',
+      arguments: [
+        { is_auto: false },
+        args
+      ]
+    })
+  }
+}
+
 async function getVersion (): Promise<AxiosResponse<{
   /* eslint-disable  camelcase */
   web_version: string,
@@ -25,4 +37,4 @@ async function getVersion (): Promise<AxiosResponse<{
   return await axios.get('https://874be9c6-69bb-473d-9ba3-8afc02442e35.bspapp.com/http/version')
 }
 
-export { showPop, closePop, getVersion }
+export { showPop, closePop, getVersion, sendPV }

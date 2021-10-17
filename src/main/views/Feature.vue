@@ -9,8 +9,8 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Android } from '@/common/js/android'
 import FeatureItem from '@/main/components/FeatureItem.vue'
+import { Android } from '@/common/js/const'
 
 export default Vue.extend({
   name: 'feature',
@@ -31,7 +31,7 @@ export default Vue.extend({
       if (Android) {
         if (this.isNoticeRunning) {
           Android.startNoticeService()
-          // Android.redirectToCalendar()
+          // Const.redirectToCalendar()
         } else {
           Android.stopNoticeService()
         }

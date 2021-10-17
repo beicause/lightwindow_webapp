@@ -69,8 +69,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { getVersion, showPop } from '@/common/js/util'
-import { Android } from '@/common/js/android'
-import { EMAIL, GIT_URL, INDEX_URL } from '@/common/js/const'
+import { Android, EMAIL, GIT_URL, INDEX_URL } from '@/common/js/const'
 
 export default Vue.extend({
   name: 'About',
