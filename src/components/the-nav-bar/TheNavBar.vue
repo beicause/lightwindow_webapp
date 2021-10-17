@@ -9,7 +9,7 @@
         <text>日程表</text>
       </view>
 
-      <text @click="()=>{if(Android)Android.close()}" class="fal fa-times-circle"
+      <text @click="closeClick" class="fal fa-times-circle"
             style="color: #2196F3;font-size: 20px;position: absolute;right: 16px"></text>
     </view>
     <uni-segmented-control class="segmented" :current="current" :values="['日','周','月']" styleType="button"
@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import {Android} from "@/common/android";
+import { Android } from '@/common/android'
 
 /**
  * *页面直接组件-顶部导航栏
@@ -39,6 +39,10 @@ export default Vue.extend({
     }
   },
   methods: {
+    closeClick(){
+      if (Android)Android.close()
+      else window.parent.postMessage('close','*')
+    },
     toMain() {
       if (Android) {
         Android.redirectToMain()

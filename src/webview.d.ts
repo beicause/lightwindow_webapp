@@ -1,4 +1,4 @@
-import {Android} from "@/common/android";
+import { Android } from '@/common/data'
 
 declare global {
     interface Window {

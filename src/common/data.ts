@@ -1,5 +1,19 @@
-export const VERSION='101'
+export const VERSION='102'
 
+export interface Android {
+    setSystemAlarm: () => void,
+    addEvents: (events: string) => void,
+    removeEvents: (events: string) => void,
+    getEvents: () => string,
+    close: () => void,
+    showZoom: () => void,
+    requestCsustEvents: (username: string, password: string) => string,
+    requestGnnuEvents: (username: string, password: string) => string,
+    redirectToMain: () => void,
+    redirectToCalendar: () => void,
+    setEnableSensor: (value: string) => void,
+    getEnableSensor: () => string
+}
 interface Event {
     title: string,
     detail: string,

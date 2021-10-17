@@ -1,23 +1,10 @@
-import {Event} from "@/common/data";
-import {compareEvents} from "@/common/util";
+import { Event } from '@/common/data'
+import { compareEvents } from '@/common/util'
 
 /**
  * 由Android webview提供
  * */
-export interface Android {
-    setSystemAlarm: () => void,
-    addEvents: (events: string) => void,
-    removeEvents: (events: string) => void,
-    getEvents: () => string,
-    close: () => void,
-    showZoom: () => void,
-    requestCsustEvents: (username: string, password: string) => string,
-    requestGnnuEvents: (username: string, password: string) => string,
-    redirectToMain: () => void,
-    redirectToCalendar: () => void,
-    setEnableSensor: (value: string) => void,
-    getEnableSensor: () => string
-}
+
 export const Android=window.Android
 
 function androidAddEvents(events: Event[]) {
