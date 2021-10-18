@@ -4,9 +4,27 @@
   "version": "1.0.0",
   "license": "Apache-2.0",
   "scripts": {
+    "preinstall": "cd packages/lightwindow_calendar & yarn install",
     "build": "node scripts/build.js",
-    "postbuild": "node scripts/postBuild.js"
+    "postbuild": "node scripts/postBuild.js",
+    "serve:main": "cd packages/lightwindow_main & yarn run serve",
+    "serve:calendar": "cd packages/lightwindow_calendar & yarn run serve",
+    "build:main": "cd packages/lightwindow_main & yarn run build",
+    "build:calendar": "cd packages/lightwindow_calendar & yarn run build"
   },
+  "workspaces": [
+    "packages/!(lightwindow_calendar)"
+  ],
+  "private": true,
+  "description": "详情见主项目https://github.com/beicause/lightwindow",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beicause/lightwindow_webapp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/beicause/lightwindow_webapp/issues"
+  },
+  "homepage": "https://github.com/beicause/lightwindow_webapp#readme",
   "devDependencies": {
     "chalk": "^4.1.2"
   }
