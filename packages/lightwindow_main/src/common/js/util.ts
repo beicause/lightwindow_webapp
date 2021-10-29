@@ -1,20 +1,33 @@
-import { vm } from '@/main'
+import CompositionApi, { reactive } from '@vue/composition-api'
 import axios, { AxiosResponse } from 'axios'
+import Vue from 'vue'
+Vue.use(CompositionApi)
 
+export const popState = reactive({
+  showPop: false,
+  text: '',
+  type: 'info' as 'info' | 'error' | 'success' | 'warning',
+  duration: 800,
+  timerId: NaN
+})
 function showPop (text: string, type: 'info' | 'error' | 'success' | 'warning' = 'info', duration = 800): void {
   closePop()
-  vm.$emit('show-pop', {
-    text,
-    type,
-    duration
-  })
+  popState.duration = duration
+  popState.text = text
+  popState.type = type
+  popState.showPop = true
+  popState.timerId = setTimeout(() => closePop(), duration) as unknown as number
 }
 
 function closePop (): void {
-  vm.$emit('close-pop')
+  clearTimeout(popState.timerId)
+  popState.showPop = false
+  popState.text = ''
+  popState.duration = 800
+  popState.type = 'info'
 }
 
-function sendPV (args: Record<string, string>):void {
+function sendPV (args: Record<string, string>): void {
   if (window.aplus_queue) {
     window.aplus_queue.push({
       action: 'aplus.sendPV',

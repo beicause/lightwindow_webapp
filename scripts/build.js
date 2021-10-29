@@ -6,16 +6,16 @@ const {
 } = require('./util')
 
 console.log(chalk.blue('build main...'))
-childProcess.exec('yarn build', { cwd: main }, (err, stdout, stderr) => {
-  console.error(err)
+childProcess.exec('pnpm run build', { cwd: main }, (err, stdout, stderr) => {
+  err && console.error(err)
   console.log(stdout)
-  console.error(stderr)
-  console.log(chalk.green('main build completely!\n'))
+  stderr && console.error(stderr)
+  console.log(chalk.green('main built completely!\n'))
 })
 console.log(chalk.blue('build calendar...'))
-childProcess.exec('yarn build', { cwd: calendar }, (err, stdout, stderr) => {
-  console.error(err)
+childProcess.exec('pnpm run build', { cwd: calendar }, (err, stdout, stderr) => {
+  err && console.error(err)
   console.log(stdout)
-  console.error(stderr)
-  console.log(chalk.green('calendar build completely!\n'))
+  stderr && console.error(stderr)
+  console.log(chalk.green('calendar built completely!\n'))
 })

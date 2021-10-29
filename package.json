@@ -4,17 +4,13 @@
   "version": "1.0.0",
   "license": "Apache-2.0",
   "scripts": {
-    "preinstall": "cd packages/lightwindow_calendar & yarn install",
-    "build": "node scripts/build.js",
-    "postbuild": "node scripts/postBuild.js",
-    "serve:main": "cd packages/lightwindow_main & yarn run serve",
-    "serve:calendar": "cd packages/lightwindow_calendar & yarn run serve",
-    "build:main": "cd packages/lightwindow_main & yarn run build",
-    "build:calendar": "cd packages/lightwindow_calendar & yarn run build"
+    "preinstall": "node scripts/preinstall.js",
+    "build": "node scripts/build.js && node scripts/postBuild.js",
+    "serve:main": "cd packages/lightwindow_main && pnpm run serve",
+    "serve:calendar": "cd packages/lightwindow_calendar && pnpm run serve",
+    "build:main": "cd packages/lightwindow_main && pnpm run build",
+    "build:calendar": "cd packages/lightwindow_calendar && pnpm run build"
   },
-  "workspaces": [
-    "packages/!(lightwindow_calendar)"
-  ],
   "private": true,
   "description": "详情见主项目https://github.com/beicause/lightwindow",
   "repository": {
@@ -25,7 +21,18 @@
     "url": "https://github.com/beicause/lightwindow_webapp/issues"
   },
   "homepage": "https://github.com/beicause/lightwindow_webapp#readme",
+  "packageManager": "pnpm",
   "devDependencies": {
-    "chalk": "^4.1.2"
+    "@types/jest": "^24.0.19",
+    "@vue/test-utils": "^1.2.2",
+    "babel-core": "^6.26.3",
+    "chalk": "^4.1.2",
+    "jest": "^27.3.1",
+    "ts-jest": "^27.0.7",
+    "ts-node": "^10.4.0",
+    "tslib": "^2.3.1",
+    "vue": "^2.6.11",
+    "vue-jest": "^3.0.7",
+    "vue-template-compiler": "^2.6.11"
   }
 }

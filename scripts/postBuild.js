@@ -19,4 +19,4 @@ if (fs.existsSync(outDir)) deleteDir(outDir)
 
 copyDir(mainBuild, outDir)
 copyDir(calendarBuild, path.resolve(outDir, 'calendar'))
-console.log(chalk.green('output successfully!'))
+console.log(chalk.green('output compeletely!'))

@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-icon v-show="!drawer" class="expand-arrow" color="blue"
-            @click="()=>{this.drawer=true}">fal fa-chevron-circle-right
+            @click="()=>{drawer=true}">fal fa-chevron-circle-right
     </v-icon>
     <v-navigation-drawer temporary fixed style="top: 65px" mini-variant v-model="drawer">
       <v-list dense>
@@ -21,7 +21,7 @@
 
     <div v-show="selectItem===0">
       <p class="blue--text mt-2">编辑事件</p>
-      <v-img height="100" contain src="@/main/assets/calendar_guide.svg"></v-img>
+      <v-img height="100" contain src="/images/calendar_guide.svg"></v-img>
 
       <p class="blue--text mt-2">重力打开</p>
       <div class="body-2 indent-2 ">开启重力感应后，运行日程表服务时，将手机正面朝下后快速朝上，即可随时打开日程表</div>

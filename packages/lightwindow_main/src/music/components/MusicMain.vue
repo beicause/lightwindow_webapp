@@ -2,10 +2,10 @@
   <v-container>
     <v-textarea auto-grow :value="firstScore.inputValue" :label="levelName.get(firstScore.level)" :rules="rules"
                 @input="e=>onInput(firstScore)(e)" append-icon="fal fa-cog"
-                @click:append="()=>{this.blur();this.activeSettingPicker=0;$refs.picker.open()}"></v-textarea>
+                @click:append="()=>{blur();activeSettingPicker=0;$refs.picker.open()}"></v-textarea>
     <v-textarea style="padding: 0" auto-grow :value="secondScore.inputValue" :label="levelName.get(secondScore.level)"
                 :rules="rules" append-icon="fal fa-cog"
-                @click:append="()=>{this.blur();this.activeSettingPicker=1;$refs.picker.open()}"
+                @click:append="()=>{blur();activeSettingPicker=1;$refs.picker.open()}"
                 @input="e=>onInput(secondScore)(e)"></v-textarea>
     <v-slider dense :step="STEP" @change="sliderChange" :max="maxTime" :value="musicTime"
               :append-icon="isPlaying ? 'fal fa-pause' : 'fal fa-play'" @click:append="onPlay"></v-slider>
@@ -17,32 +17,32 @@
       <v-container>
         <setting-item
             @down-click="()=>{
-            this.activeSettingScore.level--
-            if (this.activeSettingScore.level===-2)this.activeSettingScore.level=1
-        this.initMusic()}"
+            activeSettingScore.level--
+            if (activeSettingScore.level===-2)activeSettingScore.level=1
+        initMusic()}"
             @up-click="()=>{
-          this.activeSettingScore.level++
-          if (this.activeSettingScore.level===2)this.activeSettingScore.level=-1
-          this.initMusic()}">
+          activeSettingScore.level++
+          if (activeSettingScore.level===2)activeSettingScore.level=-1
+          initMusic()}">
           音调：1={{ activeSettingScore.level === 0 ? 'c1' : (activeSettingScore.level === 1 ? 'c2' : 'c') }}
         </setting-item>
 
         <setting-item
             @down-click="()=>{
-        this.activeSettingScore.gain--
-        this.initMusic()}"
+        activeSettingScore.gain--
+        initMusic()}"
             @up-click="()=>{
-          this.activeSettingScore.gain++
-          this.initMusic()}">音量：{{ activeSettingScore.gain }}
+          activeSettingScore.gain++
+          initMusic()}">音量：{{ activeSettingScore.gain }}
         </setting-item>
 
         <setting-item
             @down-click="()=>{
-        this.beatDuration=60/(60/beatDuration-10)
-        this.initMusic()}"
+        beatDuration=60/(60/beatDuration-10)
+        initMusic()}"
             @up-click="()=>{
-        this.beatDuration=60/(60/beatDuration+10)
-        this.initMusic()}">速度：{{ Math.floor(60 / beatDuration) }}
+        beatDuration=60/(60/beatDuration+10)
+        initMusic()}">速度：{{ Math.floor(60 / beatDuration) }}
         </setting-item>
       </v-container>
     </setting-picker>
@@ -57,12 +57,7 @@ import SettingItem from '@/music/components/SettingItem.vue'
 import SettingPicker from '@/music/components/SettingPicker.vue'
 import SettingClipboard from '@/music/components/SettingClipboard.vue'
 import { showPop } from '@/common/js/util'
-
-interface ScoreInfo {
-  inputValue: string
-  level: 0 | 1 | -1,
-  gain: number
-}
+import { FIRST_SCORE, SECOND_SCORE, BEAT_DURATION, SECTION_BEATS, formatScore, sectionBeat, ScoreInfo } from './musicUtil'
 
 export default Vue.extend({
   name: 'MusicMain',
@@ -74,13 +69,13 @@ export default Vue.extend({
   },
   data () {
     return {
-      FIRST_SCORE: 'FIRST_SCORE',
-      SECOND_SCORE: 'SECOND_SCORE',
-      BEAT_DURATION: 'BEAT_DURATION',
+      FIRST_SCORE,
+      SECOND_SCORE,
+      BEAT_DURATION,
+      SECTION_BEATS,
       // 每拍0.5秒
       beatDuration: 0.50,
       STEP: 0.0125,
-      SECTION_BEATS: 4,
       firstScore: {
         inputValue: '',
         level: 1,
@@ -165,8 +160,8 @@ export default Vue.extend({
     },
 
     onPlay () {
-      this.firstScore.inputValue = this.formatSection(this.firstScore.inputValue)
-      this.secondScore.inputValue = this.formatSection(this.secondScore.inputValue)
+      this.firstScore.inputValue = this.formatScore(this.firstScore.inputValue)
+      this.secondScore.inputValue = this.formatScore(this.secondScore.inputValue)
       if (this.isPlaying) {
         this.player.stop()
         this.isPlaying = false
@@ -267,48 +262,6 @@ export default Vue.extend({
         duration
       }
     },
-    sectionBeat (r: string): number {
-      let num = 0
-      let isReduce = 0
-      for (let i = 0; i < r.length; i++) {
-        if (r[i] === '_') {
-          isReduce++
-        } else if (isReduce > 0) {
-          num -= 1 - 1 / Math.pow(2, isReduce)
-          isReduce = 0
-        }
-        if (r[i] === '~') num++
-        if (/\d/.test(r[i])) num++
-      }
-      return num
-    },
-    formatSection (s: string): string {
-      if (!s) return ''
-      if (s[0] !== '/') s = '/' + s
-      if (s[s.length - 1] !== '/') s += '/'
-      const sections = s.substring(1, s.length - 1)
-        .replaceAll(/[^0-7/_~ud#]/g, '')
-        .split('/')
-      for (let i = 0; i < sections.length; i++) {
-        const beats = this.sectionBeat(sections[i])
-        if (beats === this.SECTION_BEATS) continue
-        if (beats < this.SECTION_BEATS) {
-          sections[i] += '0'
-          i--
-        }
-        if (beats > this.SECTION_BEATS) {
-          for (let j = 1; j <= sections[i].length; j++) {
-            const mutableStr = sections[i].substring(0, j)
-            if (this.sectionBeat(mutableStr) === this.SECTION_BEATS) {
-              sections[i] = mutableStr + '/' + sections[i].substring(j)
-              break
-            }
-          }
-          sections[i] = this.formatSection(sections[i])
-        }
-      }
-      return sections.join('/')
-    },
     onCopied (isSuccess: boolean) {
       if (isSuccess) {
         showPop('内容复制成功', 'success')
@@ -328,7 +281,9 @@ export default Vue.extend({
       for (const element of document.getElementsByTagName('textarea')) {
         element.blur()
       }
-    }
+    },
+    sectionBeat,
+    formatScore
   },
   mounted () {
     const duration = Number.parseFloat(localStorage.getItem(this.BEAT_DURATION) || '0.50')

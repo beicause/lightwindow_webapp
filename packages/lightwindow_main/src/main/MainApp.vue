@@ -7,7 +7,7 @@
           mdi mdi-arrow-top-left-bottom-right border
         </v-icon>
         <div style="margin: 0 auto;display: flex;justify-content: center;align-items: center">
-          <img height="20" width="20" src="../../public/logo.svg" alt="logo"/>
+          <img height="20" width="20" src="/images/logo.svg" alt="logo"/>
           <span class="blue--text" style="font-family: source-han, Roboto, sans-serif !important;">窗隙流光</span>
         </div>
         <v-icon id="icon-close" dense @click="closeClick" color="blue">

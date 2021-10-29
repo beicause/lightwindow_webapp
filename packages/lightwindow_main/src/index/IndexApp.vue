@@ -1,7 +1,7 @@
 <template>
   <div class="pa-3" v-resize="onResize">
     <div class="d-flex justify-space-between align-center">
-      <div class="flex-center"><img :height="isMobile?32:48" :width="isMobile?32:48" src="../../public/logo.svg"
+      <div class="flex-center"><img :height="isMobile?32:48" :width="isMobile?32:48" src="/images/logo.svg"
                                     alt="logo">
         <span style="font-family: source-han, Roboto, sans-serif !important;"
               class=" blue--text text-sm-h4 text-h5">窗隙流光</span>
@@ -11,13 +11,13 @@
 
     <div style="text-align: center;vertical-align: middle">新颖·创意·简洁<br/>轻量快捷的悬浮窗应用</div>
     <img v-if="isClose" @click="isClose=false" class="anim-logo absolute-center" height="60" width="60"
-         src="../../public/logo.svg"
+         src="/images/logo.svg"
          alt="logo">
     <iframe class="iframe-mobile absolute-center" src="../main" :class="{'iframe-hide':isClose}"
             :style="isZoom?{position:'fixed',border: 'none',height:windowSize.height+'px',width:windowSize.width+'px'}:{border: '#2196f3 1px solid'}"></iframe>
     <div style="position: absolute;top: 85%;left: 0;right: 0">
       <div :style="{height: windowSize.height*0.15+'px'}" class="d-flex justify-center mt-2">
-        <v-btn @click="download" style="text-transform: none;" :x-large="!isMobile" color="blue" outlined>
+        <v-btn :disabled="!downloadUrl" @click="download" style="text-transform: none;" :x-large="!isMobile" color="blue" outlined>
           <v-icon>mdi-android</v-icon>
           Android下载
         </v-btn>
@@ -41,7 +41,7 @@
       <div style="font-size: 12px;" class="d-flex align-center justify-center flex-column">
         <a style="color: #bbb" href="https://beian.miit.gov.cn/">赣ICP备2021005447号</a>
         <div>
-          <img src="./assets/gov.png" alt="gov">
+          <img src="/images/gov.png" alt="gov">
           <a style="color: #bbb"
              href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=36070302360949">
             赣公网安备36070302360949号</a>
@@ -102,7 +102,7 @@ export default Vue.extend({
     })
     getVersion().then(res => {
       this.downloadUrl = INDEX_URL + '/lightwindow-v' + res.data.app_version.split('').join('.') + '.apk'
-      // console.log(this.downloadUrl)
+      console.log(this.downloadUrl)
     })
   },
   methods: {
