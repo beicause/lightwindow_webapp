@@ -4,9 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vite serve",
-    "build": "vite build",
-    "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "build": "vite build"
   },
   "dependencies": {
     "@vue/composition-api": "^1.2.4",
@@ -38,6 +36,8 @@
     "unplugin-vue2-script-setup": "^0.6.12",
     "vite": "^2.6.13",
     "vite-plugin-vue2": "^1.9.0",
-    "vue-template-compiler": "^2.6.11"
+    "vite-plugin-windicss": "^1.4.12",
+    "vue-template-compiler": "^2.6.11",
+    "windicss": "^3.2.0"
   }
 }

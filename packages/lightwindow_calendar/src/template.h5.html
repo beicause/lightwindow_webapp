@@ -11,13 +11,12 @@
         <%= htmlWebpackPlugin.options.title %>
     </title>
     <script type="module">
-      import { INDEX_URL, POLICY_VERSION, VERSION } from '/const.js'
 
       window['getVersion'] = () => VERSION
         console.log(getVersion())
         const Android = window.Android
         if (Android && Android.getPolicy() !== POLICY_VERSION) {
-            window.location.href = INDEX_URL + '/policy'
+            window.location.href = window.location.protocol+'//'+window.location.host + '/policy'
         }
     </script>
     <!-- 正式发布的时候使用，开发期间不启用。↓ -->

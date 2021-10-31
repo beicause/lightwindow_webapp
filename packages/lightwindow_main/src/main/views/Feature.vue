@@ -10,7 +10,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import FeatureItem from '@/main/components/FeatureItem.vue'
-import { Android } from '@/common/js/const'
+import { Android, INDEX_URL } from '@/common/js/const'
 
 export default Vue.extend({
   name: 'feature',
@@ -18,7 +18,6 @@ export default Vue.extend({
   data () {
     return {
       isNoticeRunning: false,
-      // isPetRunning: false,
       Android
     }
   },
@@ -41,7 +40,7 @@ export default Vue.extend({
       if (Android) {
         Android.redirectToCalendar()
       } else {
-        window.location.href = 'https://qingcheng.asia/calendar/'
+        window.location.href = INDEX_URL + '/calendar/'
       }
     }
   }

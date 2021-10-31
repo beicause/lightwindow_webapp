@@ -50,4 +50,29 @@ async function getVersion (): Promise<AxiosResponse<{
   return await axios.get('https://874be9c6-69bb-473d-9ba3-8afc02442e35.bspapp.com/http/version')
 }
 
-export { showPop, closePop, getVersion, sendPV }
+function isMobile ():boolean {
+  const agents = navigator.userAgent
+  let f = false;
+  ['Android', 'iPhone', 'iPad', 'iPod', 'Windows Phone', 'SymbianOS'].forEach(e => {
+    if (agents.indexOf(e) > 0)f = true
+  })
+  return f
+}
+export { showPop, closePop, getVersion, sendPV, isMobile }
+
+export function disableScroll () {
+  const body = document.body
+  const html = document.documentElement
+  html.style.maxHeight = '90vh'
+  body.style.maxHeight = '90vh'
+  html.style.overflow = 'hidden'
+  body.style.overflow = 'hidden'
+}
+export function resumeScroll () {
+  const body = document.body
+  const html = document.documentElement
+  html.style.maxHeight = ''
+  html.style.overflow = ''
+  body.style.maxHeight = ''
+  body.style.overflow = ''
+}

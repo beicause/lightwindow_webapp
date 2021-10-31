@@ -1,49 +1,76 @@
 <template>
   <v-container>
-    <v-textarea auto-grow :value="firstScore.inputValue" :label="levelName.get(firstScore.level)" :rules="rules"
-                @input="e=>onInput(firstScore)(e)" append-icon="fal fa-cog"
-                @click:append="()=>{blur();activeSettingPicker=0;$refs.picker.open()}"></v-textarea>
-    <v-textarea style="padding: 0" auto-grow :value="secondScore.inputValue" :label="levelName.get(secondScore.level)"
-                :rules="rules" append-icon="fal fa-cog"
-                @click:append="()=>{blur();activeSettingPicker=1;$refs.picker.open()}"
-                @input="e=>onInput(secondScore)(e)"></v-textarea>
-    <v-slider dense :step="STEP" @change="sliderChange" :max="maxTime" :value="musicTime"
-              :append-icon="isPlaying ? 'fal fa-pause' : 'fal fa-play'" @click:append="onPlay"></v-slider>
+    <v-textarea
+      auto-grow
+      :value="firstScore.inputValue"
+      :label="levelName.get(firstScore.level)"
+      :rules="rules"
+      @input="e => onInput(firstScore)(e)"
+      append-icon="fal fa-cog"
+      @click:append="() => { blur(); activeSettingPicker = 0; $refs.picker.open() }"
+    ></v-textarea>
+    <v-textarea
+      style="padding: 0"
+      auto-grow
+      :value="secondScore.inputValue"
+      :label="levelName.get(secondScore.level)"
+      :rules="rules"
+      append-icon="fal fa-cog"
+      @click:append="() => { blur(); activeSettingPicker = 1; $refs.picker.open() }"
+      @input="e => onInput(secondScore)(e)"
+    ></v-textarea>
+    <v-slider
+      dense
+      :step="STEP"
+      @change="sliderChange"
+      :max="maxTime"
+      :value="musicTime"
+      :append-icon="isPlaying ? 'fal fa-pause' : 'fal fa-play'"
+      @click:append="onPlay"
+    ></v-slider>
 
     <music-guide class="pt-0"></music-guide>
     <setting-picker ref="picker">
-      <setting-clipboard @copied="onCopied" @pasted="onPasted"
-                         :copy-value="activeSettingScore.inputValue"></setting-clipboard>
+      <setting-clipboard
+        @copied="onCopied"
+        @pasted="onPasted"
+        :copy-value="activeSettingScore.inputValue"
+      ></setting-clipboard>
       <v-container>
         <setting-item
-            @down-click="()=>{
+          @down-click="() => {
             activeSettingScore.level--
-            if (activeSettingScore.level===-2)activeSettingScore.level=1
-        initMusic()}"
-            @up-click="()=>{
-          activeSettingScore.level++
-          if (activeSettingScore.level===2)activeSettingScore.level=-1
-          initMusic()}">
-          音调：1={{ activeSettingScore.level === 0 ? 'c1' : (activeSettingScore.level === 1 ? 'c2' : 'c') }}
-        </setting-item>
+            if (activeSettingScore.level === -2) activeSettingScore.level = 1
+            initMusic()
+          }"
+          @up-click="() => {
+            activeSettingScore.level++
+            if (activeSettingScore.level === 2) activeSettingScore.level = -1
+            initMusic()
+          }"
+        >音调：1={{ activeSettingScore.level === 0 ? 'c1' : (activeSettingScore.level === 1 ? 'c2' : 'c') }}</setting-item>
 
         <setting-item
-            @down-click="()=>{
-        activeSettingScore.gain--
-        initMusic()}"
-            @up-click="()=>{
-          activeSettingScore.gain++
-          initMusic()}">音量：{{ activeSettingScore.gain }}
-        </setting-item>
+          @down-click="() => {
+            activeSettingScore.gain--
+            initMusic()
+          }"
+          @up-click="() => {
+            activeSettingScore.gain++
+            initMusic()
+          }"
+        >音量：{{ activeSettingScore.gain }}</setting-item>
 
         <setting-item
-            @down-click="()=>{
-        beatDuration=60/(60/beatDuration-10)
-        initMusic()}"
-            @up-click="()=>{
-        beatDuration=60/(60/beatDuration+10)
-        initMusic()}">速度：{{ Math.floor(60 / beatDuration) }}
-        </setting-item>
+          @down-click="() => {
+            beatDuration = 60 / (60 / beatDuration - 10)
+            initMusic()
+          }"
+          @up-click="() => {
+            beatDuration = 60 / (60 / beatDuration + 10)
+            initMusic()
+          }"
+        >速度：{{ Math.floor(60 / beatDuration) }}</setting-item>
       </v-container>
     </setting-picker>
   </v-container>
@@ -52,21 +79,21 @@
 <script lang="ts">
 import Vue from 'vue'
 import MusicGuide from '@/music/components/MusicGuide.vue'
-import SoundFont, { InstrumentName } from 'soundfont-player'
 import SettingItem from '@/music/components/SettingItem.vue'
 import SettingPicker from '@/music/components/SettingPicker.vue'
 import SettingClipboard from '@/music/components/SettingClipboard.vue'
 import { showPop } from '@/common/js/util'
-import { FIRST_SCORE, SECOND_SCORE, BEAT_DURATION, SECTION_BEATS, formatScore, sectionBeat, ScoreInfo } from './musicUtil'
+import { FIRST_SCORE, SECOND_SCORE, BEAT_DURATION, SECTION_BEATS, formatScore, sectionBeat, ScoreInfo } from './scoreUtil'
 
 export default Vue.extend({
-  name: 'MusicMain',
+  name: 'MusicScore',
   components: {
     SettingClipboard,
     SettingPicker,
     SettingItem,
     MusicGuide
   },
+  inject: ['player'],
   data () {
     return {
       FIRST_SCORE,
@@ -86,8 +113,6 @@ export default Vue.extend({
         level: -1,
         gain: 5
       } as ScoreInfo,
-      player: {} as SoundFont.Player,
-      audio: {} as AudioContext,
       musicTime: 0,
       sliderValue: 0,
       maxTime: 0,
@@ -135,12 +160,12 @@ export default Vue.extend({
     onInput (score: ScoreInfo) {
       return (value: string) => {
         this.isPlaying = false
-        this.player.stop()
+        this.player.value.stop()
         // 如果长度增加
         if (value.length > score.inputValue.length) {
           const info = this.lastNoteInfo(value, score.level)
           if (info) {
-            this.player.play(info.note, 0, {
+            this.player.value.play(info.note, 0, {
               duration: info.duration,
               gain: score.gain
             })
@@ -163,7 +188,7 @@ export default Vue.extend({
       this.firstScore.inputValue = this.formatScore(this.firstScore.inputValue)
       this.secondScore.inputValue = this.formatScore(this.secondScore.inputValue)
       if (this.isPlaying) {
-        this.player.stop()
+        this.player.value.stop()
         this.isPlaying = false
         return
       }
@@ -201,9 +226,9 @@ export default Vue.extend({
       const schedule = [...getSchedule(this.firstScore), ...getSchedule(this.secondScore)]
       if (schedule.length === 0) return
       // console.log(schedule)
-      this.player.schedule(0, schedule)
+      this.player.value.schedule(0, schedule)
       this.isPlaying = true
-
+      // webview does not support high frame rate animation
       const step = 0.1
       const timerId = setInterval(() => {
         if (!this.isPlaying) clearInterval(timerId)
@@ -218,7 +243,7 @@ export default Vue.extend({
     },
 
     sliderChange (value: number) {
-      this.player.stop()
+      this.player.value.stop()
       this.isPlaying = false
       this.musicTime = value
     },
@@ -300,18 +325,6 @@ export default Vue.extend({
       level: -1,
       gain: 5
     }) as ScoreInfo
-    // console.log(this.firstScore, this.secondScore)
-    this.audio = new AudioContext()
-    SoundFont.instrument(this.audio, './acoustic_grand_piano.js' as InstrumentName)
-      .then(player => {
-        this.player = player
-      })
-    // .catch((err) => console.log(err))
-    // console.log('soundfont loaded')
-  },
-  beforeDestroy () {
-    this.player.stop()
-    this.audio.close()
   },
   watch: {
     beatDuration (val: number) {
@@ -331,10 +344,13 @@ export default Vue.extend({
         localStorage.setItem(this.SECOND_SCORE, JSON.stringify(val))
       }
     }
+  },
+  beforeDestroy () {
+    this.isPlaying = false
+    this.player.value.stop()
   }
 })
 </script>
 
 <style scoped>
-
 </style>

@@ -16,6 +16,9 @@
         "src/*"
       ]
     },
+    "types": [
+      "unplugin-vue2-script-setup/types"
+    ],
     "lib": [
       "esnext",
       "dom",
@@ -32,5 +35,8 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+  "vueCompilerOptions": {
+    "experimentalCompatMode": 2
+  },
 }

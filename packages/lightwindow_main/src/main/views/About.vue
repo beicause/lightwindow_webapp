@@ -28,9 +28,9 @@
 
     <v-row no-gutters align="center">
       <v-col cols="3">开源仓库：</v-col>
-      <v-col style="overflow: auto">{{ GIT_URL }}</v-col>
+      <v-col style="overflow: auto">{{ GITHUB_URL }}</v-col>
       <v-col cols="1">
-        <v-btn @click="copyOrNavigate(GIT_URL)" icon color="blue">
+        <v-btn @click="copyOrNavigate(GITHUB_URL)" icon color="blue">
           <v-icon dense>{{ Android ? 'fal fa-copy' : 'fal fa-location-arrow' }}</v-icon>
         </v-btn>
       </v-col>
@@ -69,14 +69,14 @@
 <script lang="ts">
 import Vue from 'vue'
 import { getVersion, showPop } from '@/common/js/util'
-import { Android, EMAIL, GIT_URL, INDEX_URL } from '@/common/js/const'
+import { Android, EMAIL, GITHUB_URL, INDEX_URL } from '@/common/js/const'
 
 export default Vue.extend({
   name: 'About',
   data () {
     return {
       Android,
-      GIT_URL,
+      GITHUB_URL,
       EMAIL,
       INDEX_URL,
       localAppVersion: '',
