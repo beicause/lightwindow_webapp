@@ -168,6 +168,7 @@ export default Vue.extend({
 .iframe-normal {
   transition-property: width, height;
   transition-duration: 0.5s;
+  background-color: white;
   z-index: 1;
   height: 65vh;
   width: 100%;

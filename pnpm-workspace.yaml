@@ -1,4 +1,5 @@
 packages:
-- 'packages/*'
-- '!packages/lightwindow_calendar'
+- 'packages/**'
+- '!**/lightwindow_calendar'
+- '!**/presentation'
 

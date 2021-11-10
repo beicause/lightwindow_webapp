@@ -1,8 +1,4 @@
-/yarn-error.log
-/dist/
-/node_modules/
-/.idea/
-/packages/lightwindow_calendar/dist/
-/packages/lightwindow_calendar/node_modules/
-/packages/lightwindow_main/dist/
-/packages/lightwindow_main/node_modules/
+yarn-error.log
+dist
+node_modules
+.idea

@@ -96,7 +96,7 @@ export default Vue.extend({
   computed: {
     appVersionName (): string {
       if (!Android) return '---'
-      return '窗隙流光' + this.versionCodeToName(this.localAppVersion) +
+      return 'Experimental' + this.versionCodeToName(this.localAppVersion) +
           (this.isAppUpdate ? '（新' + this.versionCodeToName(this.appVersion) + '）' : '')
     }
   },

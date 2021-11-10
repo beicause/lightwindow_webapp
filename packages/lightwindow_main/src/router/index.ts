@@ -69,13 +69,13 @@ const routes: Array<RouteConfig> = [
           to: 'calendar',
           isAndroid: 'false'
         })
-        window.location.href = 'https://qingcheng.asia/calendar/'
+        window.location.href += '/'
       } else if (Android.getPolicy() !== POLICY_VERSION) {
         sendPV({ to: 'policy' })
         next('/policy')
       } else {
         sendPV({ to: 'calendar' })
-        window.location.href = 'https://qingcheng.asia/calendar/'
+        window.location.href += '/'
       }
     }
   }
