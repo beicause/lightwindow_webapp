@@ -18,7 +18,7 @@
 
     <div style="text-align: center;vertical-align: middle">
       新颖·创意·简洁
-      <br />轻量快捷的悬浮窗应用
+      <br />工具优先的悬浮窗应用
     </div>
     <div style="height: 65vh;" class="flex justify-center items-center">
       <img
@@ -32,7 +32,7 @@
       />
       <iframe
         class="iframe-normal"
-        src="../main"
+        src="../main/"
         :class="{ 'iframe-hide': isClose, 'iframe-full': isZoom && !isClose, 'blue-border': !isMobile || !isZoom }"
       ></iframe>
     </div>
@@ -134,6 +134,8 @@ export default Vue.extend({
     })
     getVersion().then(res => {
       this.downloadUrl = INDEX_URL + '/lightwindow-v' + res.data.app_version.split('').join('.') + '.apk'
+    }).catch(err => {
+      console.log(err)
     })
   },
   methods: {

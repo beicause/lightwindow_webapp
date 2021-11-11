@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "serve": "vite serve",
-    "build": "vite build"
+    "build": "vite build",
+    "preview":"vite preview"
   },
   "dependencies": {
     "@vue/composition-api": "^1.2.4",

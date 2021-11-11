@@ -5,12 +5,14 @@
   "license": "Apache-2.0",
   "scripts": {
     "install-all": "pnpm i && cd packages/lightwindow_calendar && yarn && cd ../presentation && pnpm i ",
-    "build": "node scripts/build.js && node scripts/postBuild.js",
+    "build": "run-p build-main build-calendar && node scripts/postBuild.js",
     "preview": "vite preview",
-    "serve:main": "cd packages/lightwindow_main && pnpm run serve",
-    "serve:calendar": "cd packages/lightwindow_calendar && pnpm run serve",
-    "build:main": "cd packages/lightwindow_main && pnpm run build",
-    "build:calendar": "cd packages/lightwindow_calendar && pnpm run build"
+    "serve-main": "cd packages/lightwindow_main && pnpm serve",
+    "serve-calendar": "cd packages/lightwindow_calendar && pnpm serve",
+    "serve-slidev": "cd packages/presentation && pnpm dev",
+    "build-main": "cd packages/lightwindow_main && pnpm build",
+    "build-calendar": "cd packages/lightwindow_calendar && pnpm build",
+    "build-slidev": "cd packages/presentation && pnpm build"
   },
   "private": true,
   "description": "详情见主项目https://github.com/beicause/lightwindow",
@@ -29,6 +31,7 @@
     "babel-core": "^6.26.3",
     "chalk": "^4.1.2",
     "jest": "^27.3.1",
+    "npm-run-all": "^4.1.5",
     "serve-static": "^1.14.1",
     "ts-jest": "^27.0.7",
     "ts-node": "^10.4.0",
