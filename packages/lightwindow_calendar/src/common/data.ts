@@ -1,4 +1,3 @@
-export const VERSION='102'
 
 export interface Android {
     setSystemAlarm: () => void,

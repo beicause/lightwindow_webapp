@@ -4,7 +4,7 @@
       <view class="left-arrow"></view>
     </view>
     <picker @change="dateChange" mode="multiSelector" :value="date" :range="[mon,day]">
-      <text>{{ pickerText }}</text>
+      <text :style="{color:activeDay===dayFormat(new Date())?'#2196f3':''}">{{ pickerText }}</text>
     </picker>
 
     <view @click="nextDay" class="arrow-wrapper">
@@ -35,7 +35,8 @@ export default Vue.extend({
     }
   },
   methods: {
-    dateChange(e: AnyObject) {
+    dayFormat,
+    dateChange(e: any) {
       let [m, d]: [number, number] = (e.detail.value)
       m++
       d++
@@ -70,13 +71,16 @@ export default Vue.extend({
     },
   },
   computed: {
+    activeDay():string{
+      return store.state.activeDay
+    },
     date(): [number, number] {
-      const [, mm, dd] = store.state.activeDay.split('-') as [string, number, number]
+      const [, mm, dd] = this.activeDay.split('-') as [string, number, number]
       return [mm - 1, dd - 1]
     },
     pickerText(): string {
-      const [, mm, dd] = store.state.activeDay.split('-')
-      const d = getEventDate(store.state.activeDay)
+      const [, mm, dd] = this.activeDay.split('-')
+      const d = getEventDate(this.activeDay)
       return mm + '月' + dd + '日' + this.week[d.getDay()]
     },
     mon(): string[] {

@@ -9,18 +9,29 @@
           <view class="down-arrow"></view>
         </view>
       </view>
-      <text @click="dayEventsClick(index)()" class="week-item" v-for="(item,index) in weekDateText" :key="index"
-            :style="index===activeStyle.index?activeStyle.style:''">{{ item }}
-      </text>
+      <text
+        @click="dayEventsClick(index)()"
+        class="week-item"
+        v-for="(item,index) in weekDateText"
+        :key="index"
+        :style="nowIndex ===index? activeStyle.style : ''"
+      >{{ item }}</text>
     </view>
     <view class="container-schedule">
       <time-line class="-time-line"></time-line>
       <view class="container-events">
-        <event-day-schedule @click.native="dayEventsClick(index)()" ref="weekSchedule" :key="index"
-                        v-for="(item,index) in week" :areaStyle="{flex:1}"
-                        :showDetail="false" @plus-click="plusClick(index)()" :editable="editable" :fontSize="12"
-                        :day="day(index)">
-        </event-day-schedule>
+        <event-day-schedule
+          @click.native="dayEventsClick(index)()"
+          ref="weekSchedule"
+          :key="index"
+          v-for="(item,index) in week"
+          :areaStyle="{ flex: 1 }"
+          :showDetail="false"
+          @plus-click="plusClick(index)()"
+          :editable="editable"
+          :fontSize="12"
+          :day="day(index)"
+        ></event-day-schedule>
       </view>
     </view>
   </view>
@@ -73,7 +84,7 @@ export default Vue.extend({
      * */
     weekDate(): Date[] {
       const mWeekDate: Date[] = []
-      const e = getEventDate(store.state.activeDay)
+      const e = getEventDate(this.activeDay)
       this.activeStyle.index = (e.getDay() + 6) % 7
       for (let i = 0; i < 7; i++) {
         const d = new Date()
@@ -88,6 +99,9 @@ export default Vue.extend({
     day(): (index: number) => string {
       return (index) => dayFormat(this.weekDate[index])
     },
+    activeDay(): string {
+      return store.state.activeDay
+    },
     weekDateText(): string[] {
       const texts = []
       for (let i = 0; i < 7; i++) {
@@ -95,7 +109,13 @@ export default Vue.extend({
         texts[i] = mm + '-' + dd + '\n' + this.week[i]
       }
       return texts
-    }
+    },
+    nowIndex(): number {
+      const d = new Date()
+      const _nowIndex = (d.getDay() + 6) % 7
+      if (dayFormat(this.weekDate[_nowIndex]) === dayFormat(d)) return _nowIndex
+      else return -1
+    },
   },
   methods: {
     plusClick(index: number): () => void {

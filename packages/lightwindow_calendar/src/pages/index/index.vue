@@ -1,21 +1,21 @@
 <template>
   <view class="app-container">
     <the-nav-bar @nav="nav"></the-nav-bar>
-    <uni-transition v-show="index===0" :show="index===0" :mode-class="mode">
-      <view class="calendar-com-height">
+    <!-- <uni-transition v-show="index===0" :show="index===0" :mode-class="mode"> -->
+      <view v-show="index===0" class="calendar-com-height">
         <calendar-day :editable="editable" ref="day"></calendar-day>
       </view>
-    </uni-transition>
-    <uni-transition v-show="index===1" :show="index===1" :mode-class="mode">
-      <view class="calendar-com-height">
+    <!-- </uni-transition> -->
+    <!-- <uni-transition v-show="index===1" :show="index===1" :mode-class="mode"> -->
+      <view v-show="index===1" class="calendar-com-height">
         <calendar-week :editable="editable" ref="week"></calendar-week>
       </view>
-    </uni-transition>
-    <uni-transition v-show="index===2" :show="index===2" :mode-class="mode">
-      <view class="calendar-com-height">
+    <!-- </uni-transition> -->
+    <!-- <uni-transition v-show="index===2" :show="index===2" :mode-class="mode"> -->
+      <view v-show="index===2" class="calendar-com-height">
         <calendar-month :editable="editable" ref="mon"></calendar-month>
       </view>
-    </uni-transition>
+    <!-- </uni-transition> -->
     <the-build-button class="build-margin" @cancel-click="cancelClick"
                       @build-click="buildClick"></the-build-button>
 
@@ -42,7 +42,7 @@ import CalendarWeek from "../../components/calendar/CalendarWeek.vue";
 import CalendarMonth from "../../components/calendar/CalendarMonth.vue";
 import TheNavBar from "@/components/the-nav-bar/TheNavBar.vue";
 import {Event, marksArrayToMap, PopMsg} from "@/common/data";
-import {closePopMsg, compareEvents, getEventDate, showPopMsg} from "@/common/util";
+import { compareEvents, getEventDate, showPopMsg} from "@/common/util";
 import store from "@/store";
 import {getStorage} from "@/common/cache";
 import TheUserDataGraph from "@/components/the-build-button/TheUserDataGraph.vue";
@@ -70,7 +70,7 @@ export default Vue.extend({
   data() {
     return {
       index: 0,//日程表索引 日0，周1，月2
-      mode: 'fade',//过渡动画模式
+      // mode: 'fade',//过渡动画模式
       editable: false,//是否开启编辑模式
       popType: '',//下面是提示框和对话框参数
       popMsg: '',//
@@ -136,9 +136,9 @@ export default Vue.extend({
      * 导航
      * */
     nav(e: { from: number, to: number }): void {
-      uni.$emit('navigate', e)
-      if (e.to > e.from) this.mode = 'slide-right'
-      else this.mode = 'slide-left'
+      // uni.$emit('navigate', e)
+      // if (e.to > e.from) this.mode = 'slide-right'
+      // else this.mode = 'slide-left'
       this.index = e.to
     },
 
