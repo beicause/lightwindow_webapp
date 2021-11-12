@@ -5,7 +5,7 @@
     <div class="flex-1"></div>
     <div class="self-end mr-10">> 罗智豪，冯庆淳，杨赢赢，马新永</div>
   </div>
-  <img src="/index.jpg" style="width: 30%;border: #1296f3 1px solid;" />
+  <img src="/images/index.jpg" style="width: 30%;border: #1296f3 1px solid;" />
 </div>
 
 ---
@@ -14,10 +14,10 @@
 <div class="flex">
   <div class="flex flex-wrap">
     <v-clicks>
-      <img src="/softnum.png" />
-      <img src="/softcommend.png" />
-      <img src="/softage.png" />
-      <img src="/softlocale.png" />
+      <img src="/images/softnum.png" />
+      <img src="/images/softcommend.png" />
+      <img src="/images/softage.png" />
+      <img src="/images/softlocale.png" />
     </v-clicks>
   </div>
   <v-click>
@@ -50,8 +50,8 @@ clicks: 2
   </v-click>
 </ul>
 <div class="flex h-80">
-  <v-click at="1"><img src="/calendar.jpg" alt="单调的日历" /></v-click>
-  <v-click at="2"><img src="/advs.jpg" alt="弹窗广告" /></v-click>
+  <v-click at="1"><img src="/images/calendar.jpg" alt="单调的日历" /></v-click>
+  <v-click at="2"><img src="/images/advs.jpg" alt="弹窗广告" /></v-click>
 </div>
 
 ---
@@ -74,11 +74,11 @@ clicks: 3
 <template v-if="$slidev.nav.clicks===1">
   <div class="flex justify-around">
     <div class="w-80">
-      <img src="/notification.jpg" alt="流光通知栏" />
+      <img src="/images/notification.jpg" alt="流光通知栏" />
       <p>分离出核心需求，在通知栏展示</p>
     </div>
     <div class="w-65 -mt-40">
-      <img style="border: #2196f3 solid 1px;" src="/light_calendar.jpg" alt="流光日程表" />
+      <img style="border: #2196f3 solid 1px;" src="/images/light_calendar.jpg" alt="流光日程表" />
       <p>简洁的24小时日程展示</p>
     </div>
   </div>
@@ -87,8 +87,8 @@ clicks: 3
 <template v-if="$slidev.nav.clicks===2">
   <div class="flex justify-around h-90 -mt-5">
     <span class="absolute bottom-5">引入创作元素</span>
-    <img src="/musicscore.jpg" alt="音乐谱" />
-    <img src="/musicboard.jpg" alt="音乐板" />
+    <img src="/images/musicscore.jpg" alt="音乐谱" />
+    <img src="/images/musicboard.jpg" alt="音乐板" />
   </div>
 </template>
 
@@ -98,10 +98,10 @@ clicks: 3
     <br />打造技术分享自媒体，会带来广泛盈利。
   </p>
   <div class="flex">
-    <img src="/wechat.jpg" />
-    <img src="/douyin.jpg" />
-    <img src="/zhihu.jpg" />
-    <img src="/bilibili.jpg" />
+    <img src="/images/wechat.jpg" />
+    <img src="/images/douyin.jpg" />
+    <img src="/images/zhihu.jpg" />
+    <img src="/images/bilibili.jpg" />
   </div>
 </template>
 
