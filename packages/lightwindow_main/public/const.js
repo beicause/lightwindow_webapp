@@ -1,4 +1,4 @@
-const VERSION = '106'
+const VERSION = '107'
 const POLICY_VERSION = '1'
 
 if (typeof require === 'function' && typeof module === 'object' && module && module.exports) {

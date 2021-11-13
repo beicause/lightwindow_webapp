@@ -19,47 +19,48 @@
             window.location.href = window.location.protocol+'//'+window.location.host + '/policy'
         }
     </script>
-    <!-- 正式发布的时候使用，开发期间不启用。↓ -->
-    <!-- <script src="/h5/touch-emulator.js"></script>
-<script>
-        TouchEmulator();
-  if (document.documentElement.clientWidth > 1024) {
-    window.location.href = '/h5/pcguide.html#'+location.pathname+location.search;
-  }
-</script>
-    <style>
-        ::-webkit-scrollbar{
-            display: none;
-        }
-    </style>
-    <script>
-        var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            hm.src = "https://hm.baidu.com/hm.js?";// 百度统计key
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();
-    </script> -->
-    <!-- 正式发布的时候使用，开发期间不启用。↑ -->
-    <script>
-        // document.addEventListener('DOMContentLoaded', function() {
-        // 	document.documentElement.style.fontSize = document.documentElement.clientWidth / 20 + 'px'
-        // })
-    </script>
     <link rel="stylesheet" href="<%= BASE_URL %>static/index.<%= VUE_APP_INDEX_CSS_HASH %>.css"/>
 </head>
 <body>
-<!-- 该文件为 H5 平台的模板 HTML，并非应用入口。 -->
-<!-- 请勿在此文件编写页面代码或直接运行此文件。 -->
-<!-- 详见文档：https://uniapp.dcloud.io/collocation/manifest?id=h5-template -->
 <noscript>
     <strong>Please enable JavaScript to continue.</strong>
 </noscript>
-<div id="app"></div>
+<div id="app">
+    <div id="__loading" style="left: 0;right: 0;top: 0;bottom: 0; 
+    position: absolute; width: 60px;height: 60px;margin: auto;
+    display: flex;justify-content: center;align-items: center;">
+        <img class="anim" src="/images/loading.svg" />
+    </div>
+    <script>
+        document.getElementById('__loading').onclick = () => {
+            if (window.AndroidBase) window.AndroidBase.clearPageCache()
+            if (window.Android) window.Android.close()
+            else console.log('android only');
+        }
+    </script>
+    <style>
+        .anim {
+            animation-name: animRotate;
+            animation-iteration-count: infinite;
+            animation-duration: 2.5s;
+            animation-timing-function: linear;
+        }
+
+        @keyframes animRotate {
+            0% {
+                transform: rotate(30deg);
+            }
+
+            50% {
+                transform: rotate(210deg);
+            }
+
+            100% {
+                transform: rotate(390deg);
+            }
+        }
+    </style>
+</div>
 <!-- built files will be auto injected -->
-<script>
-    /*BAIDU_STAT*/
-</script>
 </body>
 </html>

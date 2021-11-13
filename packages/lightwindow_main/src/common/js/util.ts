@@ -60,7 +60,7 @@ function isMobile ():boolean {
 }
 export { showPop, closePop, getVersion, sendPV, isMobile }
 
-export function disableScroll () {
+export function disableScroll ():void {
   const body = document.body
   const html = document.documentElement
   html.style.maxHeight = '90vh'
@@ -68,7 +68,7 @@ export function disableScroll () {
   html.style.overflow = 'hidden'
   body.style.overflow = 'hidden'
 }
-export function resumeScroll () {
+export function resumeScroll ():void {
   const body = document.body
   const html = document.documentElement
   html.style.maxHeight = ''

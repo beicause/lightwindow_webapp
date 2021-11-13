@@ -4,5 +4,8 @@ declare global {
     interface Window {
         Android?: Android
         getVersion?: () => string
+        AndroidBase?:{
+            clearPageCache:()=>void
+        }
     }
 }
