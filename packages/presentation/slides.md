@@ -1,3 +1,7 @@
+---
+download: true
+---
+
 <div class="flex justify-between">
   <div class="flex flex-col flex-1">
     <h1>窗隙流光<span class="text-lg ml-2">https://qingcheng.asia</span></h1>
@@ -12,9 +16,14 @@
 
 # 工具软件何去何从？
 <div class="flex">
+  <v-click><div></div></v-click>
+  <div class="flex flex-shrink-0" v-if="$slidev.nav.clicks===1">
+    <img style="width: 250px;" src="/images/tools.jpg" />
+    <p class="text-center indent"> 繁多的工具类软件</p>
+  </div>
   <div class="flex flex-wrap">
     <v-clicks>
-      <img src="/images/softnum.png" />
+      <img v-show="$slidev.nav.clicks>=2" src="/images/softnum.png" />
       <img src="/images/softcommend.png" />
       <img src="/images/softage.png" />
       <img src="/images/softlocale.png" />
@@ -50,15 +59,15 @@ clicks: 2
   </v-click>
 </ul>
 <div class="flex h-80">
-  <v-click at="1"><img src="/images/calendar.jpg" alt="单调的日历" /></v-click>
-  <v-click at="2"><img src="/images/advs.jpg" alt="弹窗广告" /></v-click>
+  <v-click at="1"><img class="h-full" src="/images/calendar.jpg" alt="单调的日历" /></v-click>
+  <v-click at="2"><img class="h-full" src="/images/advs.jpg" alt="弹窗广告" /></v-click>
 </div>
 
 ---
 clicks: 3
 ---
 
-# 我们是怎么做的？
+# 我们怎么做？
 <ul>
   <v-click>
     <li>强调核心需求</li>
@@ -94,8 +103,9 @@ clicks: 3
 
 <template v-if="$slidev.nav.clicks===3">
   <p class="indent" style="text-align: start;">
-    不仅仅是软件，《窗隙流光》更是开源的前端编程项目，任何人都能分享、交流、学习、修改。
-    <br />打造技术分享自媒体，会带来广泛盈利。
+    《窗隙流光》是开源的前端编程项目，任何人可查看，分享，贡献源代码。
+  <div>1. 对部分功能组件收费，或推出付费专业版。</div>
+  <div>2. 打造技术分享自媒体，通过服务收费。</div>
   </p>
   <div class="flex">
     <img src="/images/wechat.jpg" />
@@ -115,6 +125,21 @@ clicks: 3
     overflow: hidden;
   }
 </style>
+
+---
+
+# 我们不做什么?
+<ul>
+  <v-click>
+    <li>不做没有灵魂的干巴巴的工具</li>
+  </v-click>
+  <v-click>
+    <li>不做没有实用价值的大杂烩</li>
+  </v-click>
+  <v-click>
+    <li>不做停滞不前的一滩死水</li>
+  </v-click>
+</ul>
 
 ---
 
