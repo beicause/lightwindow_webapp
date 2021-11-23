@@ -23,7 +23,7 @@ import Vue from 'vue'
     this.draw()
     this.timer = setInterval(() => {
       this.draw()
-			}, 3000)
+			}, 3000) as unknown as number
 		},
 		beforeDestroy() {
 			clearInterval(this.timer)

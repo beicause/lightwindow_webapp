@@ -87,7 +87,7 @@ export default Vue.extend({
       clearTimeout(this.timerId)
       this.timerId=0
       this.showPop(e.msg, e.type)
-      if (e.duration)this.timerId= setTimeout(() =>this.closePop(), e.duration)
+      if (e.duration) this.timerId= setTimeout(() =>this.closePop(), e.duration) as unknown as number
     })
     uni.$on('closePopMsg', () => {
       clearTimeout(this.timerId)
