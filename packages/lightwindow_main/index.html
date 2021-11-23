@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" href="/images/logo.svg" />
@@ -47,19 +48,22 @@
 
 <body>
   <div id="app">
-    <div id="__loading"
-      style="left: 0;right: 0;top: 0;bottom: 0; 
-      position: absolute; width: 60px;height: 60px;margin: auto;
-      display: flex;justify-content: center;align-items: center;"
-      >
+    <div id="__LOAD__" style="left: 0;right: 0;top: 0;bottom: 0; 
+      position: absolute; width: 150px;height: 150px;margin: auto;
+      display: flex;flex-direction: column; justify-content: center;align-items: center;">
       <img class="anim" src="/images/loading.svg" />
+      <div id="__TIP__" style="display: none;">加载异常，点击重试</div>
     </div>
     <script>
-      document.getElementById('__loading').onclick = () => {
-        if (window.AndroidBase) window.AndroidBase.clearPageCache()
-        if (window.Android) window.Android.close()
-        else console.log('android only');
-      }
+      setTimeout(() => {
+        document.getElementById('__LOAD__').onclick = () => {
+          if (window.AndroidBase) window.AndroidBase.clearPageCache()
+          if (window.Android) window.Android.close()
+          else console.log('android only');
+        }
+        document.getElementById("__TIP__").style = null
+      }, 2000)
+
     </script>
     <style>
       .anim {
@@ -73,9 +77,11 @@
         0% {
           transform: rotate(30deg);
         }
+
         50% {
           transform: rotate(210deg);
         }
+
         100% {
           transform: rotate(390deg);
         }

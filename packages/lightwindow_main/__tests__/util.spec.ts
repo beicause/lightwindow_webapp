@@ -1,5 +1,5 @@
 import { getVersion } from '../src/common/js/util'
-import { formatScore, sectionBeat } from '../src/music/components/musicUtil'
+import { formatScore, sectionBeat } from '../src/music/components/scoreUtil'
 
 test('get version', async () => {
   const res = await getVersion()

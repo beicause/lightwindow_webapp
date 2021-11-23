@@ -1,5 +1,5 @@
 ---
-download: true
+download: 'https://qingcheng.asia/presentation/presentation.pdf'
 ---
 
 <div class="flex justify-between">
@@ -16,11 +16,12 @@ download: true
 
 # 工具软件何去何从？
 <div class="flex">
-  <v-click><div></div></v-click>
-  <div class="flex flex-shrink-0" v-if="$slidev.nav.clicks===1">
+ <v-click>
+  <div class="flex flex-shrink-0" v-show="$slidev.nav.clicks===1">
     <img style="width: 250px;" src="/images/tools.jpg" />
     <p class="text-center indent"> 繁多的工具类软件</p>
   </div>
+</v-click>
   <div class="flex flex-wrap">
     <v-clicks>
       <img v-show="$slidev.nav.clicks>=2" src="/images/softnum.png" />
@@ -80,28 +81,28 @@ clicks: 3
   </v-click>
 </ul>
 
-<template v-if="$slidev.nav.clicks===1">
-  <div class="flex justify-around">
+<div v-show="$slidev.nav.clicks===1">
+  <div class="absolute flex justify-around w-full top-0 bottom-0 m-auto items-center">
     <div class="w-80">
       <img src="/images/notification.jpg" alt="流光通知栏" />
       <p>分离出核心需求，在通知栏展示</p>
     </div>
-    <div class="w-65 -mt-40">
+    <div class="w-65">
       <img style="border: #2196f3 solid 1px;" src="/images/light_calendar.jpg" alt="流光日程表" />
       <p>简洁的24小时日程展示</p>
     </div>
   </div>
-</template>
+</div>
 
-<template v-if="$slidev.nav.clicks===2">
-  <div class="flex justify-around h-90 -mt-5">
+<div v-show="$slidev.nav.clicks===2">
+  <div class="flex justify-around h-85">
     <span class="absolute bottom-5">引入创作元素</span>
     <img src="/images/musicscore.jpg" alt="音乐谱" />
     <img src="/images/musicboard.jpg" alt="音乐板" />
   </div>
-</template>
+</div>
 
-<template v-if="$slidev.nav.clicks===3">
+<div v-show="$slidev.nav.clicks===3">
   <p class="indent" style="text-align: start;">
     《窗隙流光》是开源的前端编程项目，任何人可查看，分享，贡献源代码。
   <div>1. 对部分功能组件收费，或推出付费专业版。</div>
@@ -113,7 +114,7 @@ clicks: 3
     <img src="/images/zhihu.jpg" />
     <img src="/images/bilibili.jpg" />
   </div>
-</template>
+</div>
 
 <style>
   p {
@@ -121,7 +122,6 @@ clicks: 3
   }
 
   img {
-    border: #2196f3 solid 1px;
     overflow: hidden;
   }
 </style>
@@ -160,5 +160,5 @@ class: text-center
 [Powered by Slidev](https://sli.dev)
 <div class="absolute right-30 bottom-10">
   <p>窗隙流光<br />创新创业小组</p>
-  <p>2021-11-16</p>
+  <p>2021-11-23</p>
 </div>

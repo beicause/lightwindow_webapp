@@ -1,9 +1,9 @@
 {
   "private": true,
   "scripts": {
-    "build": "slidev build",
+    "build": "slidev build --base /presentation/",
     "dev": "slidev --open",
-    "export": "slidev export"
+    "export": "slidev export --output public/presentation.pdf --with-clicks"
   },
   "dependencies": {
     "@slidev/cli": "^0.27.10",

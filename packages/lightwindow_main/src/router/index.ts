@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import VueRouter, { RouteConfig } from 'vue-router'
-import { Android, POLICY_VERSION } from '@/common/js/const'
+import VueRouter, { NavigationGuardNext, Route, RouteConfig } from 'vue-router'
+import { Android, INDEX_URL, POLICY_VERSION } from '@/common/js/const'
 import { sendPV } from '@/common/js/util'
 
 Vue.use(VueRouter)
@@ -63,21 +63,11 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: '/calendar',
-    beforeEnter (to, from, next) {
-      if (!Android) {
-        sendPV({
-          to: 'calendar',
-          isAndroid: 'false'
-        })
-        window.location.href += '/'
-      } else if (Android.getPolicy() !== POLICY_VERSION) {
-        sendPV({ to: 'policy' })
-        next('/policy')
-      } else {
-        sendPV({ to: 'calendar' })
-        window.location.href += '/'
-      }
-    }
+    beforeEnter: redirectCalendar
+  },
+  {
+    path: '/presentation/(\\d)*',
+    beforeEnter: redirectPresentation
   }
 ]
 
@@ -86,4 +76,24 @@ const router = new VueRouter({
   routes
 })
 
+function redirectCalendar (to:Route, from:Route, next:NavigationGuardNext) {
+  if (!Android) {
+    sendPV({
+      to: 'calendar',
+      isAndroid: 'false'
+    })
+    window.location.href += '//'
+    next(false)
+  } else if (Android.getPolicy() !== POLICY_VERSION) {
+    sendPV({ to: 'policy' })
+    next('/policy')
+  } else {
+    sendPV({ to: 'calendar' })
+    window.location.href += '//'
+    next(false)
+  }
+}
+function redirectPresentation (to:Route, from:Route, next:NavigationGuardNext) {
+  window.location.href = INDEX_URL + '/presentation//'
+}
 export default router
