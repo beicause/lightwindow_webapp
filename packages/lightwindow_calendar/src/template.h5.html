@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="icon" href="/images/logo.svg">
 
     <title>
@@ -12,60 +13,64 @@
     </title>
     <script src="/const.js"></script>
     <script>
-      window['getVersion'] = () => VERSION
+        window['getVersion'] = () => VERSION
         console.log(getVersion())
         const Android = window.Android
         if (Android && Android.getPolicy() !== POLICY_VERSION) {
-            window.location.href = window.location.protocol+'//'+window.location.host + '/policy'
+            window.location.href = window.location.protocol + '//' + window.location.host + '/policy'
         }
     </script>
-    <link rel="stylesheet" href="<%= BASE_URL %>static/index.<%= VUE_APP_INDEX_CSS_HASH %>.css"/>
+    <link rel="stylesheet" href="<%= BASE_URL %>static/index.<%= VUE_APP_INDEX_CSS_HASH %>.css" />
 </head>
+
 <body>
-<noscript>
-    <strong>Please enable JavaScript to continue.</strong>
-</noscript>
-<div id="app">
-    <div id="__LOAD__" style="left: 0;right: 0;top: 0;bottom: 0; 
-      position: absolute; width: 150px;height: 150px;margin: auto;
-      display: flex;flex-direction: column; justify-content: center;align-items: center;">
-      <img class="anim" src="/images/loading.svg" />
-      <div id="__TIP__" style="display: none;">加载异常，点击重试</div>
+    <noscript>
+        <strong>Please enable JavaScript to continue.</strong>
+    </noscript>
+    <div id="app">
+        <div id="__LOAD__" style="left: 0;right: 0;top: 0;bottom: 0; 
+            position: absolute; width: 150px;height: 150px;margin: auto;
+            display: flex;flex-direction: column; justify-content: center;align-items: center;">
+            <img class="anim" src="/images/loading.svg" />
+            <div id="__TIP__" style="display: none;">加载异常，点击重试</div>
+        </div>
+        <script>
+            setTimeout(() => {
+                const l = document.getElementById('__LOAD__')
+                if (l) l.onclick = () => {
+                    if (window.AndroidBase) window.AndroidBase.clearPageCache()
+                    if (window.Android) window.Android.close()
+                    else console.log('android only');
+                }
+                const t = document.getElementById("__TIP__")
+                if (t) t.style = null
+            }, 2000)
+
+        </script>
+        <style>
+            .anim {
+                animation-name: animRotate;
+                animation-iteration-count: infinite;
+                animation-duration: 2.5s;
+                animation-timing-function: linear;
+            }
+
+            @keyframes animRotate {
+                0% {
+                    transform: rotate(30deg);
+                }
+
+                50% {
+                    transform: rotate(210deg);
+                }
+
+                100% {
+                    transform: rotate(390deg);
+                }
+            }
+        </style>
     </div>
-    <script>
-      setTimeout(() => {
-        document.getElementById('__LOAD__').onclick = () => {
-          if (window.AndroidBase) window.AndroidBase.clearPageCache()
-          if (window.Android) window.Android.close()
-          else console.log('android only');
-        }
-        document.getElementById("__TIP__").style = null
-      }, 2000)
-
-    </script>
-    <style>
-        .anim {
-            animation-name: animRotate;
-            animation-iteration-count: infinite;
-            animation-duration: 2.5s;
-            animation-timing-function: linear;
-        }
-
-        @keyframes animRotate {
-            0% {
-                transform: rotate(30deg);
-            }
-
-            50% {
-                transform: rotate(210deg);
-            }
-
-            100% {
-                transform: rotate(390deg);
-            }
-        }
-    </style>
-</div>
-<!-- built files will be auto injected -->
+    <!-- built files will be auto injected -->
 </body>
+
 </html>

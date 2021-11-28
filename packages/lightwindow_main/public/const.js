@@ -1,4 +1,4 @@
-const VERSION = '108'
+const VERSION = '110'
 const POLICY_VERSION = '1'
 
 this.POLICY_VERSION = POLICY_VERSION

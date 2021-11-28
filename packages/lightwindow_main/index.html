@@ -56,12 +56,14 @@
     </div>
     <script>
       setTimeout(() => {
-        document.getElementById('__LOAD__').onclick = () => {
+        const l = document.getElementById('__LOAD__')
+        if (l) l.onclick = () => {
           if (window.AndroidBase) window.AndroidBase.clearPageCache()
           if (window.Android) window.Android.close()
           else console.log('android only');
         }
-        document.getElementById("__TIP__").style = null
+        const t = document.getElementById("__TIP__")
+        if (t) t.style = null
       }, 2000)
 
     </script>
