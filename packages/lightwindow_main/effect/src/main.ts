@@ -1,7 +1,7 @@
 import 'css-doodle'
 import '../reset.css'
-import { star } from './effect'
+import { bubble } from './effect'
 import { doodle, proxy } from './doodle'
 
-proxy.effect = star
+proxy.effect = bubble
 setInterval(() => doodle.update(), 3000)

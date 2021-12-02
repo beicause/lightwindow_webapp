@@ -8,19 +8,19 @@ const config: Config.InitialOptions = {
     }
   },
   moduleFileExtensions: [
-    "js",
-    "ts",
-    "json",
-    "vue"
+    'js',
+    'ts',
+    'json',
+    'vue'
   ],
   transform: {
-    ".*\\.(vue)$": "vue-jest",
-    "^.+\\.tsx?$": "ts-jest"
+    '.*\\.(vue)$': 'vue-jest',
+    '^.+\\.tsx?$': 'ts-jest'
   },
   moduleNameMapper: {
-    "^@/(.*)$": "<rootDir>/src/$1"
+    '^@/(.*)$': '<rootDir>/src/$1'
   },
-  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$"
+  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$'
 }
 
 export default config
