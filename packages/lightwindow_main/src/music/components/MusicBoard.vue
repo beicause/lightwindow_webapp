@@ -78,7 +78,6 @@ onUnmounted(() => {
 <template>
   <div class="flex flex-row fixed top-8 bottom-0 left-0 right-0" style="-webkit-user-select: none; user-select: none;">
     <div class="flex flex-col" v-for="col in 7" :key="col">
-      {{ eventOn ? '' : eventOff ? '' : '' }}
       <div
         :id="'__item' + genKey(col, row)"
         @[eventOn]="show(genKey(col, row))"
