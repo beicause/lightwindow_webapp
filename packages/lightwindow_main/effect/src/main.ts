@@ -4,4 +4,9 @@ import { bubble } from './effect'
 import { doodle, proxy } from './doodle'
 
 proxy.effect = bubble
-setInterval(() => doodle.update(), 3000)
+const timer = setInterval(() => doodle.update(), 3000)
+
+// for android webview
+window.effect = proxy.effect
+window.bubble = bubble
+window.timer = timer

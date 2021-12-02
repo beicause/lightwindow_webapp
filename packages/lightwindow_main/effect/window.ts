@@ -18,6 +18,8 @@ export interface DoodleElement extends HTMLElement {
 
 declare global {
     interface Window {
-        effect?: string
+        effect?: string,
+        bubble?:string,
+        timer?:NodeJS.Timer
     }
 }
