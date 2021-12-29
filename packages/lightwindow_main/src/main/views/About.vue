@@ -64,12 +64,16 @@
     <div class="pb-2">
       <v-divider></v-divider>
     </div>
+    <div class="flex justify-center">
+      <v-btn color="blue" outlined @click="AndroidBase?AndroidBase.clearPageCache():undefined">更新页面缓存</v-btn>
+    </div>
+
   </v-container>
 </template>
 <script lang="ts">
 import Vue from 'vue'
 import { getVersion, showPop } from '@/common/js/util'
-import { Android, EMAIL, GITHUB_URL, INDEX_URL } from '@/common/js/const'
+import { Android, AndroidBase, EMAIL, GITHUB_URL, INDEX_URL } from '@/common/js/const'
 
 export default Vue.extend({
   name: 'About',
@@ -81,7 +85,8 @@ export default Vue.extend({
       INDEX_URL,
       localAppVersion: '',
       appVersion: '',
-      isAppUpdate: false
+      isAppUpdate: false,
+      AndroidBase: AndroidBase
     }
   },
   mounted () {

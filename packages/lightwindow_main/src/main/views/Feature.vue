@@ -1,48 +1,43 @@
+<script setup lang="ts">
+import { features, Features, isNoticeRunning } from '../feature'
+import FeatureItem from '../components/FeatureItem.vue'
+import { Android } from '@/common/js/const'
+import { onMounted, ref } from '@vue/composition-api'
+
+const refFeatures = ref(features)
+
+onMounted(() => {
+  isNoticeRunning.value = !!Android?.isNoticeRunning()
+})
+
+</script>
+
 <template>
   <v-container>
-    <feature-item :show-run="Android" name="日程表" :is-running="isNoticeRunning" prepend-icon="fal fa-calendar-week"
-                  @run-click="runCalendar" @nav-click="navCalendar"></feature-item>
-    <feature-item name="音乐谱" :is-running="false" prepend-icon="fal fa-music"
-                  @nav-click="$router.push('/music')"></feature-item>
-  </v-container>
+    <FeatureItem
+    :key= "item.name"
+    v-for = "item in refFeatures"
+    :name = "item.name"
+    :showRun="item.showRun"
+    @nav-click="onNavClick(item)"
+    @run-click="item.runClick?item.runClick():undefined"
+    :isRunning="item.isRunning?item.isRunning.value:undefined"
+    :prependIcon="item.prependIcon">
+    </FeatureItem>
+<!-- 上面我手动对isRunning 解包ref,否则出错 -->
+</v-container>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import FeatureItem from '@/main/components/FeatureItem.vue'
-import { Android, INDEX_URL } from '@/common/js/const'
 
-export default Vue.extend({
-  name: 'feature',
-  components: { FeatureItem },
-  data () {
-    return {
-      isNoticeRunning: false,
-      Android
-    }
-  },
-  mounted () {
-    this.isNoticeRunning = !!Android?.isNoticeRunning()
-  },
+export default {
+
   methods: {
-    runCalendar () {
-      this.isNoticeRunning = !this.isNoticeRunning
-      if (Android) {
-        if (this.isNoticeRunning) {
-          Android.startNoticeService()
-          // Const.redirectToCalendar()
-        } else {
-          Android.stopNoticeService()
-        }
-      }
-    },
-    navCalendar () {
-      if (Android) {
-        Android.redirectToCalendar()
-      } else {
-        window.location.href = INDEX_URL + '/calendar/'
-      }
+    onNavClick (item: Partial<Features>) {
+      const r = item.navClick ? item.navClick() : undefined
+      if (r) { (this as any).$router.push(r) }
     }
   }
-})
+}
+
 </script>

@@ -1,3 +1,14 @@
+<script setup lang="ts">
+import { defineProps, withDefaults } from '@vue/runtime-dom'
+import { defaultProps } from '../feature'
+
+interface P{
+   showRun:boolean, isRunning:boolean, name:string, prependIcon:string
+}
+
+withDefaults(defineProps<P>(), defaultProps)
+</script>
+
 <template>
   <div>
     <v-row no-gutters align="center">
@@ -21,33 +32,3 @@
     </div>
   </div>
 </template>
-
-<script lang="ts">
-import Vue from 'vue'
-
-export default Vue.extend({
-  name: 'FeatureItem',
-  props: {
-    showRun: {
-      type: Boolean,
-      default: false
-    },
-    isRunning: {
-      type: Boolean,
-      default: false
-    },
-    name: {
-      type: String,
-      default: ''
-    },
-    prependIcon: {
-      type: String,
-      default: ''
-    }
-  }
-})
-</script>
-
-<style scoped>
-
-</style>

@@ -14,6 +14,5 @@ export function loadPlayer () {
       console.log(err)
     }).finally(() => {
       if (!player.value.play) showPop('load fail, please try refreshing', 'error', 2000)
-      else console.log('loaded')
     })
 }

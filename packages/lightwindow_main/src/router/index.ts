@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import VueRouter, { NavigationGuardNext, Route, RouteConfig } from 'vue-router'
+import VueRouter, { RouteConfig } from 'vue-router'
 import { Android, INDEX_URL, POLICY_VERSION } from '@/common/js/const'
 import { sendPV } from '@/common/js/util'
 
@@ -62,12 +62,16 @@ const routes: Array<RouteConfig> = [
     component: () => import('@/music/MusicApp.vue')
   },
   {
+    path: '/effect',
+    component: () => import('@/effect/EffectApp.vue')
+  },
+  {
     path: '/calendar',
-    beforeEnter: redirectCalendar
+    beforeEnter: () => redirect('/calendar//')
   },
   {
     path: '/presentation/(\\d)*',
-    beforeEnter: redirectPresentation
+    beforeEnter: () => redirect('/presentation//')
   }
 ]
 
@@ -76,24 +80,7 @@ const router = new VueRouter({
   routes
 })
 
-function redirectCalendar (to:Route, from:Route, next:NavigationGuardNext) {
-  if (!Android) {
-    sendPV({
-      to: 'calendar',
-      isAndroid: 'false'
-    })
-    window.location.href += '//'
-    next(false)
-  } else if (Android.getPolicy() !== POLICY_VERSION) {
-    sendPV({ to: 'policy' })
-    next('/policy')
-  } else {
-    sendPV({ to: 'calendar' })
-    window.location.href += '//'
-    next(false)
-  }
-}
-function redirectPresentation (to:Route, from:Route, next:NavigationGuardNext) {
-  window.location.href = INDEX_URL + '/presentation//'
+function redirect (path:string) {
+  window.location.href = INDEX_URL + path
 }
 export default router

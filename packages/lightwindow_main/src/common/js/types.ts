@@ -1,3 +1,4 @@
+
 export interface Android {
   exception: (value: string) => void,
   isNoticeRunning: () => boolean,
@@ -25,3 +26,8 @@ export interface Android {
 //   version_info: string
 //   /* eslint-enable camelcase */
 // }
+export interface AndroidBase{
+  clearPageCache():void
+}
+
+export type IsEqual<X, Y> = [X] extends [Y]?[Y] extends [X]? true:false:false

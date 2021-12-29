@@ -8,7 +8,6 @@ import 'virtual:windi.css'
 
 Vue.config.productionTip = false
 Vue.use(CompositionApi)
-
 new Vue({
   router,
   vuetify,

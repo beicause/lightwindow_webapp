@@ -1,5 +1,4 @@
 import 'css-doodle'
-import '../reset.css'
 import { bubble } from './effect'
 import { doodle, proxy } from './doodle'
 

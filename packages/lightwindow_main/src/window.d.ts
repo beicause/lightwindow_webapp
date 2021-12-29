@@ -1,4 +1,4 @@
-import { Android } from '@/common/js/types'
+import { Android, AndroidBase } from '@/common/js/types'
 
 declare global {
   interface Window {
@@ -6,6 +6,7 @@ declare global {
     aplus_queue?: { action: string|'aplus.sendPV', arguments: unknown[] }[],
     Android?: Android
     showZoom?: () => void
-    getVersion?: () => string
+    getVersion?: () => string,
+    AndroidBase?:AndroidBase
   }
 }
