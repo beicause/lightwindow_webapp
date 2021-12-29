@@ -3,8 +3,10 @@
     <view @click="previousDay" class="arrow-wrapper">
       <view class="left-arrow"></view>
     </view>
-    <picker @change="dateChange" mode="multiSelector" :value="date" :range="[mon,day]">
-      <text :style="{color:activeDay===dayFormat(new Date())?'#2196f3':''}">{{ pickerText }}</text>
+    <picker @change="dateChange" mode="multiSelector" :value="date" :range="[mon, day]">
+      <text
+        :style="{ color: activeDay === dayFormat(new Date()) ? '#2196f3' : '' }"
+      >{{ pickerText }}</text>
     </picker>
 
     <view @click="nextDay" class="arrow-wrapper">
@@ -19,7 +21,7 @@
 <script lang="ts">
 import store from '../../store'
 import Vue from "vue";
-import {dayFormat, getEventDate} from '@/common/util';
+import { dayFormat, getEventDate } from '@/common/util';
 import CalendarDay from "@/components/calendar/calendarDay.vue";
 
 /**
@@ -54,24 +56,18 @@ export default Vue.extend({
       store.commit('setActiveDay', dayFormat(date))
     },
     nextDay() {
-      let [m, d] = this.date
-      d++
-      const date = new Date()
-      date.setMonth(m)
-      date.setDate(d + 1)
+      const date = getEventDate(this.activeDay)
+      date.setDate(date.getDate() + 1)
       store.commit('setActiveDay', dayFormat(date))
     },
     previousDay() {
-      let [m, d] = this.date
-      d--
-      const date = new Date()
-      date.setMonth(m)
-      date.setDate(d + 1)
+      const date = getEventDate(this.activeDay)
+      date.setDate(date.getDate() - 1)
       store.commit('setActiveDay', dayFormat(date))
     },
   },
   computed: {
-    activeDay():string{
+    activeDay(): string {
       return store.state.activeDay
     },
     date(): [number, number] {

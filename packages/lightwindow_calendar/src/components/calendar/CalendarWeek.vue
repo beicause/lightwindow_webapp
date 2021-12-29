@@ -136,7 +136,7 @@ export default Vue.extend({
      * 翻到下一周
      * */
     nextWeek() {
-      const date = getEventDate(store.state.activeDay)
+      const date = getEventDate(this.activeDay)
       date.setDate(date.getDate() + 7)
       store.commit('setActiveDay', dayFormat(date))
     },
@@ -144,7 +144,7 @@ export default Vue.extend({
      * 翻到上一周
      * */
     previousWeek() {
-      const date = getEventDate(store.state.activeDay)
+      const date = getEventDate(this.activeDay)
       date.setDate(date.getDate() - 7)
       store.commit('setActiveDay', dayFormat(date))
     }
