@@ -72,6 +72,10 @@ const routes: Array<RouteConfig> = [
   {
     path: '/presentation/(\\d)*',
     beforeEnter: () => redirect('/presentation//')
+  },
+  {
+    path: '/log',
+    component: () => import('../log/LogApp.vue')
   }
 ]
 
@@ -80,7 +84,7 @@ const router = new VueRouter({
   routes
 })
 
-function redirect (path:string) {
+function redirect (path: string) {
   window.location.href = INDEX_URL + path
 }
 export default router
