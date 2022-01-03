@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <VApp>
     <div>
       <v-expand-transition>
         <div class="alert" v-show="popState.showPop">
@@ -9,7 +9,7 @@
 
       <router-view></router-view>
     </div>
-  </v-app>
+  </VApp>
 </template>
 
 <script setup lang="ts">

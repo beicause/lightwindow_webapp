@@ -67,7 +67,6 @@
     <div class="flex justify-center">
       <v-btn color="blue" outlined @click="AndroidBase?AndroidBase.clearPageCache():undefined">更新页面缓存</v-btn>
     </div>
-
   </v-container>
 </template>
 <script lang="ts">
