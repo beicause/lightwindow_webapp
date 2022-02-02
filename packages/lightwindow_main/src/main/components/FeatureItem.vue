@@ -3,7 +3,7 @@ import { defineProps, withDefaults } from '@vue/runtime-dom'
 import { defaultProps } from '../feature'
 
 interface P{
-   showRun:boolean, isRunning:boolean, name:string, prependIcon:string
+   showRun?:boolean, isRunning?:boolean, name:string, prependIcon:string
 }
 
 withDefaults(defineProps<P>(), defaultProps)
