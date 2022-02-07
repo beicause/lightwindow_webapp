@@ -42,6 +42,6 @@ export const features:Partial<Features>[] = [
       }
     }
   },
-  { name: '音乐谱', prependIcon: 'fal fa-music', navClick: () => '/music' },
-  { name: 'log', prependIcon: '', navClick: () => '/log' }
+  { name: '音乐谱', prependIcon: 'fal fa-music', navClick: () => '/music' }//,
+  // { name: 'log', prependIcon: '', navClick: () => '/log' }
 ]
