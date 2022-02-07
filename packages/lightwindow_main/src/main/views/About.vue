@@ -100,13 +100,13 @@ export default Vue.extend({
   computed: {
     appVersionName (): string {
       if (!Android) return '---'
-      return 'Experimental-' + this.versionCodeToName(this.localAppVersion) +
+      return this.versionCodeToName(this.localAppVersion) +
           (this.isAppUpdate ? '（发现新版本' + this.versionCodeToName(this.appVersion) + '）' : '')
     }
   },
   methods: {
     versionCodeToName (code: string): string {
-      return 'v' + code.split('').join('.')
+      return 'Ｖ' + code.split('').join('.')
     },
     copyOrNavigate (s: string, url?: string) {
       if (Android) {
