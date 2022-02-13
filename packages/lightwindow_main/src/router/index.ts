@@ -62,10 +62,6 @@ const routes: Array<RouteConfig> = [
     component: () => import('@/music/MusicApp.vue')
   },
   {
-    path: '/effect',
-    component: () => import('@/effect/EffectApp.vue')
-  },
-  {
     path: '/calendar',
     beforeEnter: () => redirect('/calendar//')
   },
